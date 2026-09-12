@@ -1,0 +1,23 @@
+{
+  "package": "KIM SILESIA website project brief",
+  "selected_visuals": [
+    "references/branding/logo-kim-silesia-approved.png",
+    "references/branding/meble-szymkowiak-reference.png",
+    "references/branding/3d-silesia-reference.png",
+    "references/homepage/homepage-reference-01.png",
+    "references/homepage/homepage-reference-02.png",
+    "references/homepage/homepage-reference-03.png",
+    "references/mieszkaj-w-miescie/mieszkaj-page-reference-01.png",
+    "references/mieszkaj-w-miescie/mieszkaj-page-reference-02.png",
+    "references/mieszkaj-w-miescie/estate-reference-photo.jpg",
+    "references/warianty-wykonczenia/standard-render.jpg",
+    "references/warianty-wykonczenia/plus-render-gloss.jpg",
+    "references/warianty-wykonczenia/plus-render-compact12.png",
+    "references/warianty-wykonczenia/premium-render.jpg",
+    "references/warianty-wykonczenia/comparison-table-reference.png",
+    "references/realizacje/realizacja-01.jpg",
+    "references/realizacje/realizacja-02.jpg",
+    "references/realizacje/realizacja-03.jpg"
+  ],
+  "missing_source_files": []
+}
