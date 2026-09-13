@@ -28,7 +28,8 @@ export function Header() {
 
 export function Footer() {
   return <footer className="footer" id="kontakt">
-    <div className="footer-lead"><p className="eyebrow light">Zacznijmy od rozmowy</p><h2>Masz mieszkanie.<br />My zajmiemy się resztą.</h2><p>Opowiedz nam o swoim wnętrzu, terminie i budżecie. Ustalimy najlepszy zakres współpracy.</p><div className="hero-actions"><a className="button button-light" href="tel:+48881028373"><Phone size={18} /> Zadzwoń</a><a className="button button-outline-light" href="mailto:kim.katowice@gmail.com"><Mail size={18} /> Napisz e-mail</a></div></div>
+    <div className="footer-wave" aria-hidden="true"><span /></div>
+    <div className="footer-lead"><div><p className="eyebrow light">Zacznijmy od rozmowy</p><h2>Porozmawiajmy<br />o Twoim wnętrzu.</h2><p>Opowiedz nam o mieszkaniu, terminie i budżecie. Ustalimy najlepszy zakres współpracy.</p></div><div className="footer-actions"><a className="neo-button" href="tel:+48881028373"><Phone size={18} /> Zadzwoń</a><a className="footer-mail" href="mailto:kim.katowice@gmail.com"><Mail size={18} /> kim.katowice@gmail.com</a></div></div>
     <div className="footer-bottom"><Logo /><div><strong>Marek Szymkowiak</strong><span>Główny Projektant</span></div><div><a href="tel:+48881028373">+48 881 028 373</a><a href="mailto:kim.katowice@gmail.com">kim.katowice@gmail.com</a></div><p>© {new Date().getFullYear()} KIM SILESIA</p></div>
   </footer>;
 }
