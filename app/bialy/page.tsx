@@ -26,7 +26,7 @@ export default function WhiteVariant() {
     </header>
 
     <section className="white-hero" id="start">
-      <img src="/assets/realizacja-02.jpg" alt="Nowoczesna kuchnia wykonana przez KIM SILESIA" />
+      <img src="/assets/bialy-hero-kuchnia.png" alt="Nowoczesna kuchnia w stylistyce KIM SILESIA" />
       <div className="white-hero-shade" />
       <div className="white-hero-copy">
         <p>Wnętrza, które mają sens</p>
