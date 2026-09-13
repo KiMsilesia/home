@@ -24,7 +24,7 @@ p { color:var(--muted); }
 .site-header { position:absolute; z-index:20; top:0; width:100%; color:#fff; border-bottom:1px solid #ffffff30; }
 .nav-wrap { width:min(1320px, calc(100% - 48px)); height:92px; margin:auto; display:flex; align-items:center; gap:34px; }
 .brand { width:160px; display:flex; align-items:center; flex-shrink:0; }
-.brand img { max-height:48px; object-fit:contain; filter:brightness(0) invert(1); }
+.brand img { max-height:48px; object-fit:contain; filter:grayscale(1) invert(1) contrast(2.2); mix-blend-mode:screen; }
 .desktop-nav { margin-left:auto; display:flex; align-items:center; gap:30px; font-size:.84rem; }
 .desktop-nav a { opacity:.82; transition:.2s; }
 .desktop-nav a:hover { opacity:1; }
@@ -121,7 +121,7 @@ p { color:var(--muted); }
 .qr-page { min-height:100svh; display:grid; place-items:center; padding:28px; background:linear-gradient(145deg,#061b2e,#0c385c); }
 .qr-panel { width:min(520px,100%); padding:clamp(28px,6vw,58px); background:#fff; box-shadow:0 30px 90px #0005; }
 .qr-panel .brand { margin-bottom:48px; width:185px; }
-.qr-panel .brand img { filter:none; }
+.qr-panel .brand img { filter:none; mix-blend-mode:normal; }
 .qr-panel h1 { font-size:clamp(2.3rem,7vw,3.7rem); }
 .qr-links { margin:36px 0; border-top:1px solid var(--line); }
 .qr-links a { min-height:64px; display:flex; align-items:center; gap:14px; border-bottom:1px solid var(--line); font-weight:700; }
