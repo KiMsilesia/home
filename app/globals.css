@@ -155,7 +155,8 @@ p { color:var(--muted); }
 .home-dark { --blue:#168cff; --blue-soft:#7dccff; color:#fff; background:#020e1d; overflow:hidden; }
 .home-dark h1,.home-dark h2 { text-transform:none; }
 .home-dark h1 em,.home-dark h2 em { color:var(--blue-soft); font-style:normal; }
-.neo-hero,.city-showcase { position:relative; min-height:760px; background:radial-gradient(circle at 16% 30%,#0a3158 0,transparent 34%),linear-gradient(135deg,#020b17 0%,#041b33 58%,#020b17 100%); }
+.neo-hero,.city-showcase { position:relative; isolation:isolate; min-height:760px; background:radial-gradient(circle at 16% 30%,#0a3158 0,transparent 34%),linear-gradient(135deg,#020b17 0%,#041b33 58%,#020b17 100%); }
+.neo-hero::after,.city-showcase::after { content:""; position:absolute; z-index:1; inset:0; pointer-events:none; background:radial-gradient(ellipse at 10% 48%,#168cff26 0,transparent 36%),radial-gradient(ellipse at 78% 78%,#0077ff19 0,transparent 30%),linear-gradient(116deg,transparent 18%,#168cff0d 39%,transparent 58%); mix-blend-mode:screen; }
 .neo-hero { height:clamp(760px,100svh,940px); padding-top:92px; }
 .neo-glow { position:absolute; width:580px; height:580px; border-radius:50%; background:#0878ff1d; filter:blur(80px); pointer-events:none; }
 .neo-glow-one { left:-300px; top:80px; }.neo-glow-two { right:-300px; top:120px; }
@@ -172,10 +173,14 @@ p { color:var(--muted); }
 .service-ribbon { position:absolute; z-index:6; right:4%; bottom:58px; width:min(720px,70%); min-height:68px; display:grid; grid-template-columns:repeat(4,1fr); border:1px solid #42a1ff; border-radius:18px 18px 2px 18px; background:#06182ee6; backdrop-filter:blur(12px); box-shadow:0 0 24px #008cff45; }
 .service-ribbon a { display:flex; align-items:center; justify-content:center; gap:9px; color:#e7f2ff; border-right:1px solid #ffffff35; font-size:.76rem; font-weight:700; text-transform:uppercase; }
 .service-ribbon a:last-child { border:0; }
-.section-wave,.footer-wave { position:absolute; z-index:7; left:-3%; right:-3%; height:88px; pointer-events:none; }
-.section-wave::before,.footer-wave::before { content:""; position:absolute; inset:13px 0 0; background:linear-gradient(180deg,#051a31 10%,#020e1d 78%); clip-path:polygon(0 32%,18% 55%,39% 67%,62% 88%,81% 58%,100% 31%,100% 100%,0 100%); }
-.section-wave span,.footer-wave span { position:absolute; left:0; right:0; top:27px; height:2px; background:linear-gradient(90deg,transparent 1%,#0a73e8 22%,#8ad2ff 47%,#0089ff 76%,transparent 99%); transform:rotate(.7deg); box-shadow:0 0 8px #0095ff,0 0 26px #008cff; border-radius:50%; }
-.wave-hero { bottom:-40px; }.wave-city { bottom:-39px; transform:scaleX(-1); }
+.section-wave,.footer-wave { position:absolute; z-index:7; left:-6%; right:-6%; height:138px; pointer-events:none; filter:drop-shadow(0 0 22px #087cff88); }
+.section-wave::before,.footer-wave::before { content:""; position:absolute; inset:31px 0 0; background:linear-gradient(180deg,#07233e 0%,#04172b 38%,#020e1d 88%); clip-path:polygon(0 23%,16% 45%,36% 60%,61% 85%,82% 51%,100% 20%,100% 100%,0 100%); }
+.section-wave::after,.footer-wave::after { content:""; position:absolute; left:-2%; top:3px; width:104%; height:102px; border-top:13px solid #168cff52; border-radius:50% 55% 0 0; transform:rotate(.9deg) skewX(-8deg); filter:blur(16px); box-shadow:0 -7px 35px #008cff66; }
+.section-wave span,.footer-wave span { position:absolute; left:-2%; top:17px; width:104%; height:83px; border-top:2px solid #a8e2ff; border-radius:50% 55% 0 0; transform:rotate(.9deg) skewX(-8deg); background:none; box-shadow:0 -1px 5px #d5f2ff,0 -3px 13px #209eff,0 -9px 34px #007cff; }
+.section-wave span::before,.section-wave span::after,.footer-wave span::before,.footer-wave span::after { content:""; position:absolute; left:0; width:100%; border-radius:50%; }
+.section-wave span::before,.footer-wave span::before { top:-10px; height:88px; border-top:1px solid #179affb8; transform:rotate(-1.2deg) scaleX(1.03); filter:blur(.3px); box-shadow:0 -3px 14px #007cffaa; }
+.section-wave span::after,.footer-wave span::after { top:7px; height:82px; border-top:1px solid #0876df9c; transform:rotate(1.1deg) scaleX(.99); filter:blur(1px); box-shadow:0 -3px 20px #008cff82; }
+.wave-hero { bottom:-61px; }.wave-city { bottom:-60px; transform:scaleX(-1); }
 .city-showcase { min-height:820px; padding-top:70px; }
 .city-copy { top:44%; }
 .city-copy h2 { margin:0 0 28px; font-size:clamp(3.4rem,5.8vw,6.3rem); }
