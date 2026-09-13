@@ -149,6 +149,31 @@ p { color:var(--muted); }
   .footer{padding-inline:24px}.footer-bottom{grid-template-columns:1fr;margin-top:80px}.footer-bottom p{margin-top:20px}
   .subhero{min-height:700px;height:92svh}.value-grid{grid-template-columns:1fr}.qr-page{padding:0}.qr-panel{min-height:100svh}
 }
+
+/* Reference-matched depth, fine light trails and layered city composition */
+.neo-hero,.city-showcase{isolation:isolate;background:radial-gradient(ellipse at 23% 42%,#073866 0,transparent 38%),radial-gradient(ellipse at 82% 4%,#0b3156 0,transparent 34%),linear-gradient(135deg,#010813 0%,#03162b 54%,#010a16 100%)}
+.neo-hero::after,.city-showcase::after{content:"";position:absolute;z-index:1;inset:0;pointer-events:none;background:linear-gradient(112deg,transparent 12%,#178cff12 29%,transparent 47%),radial-gradient(ellipse at 48% 103%,#087be829 0,transparent 39%);mix-blend-mode:screen}
+.depth-field{position:absolute;z-index:1;inset:0;overflow:hidden;pointer-events:none;opacity:.9;background-image:radial-gradient(circle at 15% 32%,#87caff65 0 1px,transparent 2px),radial-gradient(circle at 27% 64%,#168cff75 0 2px,transparent 6px),radial-gradient(circle at 42% 18%,#67b9ff40 0 1px,transparent 4px),radial-gradient(circle at 8% 75%,#168cff45 0 3px,transparent 10px);background-size:170px 150px,310px 270px,230px 210px,390px 340px}
+.depth-field::before,.depth-field::after{content:"";position:absolute;left:-8%;width:116%;height:36%;border-radius:50%;border-top:1px solid #289fff6b;transform:rotate(-4deg);filter:drop-shadow(0 -1px 5px #168cff)}
+.depth-field::before{bottom:-18%}.depth-field::after{bottom:-12%;transform:rotate(-2deg) scaleX(1.04);opacity:.5}
+.depth-field i{position:absolute;border-radius:50%;background:#168cff;box-shadow:0 0 18px 5px #087cff88;opacity:.35}.depth-field i:nth-child(1){left:14%;top:29%;width:5px;height:5px}.depth-field i:nth-child(2){left:35%;top:72%;width:3px;height:3px}.depth-field i:nth-child(3){right:18%;top:19%;width:4px;height:4px}
+.image-cut{border:0;box-shadow:0 18px 75px #0009;filter:drop-shadow(-1px 0 1px #cceeff) drop-shadow(-3px 0 6px #168cff) drop-shadow(-8px 0 18px #0077ff66)}
+.image-cut::after{filter:drop-shadow(-1px 0 2px #d9f4ff) drop-shadow(-3px 0 6px #168cff);opacity:.72}
+.section-wave,.footer-wave{left:-6%;right:-6%;height:112px;filter:none}
+.section-wave::before,.footer-wave::before{inset:27px 0 0;background:linear-gradient(180deg,#04172a 0%,#020e1d 88%);clip-path:polygon(0 33%,20% 47%,42% 63%,64% 81%,83% 53%,100% 28%,100% 100%,0 100%)}
+.section-wave::after,.footer-wave::after{top:17px;height:79px;border-top:1px solid #168cff70;filter:drop-shadow(0 -1px 6px #168cff)}
+.section-wave span,.footer-wave span{top:22px;height:74px;border-top:1px solid #8ed7ff;box-shadow:0 -1px 4px #168cff}
+.wave-hero{bottom:-49px}.wave-city{bottom:-48px}
+.city-inset{z-index:5;left:24%;bottom:34px;width:47%;height:198px;border:1px solid #70c8ff;border-radius:34px 34px 34px 8px;clip-path:none;filter:drop-shadow(0 0 5px #168cff) drop-shadow(0 12px 28px #000b)}
+.city-inset::after{display:none}.city-inset img{object-position:center 72%;filter:brightness(.72) saturate(.85)}.city-inset span{position:absolute;right:7%;top:28%;padding-left:22px;border-left:1px solid #e8bd75;color:#e1efff;font-size:.68rem;line-height:2;letter-spacing:.2em;text-transform:uppercase}
+.plan-row{left:5%;right:auto;bottom:62px;width:29%;padding-left:0;gap:8px}
+.plan-row article{min-height:104px;padding:15px 12px;border-color:#397ab1;background:linear-gradient(145deg,#09213bcf,#03111fe6);box-shadow:0 8px 22px #0005}
+.plan-row h3{font-size:1rem}.plan-row p{display:none}.plan-row a{right:10px;bottom:10px;width:26px;height:26px}
+.site-header .nav-wrap{justify-content:flex-end}.site-header .desktop-nav{margin-left:0}
+.footer-bottom>.brand{display:none}.footer-bottom{grid-template-columns:1fr 1fr auto}
+
+@media(max-width:900px){.city-inset{left:17%;bottom:190px;width:66%;height:150px}.plan-row{left:24px;right:24px;bottom:48px;width:auto}.depth-field{opacity:.55}}
+@media(max-width:600px){.city-inset{left:24px;bottom:205px;width:calc(100% - 48px);height:130px}.city-inset span{display:none}.plan-row{bottom:58px}.section-wave,.footer-wave{height:90px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 
 /* Dark metallic homepage direction */
