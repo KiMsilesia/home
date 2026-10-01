@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Podgląd modelu 3D — KiM</title>
+<style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#edf1f6;font:14px/1.4 system-ui,sans-serif;color:#18304e}#stage{position:absolute;inset:0}canvas{display:block;width:100%;height:100%;touch-action:none}.toolbar{position:absolute;bottom:18px;left:18px;right:18px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px}.toolbar button{border:1px solid #c2ccda;border-radius:8px;padding:10px 14px;background:#ffffffed;color:#18304e;font:inherit;cursor:pointer}.toolbar button:focus-visible{outline:3px solid #275aa0}.toolbar button[aria-pressed=true]{background:#18304e;color:#fff}.hint{position:absolute;top:52px;left:20px;right:20px;text-align:center;font-size:13px;color:#566b85}.status{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}.status span{background:#fff;padding:14px 20px;border-radius:10px;box-shadow:0 4px 20px #12294e15}.status[hidden]{display:none}.error a{color:#18304e}.error{pointer-events:auto}</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script></head>
+<body><div id="stage" aria-label="Model zlewu w 3D"></div><p class="hint">Przeciągnij, aby obracać · scroll / dwa palce, aby przybliżać</p><div id="status" class="status" role="status"><span>Wczytywanie podglądu 3D…</span></div><div class="toolbar"><button id="rotate" aria-pressed="false">Autoobrót</button><button id="reset">Przywróć widok</button><button id="wire" aria-pressed="false">Siatka</button><button id="full">Pełny ekran</button></div>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+const stage=document.querySelector('#stage'),status=document.querySelector('#status');
+function fail(){status.hidden=false;status.classList.add('error');status.replaceChildren();const span=document.createElement('span');span.textContent='Podgląd 3D jest niedostępny. ';const a=document.createElement('a');a.href='/models/zlew-przykladowy.obj';a.download='KiM_zlew_przykladowy.obj';a.textContent='Pobierz OBJ';span.append(a);status.append(span)}
+try{
+ const scene=new THREE.Scene();scene.background=new THREE.Color('#edf1f6');
+ const camera=new THREE.PerspectiveCamera(38,1,.001,100);
+ const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;stage.append(renderer.domElement);
+ const pmrem=new THREE.PMREMGenerator(renderer),environment=new RoomEnvironment();const env=pmrem.fromScene(environment,.04);scene.environment=env.texture;environment.dispose();pmrem.dispose();
+ scene.add(new THREE.HemisphereLight(0xffffff,0x53637a,2));const key=new THREE.DirectionalLight(0xffffff,4);key.position.set(3,5,4);scene.add(key);
+ const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.enablePan=false;controls.autoRotateSpeed=1.2;
+ let radius=1;const home=new THREE.Vector3();const mats=[];
+ const loader=new OBJLoader();loader.load('/models/zlew-przykladowy.obj',object=>{
+  const box=new THREE.Box3().setFromObject(object),center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3());object.position.sub(center);radius=Math.max(size.x,size.y,size.z);
+  object.traverse(mesh=>{if(!mesh.isMesh)return;const m=new THREE.MeshStandardMaterial({color:0x16181b,metalness:.25,roughness:.4,side:THREE.DoubleSide});mesh.material=m;mats.push(m)});scene.add(object);controls.minDistance=radius*.65;controls.maxDistance=radius*6;home.set(radius*1.6,radius*1.2,radius*1.9);reset();status.hidden=true;
+ },undefined,fail);
+ function reset(){camera.position.copy(home);controls.target.set(0,0,0);controls.update()}
+ document.querySelector('#reset').onclick=reset;
+ document.querySelector('#rotate').onclick=e=>{controls.autoRotate=!controls.autoRotate;e.currentTarget.setAttribute('aria-pressed',String(controls.autoRotate))};
+ document.querySelector('#wire').onclick=e=>{const on=e.currentTarget.getAttribute('aria-pressed')!=='true';mats.forEach(m=>m.wireframe=on);e.currentTarget.setAttribute('aria-pressed',String(on))};
+ document.querySelector('#full').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch{document.querySelector('#full').textContent='Otwórz większy podgląd';window.open(location.href,'_blank','noopener')}};
+ const resize=()=>{const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/Math.max(1,h);camera.updateProjectionMatrix()};new ResizeObserver(resize).observe(stage);resize();renderer.setAnimationLoop(()=>{controls.update();renderer.render(scene,camera)});
+}catch(error){console.error(error);fail()}
+</script><script>setTimeout(()=>{const status=document.querySelector('#status');if(!document.querySelector('canvas')&&!status.hidden){status.querySelector('span').textContent='Nie udało się uruchomić podglądu 3D. Plik OBJ możesz pobrać obok.'}},12000)</script></body></html>
