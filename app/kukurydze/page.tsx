@@ -42,12 +42,12 @@ export default function CityApartmentPage() {
           <a href={assetBase + "/assets/mwm-6-01-rzut2.jpg"} target="_blank" rel="noreferrer">Otwórz pełny rzut <Maximize2 size={17} /></a>
         </figure>
         <aside>
-          <small>WYBRANY LOKAL</small>
-          <h3>C.02.01</h3>
+          <small>REALIZOWANA INWESTYCJA</small>
+          <h3>Budynek C</h3>
           <dl>
             <div><dt>Lokalizacja</dt><dd>Osiedle Tysiąclecia, Katowice</dd></div>
             <div><dt>Powierzchnia mieszkania</dt><dd>67,8 m²</dd></div>
-            <div><dt>Liczba pokoi / piętro</dt><dd>4 pokoje · piętro 2</dd></div>
+            <div><dt>Liczba pokoi</dt><dd>4 pokoje</dd></div>
             <div><dt>Loggia</dt><dd>32,38 m²</dd></div>
             <div><dt>Zakres</dt><dd>Projekt · meble · wykończenie</dd></div>
             <div><dt>Status</dt><dd>Aktualna realizacja</dd></div>
