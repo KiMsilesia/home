@@ -31,13 +31,13 @@ export default function CityApartmentPage() {
 
     <section className="apartment-plan-section">
       <header>
-        <div><small>RZUT WYBRANEGO MIESZKANIA</small><h2>Punkt wyjścia<br />do dobrego projektu.</h2></div>
-        <p>Na rzucie pokażemy układ mieszkania, najważniejsze strefy funkcjonalne oraz rozwiązania, które warto uwzględnić przed rozpoczęciem prac.</p>
+        <div><small>INWENTARYZACJA Z NATURY</small><h2>Dokumentacja pomiarowa<br />realizowanej inwestycji.</h2></div>
+        <p>Rysunek przedstawia wykonaną inwentaryzację z natury pomieszczeń mieszkalnych dla realizowanej inwestycji. Dokumentuje rzeczywisty układ i wymiary pomieszczeń ustalone podczas pomiarów na miejscu oraz stanowi podstawę dalszych prac projektowych i wykonawczych.</p>
       </header>
       <div className="apartment-plan-layout">
         <figure className="apartment-plan-image">
           <div style={{ position: "relative", width: "100%", aspectRatio: "1510 / 1152", overflow: "hidden" }}>
-            <img src={assetBase + "/assets/mwm-6-01-rzut2.jpg"} alt="Właściwy rzut mieszkania Mieszkaj w Mieście — MwM 6 01 RZUT2" style={{ position: "absolute", width: "135.63%", maxWidth: "none", maxHeight: "none", height: "auto", left: "-19.87%", top: 0 }} />
+            <img src={assetBase + "/assets/mwm-6-01-rzut2.jpg"} alt="Inwentaryzacja z natury pomieszczeń mieszkalnych dla realizowanej inwestycji Mieszkaj w Mieście" style={{ position: "absolute", width: "135.63%", maxWidth: "none", maxHeight: "none", height: "auto", left: "-19.87%", top: 0 }} />
           </div>
           <a href={assetBase + "/assets/mwm-6-01-rzut2.jpg"} target="_blank" rel="noreferrer">Otwórz pełny rzut <Maximize2 size={17} /></a>
         </figure>
@@ -52,7 +52,7 @@ export default function CityApartmentPage() {
             <div><dt>Zakres</dt><dd>Projekt · meble · wykończenie</dd></div>
             <div><dt>Status</dt><dd>Aktualna realizacja</dd></div>
           </dl>
-          <p>Na podstawie tego układu przygotujemy trzy kierunki wykończenia, a wybrany wariant rozwiniemy w projekt aranżacyjny i techniczny.</p>
+          <p>Wykonana inwentaryzacja pomiarowa jest punktem odniesienia przy opracowaniu aranżacji, zabudowy meblowej i zakresu prac wykończeniowych.</p>
           <Link className="apartment-plan-button" href="/kontakt">Zapytaj o swoje mieszkanie <ArrowRight size={18} /></Link>
         </aside>
       </div>
