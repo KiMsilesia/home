@@ -1,10 +1,7 @@
-# KIM SILESIA — strona internetowa
+# KIM SILESIA — trzy strony
 
-Repozytorium aktywnego projektu strony KIM SILESIA.
+Zakres: strona główna, Kukurydze 2.0, Kontakt. Pozostałe moduły pozostają w poprzedniej gałęzi migracji.
 
-Przed rozpoczęciem pracy przeczytaj [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md).
+`npm ci` i `npm run build`. Wynik: `out/`. Dla GitHub Pages: `GITHUB_PAGES=true NEXT_PUBLIC_GITHUB_PAGES=true npm run build`.
 
-Pierwotny pakiet dokumentów i materiały referencyjne są zachowane w:
-`archive/initial-project-brief/`
-
-Aktualnie repozytorium nie zawiera jeszcze kodu aplikacji.
+Formularz kontaktowy otwiera program pocztowy. PDF i obraz rzutu lokalu są dołączone za zgodą właściciela projektu.

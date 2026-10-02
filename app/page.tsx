@@ -1,67 +1,68 @@
 import Link from "next/link";
-import { ArrowRight, ClipboardCheck, Hammer, Ruler, Sofa } from "lucide-react";
-import { SiteShell } from "@/components/site-shell";
+const assetBase = "/home";
+import { ArrowRight, CheckCircle2, ClipboardCheck, MessageSquare, PenTool } from "lucide-react";
 
 const services = [
-  { label: "Projektowanie", icon: Ruler },
-  { label: "Meble na wymiar", icon: Sofa },
-  { label: "Wykończenie", icon: Hammer },
-  { label: "Odbiory", icon: ClipboardCheck },
+  { image: assetBase + "/assets/3d-silesia-granat.png", alt: "3D SILESIA", title: "Projektowanie", text: "Funkcjonalne i estetyczne wnętrza dopasowane do Ciebie." },
+  { image: assetBase + "/assets/ms-meble-granat.png", alt: "MS Meble Szymkowiak", title: "Meble na wymiar", text: "Kuchnie, zabudowy i meble do całego domu." },
+  { image: assetBase + "/assets/kimpro-granat.png", alt: "KIMPRO", title: "Kompleksowe wykończenie", text: "Kompleksowa realizacja z jednego źródła." },
+  { image: assetBase + "/assets/tube-inspektor-granat.png", alt: "TUBE INSPEKTOR", title: "Odbiory techniczne", text: "Sprawdzisz przed zakupem. Kupujesz bez ryzyka." },
 ];
 
-const plans = [
-  { name: "Standard", note: "Funkcjonalne rozwiązania w rozsądnym budżecie." },
-  { name: "Plus", note: "Więcej możliwości, lepsze materiały i dopracowany detal." },
-  { name: "Premium", note: "Pełna personalizacja i bezkompromisowe wykończenie." },
+const process = [
+  { icon: MessageSquare, no: "01", title: <>Rozmowa<br />i potrzeby</> },
+  { icon: PenTool, no: "02", title: <>Projekt<br />i wycena</> },
+  { icon: ClipboardCheck, no: "03", title: <>Realizacja<br />i nadzór</> },
+  { icon: CheckCircle2, no: "04", title: <>Efekt<br />i satysfakcja</> },
 ];
 
-export default function Home() {
-  return <SiteShell><main className="home-dark">
-    <section className="neo-hero">
-      <div className="depth-field" aria-hidden="true"><i /><i /><i /></div>
-      <div className="depth-field" aria-hidden="true"><i /><i /><i /></div>
-      <div className="neo-glow neo-glow-one" />
-      <div className="neo-hero-copy">
-        <p className="neo-kicker">Przestrzeń ma znaczenie</p>
-        <h1>Wnętrza.<br /><em>Meble.</em><br />Wykończenie.</h1>
-        <p>Jeden partner. Jeden standard odpowiedzialności. Od pierwszego pomiaru do gotowego wnętrza.</p>
-        <a className="neo-button" href="#mieszkaj">Poznaj naszą ofertę <ArrowRight size={18} /></a>
+export default function WhiteVariant() {
+  return <main className="white-site">
+    <header className="white-header">
+      <Link href="/" className="white-logo"><img src={assetBase + "/assets/logo-kim-silesia-bialy.png"} alt="KIM SILESIA" /></Link>
+      <nav aria-label="Nawigacja wariantu białego">
+        <a href="#start">Strona główna</a><a href="#realizacje">Realizacje</a><Link href="/kukurydze">Kukurydze 2.0</Link><Link href="/kontakt">Kontakt</Link>
+      </nav>
+      <Link className="white-contact" href="/kontakt">Skontaktuj się <ArrowRight size={18} /></Link>
+    </header>
+
+    <section className="white-hero" id="start">
+      <img src={assetBase + "/assets/bialy-hero-kuchnia.jpg"} alt="Nowoczesna kuchnia w stylistyce KIM SILESIA" />
+      <div className="white-hero-shade" />
+      <div className="white-hero-copy">
+        <p>Wnętrza, które mają sens</p>
+        <h1>Projekt.<br />Wykonanie.<br /><em>Komfort.</em></h1>
+        <div className="hero-services">Meble na wymiar <span /> Kompleksowe wykończenia <span /> Odbiory techniczne</div>
+        <a className="white-outline" href="#realizacje">Zobacz nasze realizacje <ArrowRight size={18} /></a>
       </div>
-      <div className="neo-hero-photo image-cut">
-        <img src="/assets/realizacja-02.jpg" alt="Realizacja kuchni KIM SILESIA" />
-        <span className="photo-caption">Funkcja · estetyka · komfort</span>
-      </div>
-      <div className="service-ribbon">
-        {services.map(({ label, icon: Icon }) => <a href="#kontakt" key={label}><Icon size={18} />{label}</a>)}
-      </div>
-      <div className="section-wave wave-hero" aria-hidden="true"><span /></div>
+      <div className="experience"><strong>15</strong><b>lat<br />doświadczenia</b><small>Profesjonalizm.<br />Ludzie. Realne efekty.</small></div>
     </section>
 
-    <section className="city-showcase" id="mieszkaj">
-      <div className="depth-field" aria-hidden="true"><i /><i /><i /></div>
-      <div className="depth-field depth-field-city" aria-hidden="true"><i /><i /><i /></div>
-      <div className="neo-glow neo-glow-two" />
-      <div className="city-copy">
-        <p className="neo-kicker">Nowe perspektywy · Katowice</p>
-        <h2>Mieszkaj<br /><em>w Mieście</em></h2>
-        <p>Kompleksowe wnętrza w wyjątkowej lokalizacji. Wybierz wariant dopasowany do swoich oczekiwań i budżetu.</p>
-        <Link className="neo-button" href="/mieszkaj-w-miescie">Poznaj warianty <ArrowRight size={18} /></Link>
-      </div>
-      <div className="city-photo image-cut">
-        <img src="/assets/mieszkaj-w-miescie.jpg" alt="Osiedle Mieszkaj w Mieście w Katowicach" />
-      </div>
-      <div className="city-inset image-cut" aria-hidden="true"><img src="/assets/mieszkaj-w-miescie.jpg" alt="" /><span>Miasto<br />w zasięgu<br />ręki</span></div>
-      <div className="plan-row">
-        {plans.map(plan => <article key={plan.name}><h3>{plan.name}</h3><span /><p>{plan.note}</p><Link href="/mieszkaj-w-miescie" aria-label={`Poznaj wariant ${plan.name}`}><ArrowRight size={17} /></Link></article>)}
-      </div>
-      <div className="section-wave wave-city" aria-hidden="true"><span /></div>
+    <section className="white-services" id="oferta">
+      {services.map(({image,alt,title,text}) => <article key={title}><img className="service-pictogram" src={image} alt={alt}/><div><h2>{title}</h2><p>{text}</p></div></article>)}
     </section>
 
-    <section className="compact-realizations" id="realizacje">
-      <div className="compact-title"><p className="neo-kicker">Nasza duma</p><h2>Wybrane<br /><em>realizacje</em></h2></div>
-      <div className="compact-gallery">
-        {[1,2,3].map(n => <figure key={n}><img src={`/assets/realizacja-0${n}.jpg`} alt={`Realizacja KIM SILESIA — ${n}`} /></figure>)}
+    <section className="white-city" id="miasto">
+      <div className="white-city-copy"><small>Nasza aktualna realizacja</small><h2>Kukurydze<br /><em>2.0</em></h2><div className="city-location">Osiedle Tysiąclecia · Katowice</div><i /><p>Projektujemy i realizujemy wnętrza w nowej odsłonie jednej z najbardziej charakterystycznych inwestycji Katowic.</p><Link className="white-outline" href="/kukurydze">Poznaj inwestycję <ArrowRight size={18} /></Link></div>
+      <figure><img src={assetBase + "/assets/mieszkaj-w-miescie.jpg"} alt="Osiedle Mieszkaj w Mieście w Katowicach" /><figcaption>Twój<br />nowy adres<br />w mieście</figcaption></figure>
+    </section>
+
+    <section className="white-process" id="o-nas">
+      <div className="process-intro"><h2>Jak<br />pracujemy?</h2><p>Prosty proces.<br />Jasne zasady.<br />Spokojna realizacja.</p></div>
+      {process.map(({icon:Icon,no,title},i) => <article key={no}><b>{no}</b><Icon /><strong>{title}</strong>{i<3&&<ArrowRight className="process-arrow" />}</article>)}
+    </section>
+
+    <section className="white-gallery" id="realizacje">
+      <div className="gallery-label"><b>Wybrane projekty i realizacje</b><a href="#kontakt">Zobacz więcej <ArrowRight size={16} /></a></div>
+      <div>
+        <figure><img src={assetBase + "/assets/realizacja-01.jpg"} alt="Realizacja wnętrza KIM SILESIA 1" /></figure>
+        <figure><img src={assetBase + "/assets/projekt-kuchni-02.jpg"} alt="Projekt drewnianej kuchni KIM SILESIA" /></figure>
+        <figure><img src={assetBase + "/assets/realizacja-03.jpg"} alt="Realizacja wnętrza KIM SILESIA 3" /></figure>
+        <figure><img src={assetBase + "/assets/projekt-kuchni-01.jpg"} alt="Projekt wnętrza kuchni KIM SILESIA" /></figure>
       </div>
     </section>
-  </main></SiteShell>;
+
+    <section className="white-cta" id="kontakt"><h2>Porozmawiajmy<br />o Twoim projekcie.</h2><span /><p>Dobre wnętrza zaczynają się od rozmowy.<br />Skontaktuj się z nami i sprawdź, jak możemy Ci pomóc.</p><a className="white-outline" href="tel:+48881028373">Skontaktuj się <ArrowRight size={18} /></a></section>
+    <footer className="white-footer"><img src={assetBase + "/assets/logo-kim-silesia-bialy.png"} alt="KIM SILESIA" /><b>Profesjonalni w Twoich wnętrzach</b><span>Katowice</span><a href="tel:+48881028373">+48 881 028 373</a></footer>
+  </main>;
 }
