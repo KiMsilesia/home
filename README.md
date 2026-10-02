@@ -4,4 +4,4 @@ Zakres: strona główna, Kukurydze 2.0, Kontakt. Pozostałe moduły pozostają w
 
 `npm ci` i `npm run build`. Wynik: `out/`. Dla GitHub Pages: `GITHUB_PAGES=true NEXT_PUBLIC_GITHUB_PAGES=true npm run build`.
 
-Formularz kontaktowy otwiera program pocztowy. PDF i obraz rzutu lokalu są odłożone z powodu blokady automatycznej kontroli publikacji.
+Formularz kontaktowy otwiera program pocztowy. PDF i obraz rzutu lokalu są dołączone za zgodą właściciela projektu.

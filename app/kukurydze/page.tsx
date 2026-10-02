@@ -35,7 +35,10 @@ export default function CityApartmentPage() {
         <p>Na rzucie pokażemy układ mieszkania, najważniejsze strefy funkcjonalne oraz rozwiązania, które warto uwzględnić przed rozpoczęciem prac.</p>
       </header>
       <div className="apartment-plan-layout">
-        <div className="apartment-plan-image"><p>Rzut lokalu będzie dostępny po zakończeniu przenoszenia dokumentacji.</p></div>
+        <figure className="apartment-plan-image">
+          <img src={assetBase + "/assets/c-02-01-rzut.png"} alt="Rzut mieszkania C.02.01 w inwestycji Mieszkaj w Mieście" />
+          <a href={assetBase + "/assets/C_02_01.pdf"} target="_blank" rel="noreferrer">Otwórz pełny rzut <Maximize2 size={17} /></a>
+        </figure>
         <aside>
           <small>WYBRANY LOKAL</small>
           <h3>C.02.01</h3>
@@ -67,7 +70,7 @@ export default function CityApartmentPage() {
           <small>PRZESTRZEŃ ZEWNĘTRZNA</small>
           <strong>32,38 m²</strong>
           <span>Loggia · powierzchnia podana osobno, poza powierzchnią mieszkania.</span>
-          
+          <a href={assetBase + "/assets/C_02_01.pdf"} target="_blank" rel="noreferrer">Sprawdź oryginalny rzut lokalu <ArrowRight size={18} /></a>
         </aside>
       </div>
       <div className="apartment-project-scope">
