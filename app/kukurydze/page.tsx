@@ -36,8 +36,8 @@ export default function CityApartmentPage() {
       </header>
       <div className="apartment-plan-layout">
         <figure className="apartment-plan-image">
-          <img src={assetBase + "/assets/c-02-01-rzut.png"} alt="Rzut mieszkania C.02.01 w inwestycji Mieszkaj w Mieście" />
-          <a href={assetBase + "/assets/C_02_01.pdf"} target="_blank" rel="noreferrer">Otwórz pełny rzut <Maximize2 size={17} /></a>
+          <img src={assetBase + "/assets/mwm-6-01-rzut2.jpg"} alt="Właściwy rzut mieszkania Mieszkaj w Mieście — MwM 6 01 RZUT2" />
+          <a href={assetBase + "/assets/mwm-6-01-rzut2.jpg"} target="_blank" rel="noreferrer">Otwórz pełny rzut <Maximize2 size={17} /></a>
         </figure>
         <aside>
           <small>WYBRANY LOKAL</small>
@@ -70,7 +70,7 @@ export default function CityApartmentPage() {
           <small>PRZESTRZEŃ ZEWNĘTRZNA</small>
           <strong>32,38 m²</strong>
           <span>Loggia · powierzchnia podana osobno, poza powierzchnią mieszkania.</span>
-          <a href={assetBase + "/assets/C_02_01.pdf"} target="_blank" rel="noreferrer">Sprawdź oryginalny rzut lokalu <ArrowRight size={18} /></a>
+          <a href={assetBase + "/assets/mwm-6-01-rzut2.jpg"} target="_blank" rel="noreferrer">Sprawdź oryginalny rzut lokalu <ArrowRight size={18} /></a>
         </aside>
       </div>
       <div className="apartment-project-scope">
