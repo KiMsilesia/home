@@ -36,7 +36,9 @@ export default function CityApartmentPage() {
       </header>
       <div className="apartment-plan-layout">
         <figure className="apartment-plan-image">
-          <img src={assetBase + "/assets/mwm-6-01-rzut2.jpg"} alt="Właściwy rzut mieszkania Mieszkaj w Mieście — MwM 6 01 RZUT2" />
+          <div style={{ position: "relative", width: "100%", aspectRatio: "1510 / 1152", overflow: "hidden" }}>
+            <img src={assetBase + "/assets/mwm-6-01-rzut2.jpg"} alt="Właściwy rzut mieszkania Mieszkaj w Mieście — MwM 6 01 RZUT2" style={{ position: "absolute", width: "135.63%", maxWidth: "none", maxHeight: "none", height: "auto", left: "-19.87%", top: 0 }} />
+          </div>
           <a href={assetBase + "/assets/mwm-6-01-rzut2.jpg"} target="_blank" rel="noreferrer">Otwórz pełny rzut <Maximize2 size={17} /></a>
         </figure>
         <aside>
