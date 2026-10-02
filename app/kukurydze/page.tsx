@@ -32,7 +32,7 @@ export default function CityApartmentPage() {
     <section className="apartment-plan-section">
       <header>
         <div><small>INWENTARYZACJA Z NATURY</small><h2>Dokumentacja pomiarowa<br />realizowanej inwestycji.</h2></div>
-        <p>Szkic inwentaryzacyjny przedstawia wykonaną inwentaryzację z natury pomieszczeń mieszkalnych dla realizowanej inwestycji. Dokumentuje rzeczywisty układ i wymiary pomieszczeń ustalone podczas pomiarów na miejscu oraz stanowi podstawę dalszych prac projektowych i wykonawczych.</p>
+        <p>Szkic przedstawia rzeczywisty układ i wymiary pomieszczeń mieszkalnych, ustalone podczas inwentaryzacji z natury dla realizowanej inwestycji. Stanowi podstawę dalszych prac projektowych i wykonawczych.</p>
       </header>
       <div className="apartment-plan-layout">
         <figure className="apartment-plan-image">
