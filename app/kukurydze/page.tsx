@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { ProjectStudy } from "../../components/project-study";
+import "../project-study.css";
 import Link from "next/link";
 const assetBase = "/home";
 import { ArrowRight, Maximize2 } from "lucide-react";
@@ -18,6 +20,75 @@ const rooms = [
   { number: "06", name: "Łazienka", area: "5,94 m²" },
   { number: "07", name: "Korytarz", area: "8,07 m²" },
 ];
+
+const bathroomProject = {
+  "id": "lazienka",
+  "number": "01",
+  "title": "Łazienka",
+  "description": "Projekt łazienki dla realizowanej inwestycji w Kukurydzach 2.0. Wizualizacje pokazują aranżację wnętrza, a widoki techniczne rozwijają układ ścian, wyposażenia i zabudowy.",
+  "photos": [
+    {
+      "src": "/home/assets/kukurydze/lazienka/perspektywa-1.jpg",
+      "label": "Strefa umywalki i pralni"
+    },
+    {
+      "src": "/home/assets/kukurydze/lazienka/perspektywa-2.jpg",
+      "label": "Perspektywa wnętrza"
+    },
+    {
+      "src": "/home/assets/kukurydze/lazienka/perspektywa-3.jpg",
+      "label": "Strefa WC i półki"
+    },
+    {
+      "src": "/home/assets/kukurydze/lazienka/perspektywa-4.jpg",
+      "label": "Lustro i blat"
+    },
+    {
+      "src": "/home/assets/kukurydze/lazienka/perspektywa-5.jpg",
+      "label": "Układ łazienki"
+    }
+  ],
+  "heroIndex": 4,
+  "details": [
+    {
+      "label": "MATERIAŁY",
+      "title": "Kontrast jasnego i ciemnego",
+      "text": "Powierzchnie o wzorze marmuru budują spójną kompozycję, podkreśloną czarnymi detalami."
+    },
+    {
+      "label": "FUNKCJA",
+      "title": "Umywalka i strefa pralni",
+      "text": "Wspólny blat łączy umywalkę, zabudowę meblową oraz pralkę i suszarkę ustawione obok siebie."
+    },
+    {
+      "label": "ŚWIATŁO",
+      "title": "Linie LED i podświetlenia",
+      "text": "Oświetlenie przy lustrze, półkach i krawędziach wydobywa podziały wnętrza oraz jego głębię."
+    }
+  ],
+  "drawings": [
+    {
+      "label": "N",
+      "src": "/home/assets/kukurydze/lazienka/widok-N.jpg",
+      "pdf": "/home/assets/kukurydze/lazienka/widok-N.pdf"
+    },
+    {
+      "label": "S",
+      "src": "/home/assets/kukurydze/lazienka/widok-S.jpg",
+      "pdf": "/home/assets/kukurydze/lazienka/widok-S.pdf"
+    },
+    {
+      "label": "E",
+      "src": "/home/assets/kukurydze/lazienka/widok-E.jpg",
+      "pdf": "/home/assets/kukurydze/lazienka/widok-E.pdf"
+    },
+    {
+      "label": "W",
+      "src": "/home/assets/kukurydze/lazienka/widok-W.jpg",
+      "pdf": "/home/assets/kukurydze/lazienka/widok-W.pdf"
+    }
+  ]
+};
 
 export default function CityApartmentPage() {
   return <main className="white-site city-apartment-page">
@@ -77,7 +148,7 @@ export default function CityApartmentPage() {
       </div>
       <div className="apartment-project-scope">
         <div><small>DALSZE OPRACOWANIE PROJEKTU</small><h3>Od układu do detalu wykonawczego</h3></div>
-        <p>Po ustaleniu wariantu wykończenia pokażemy projektowane układy pomieszczeń, materiały i zabudowy, a następnie rysunki potrzebne do wykonania. Na tym etapie publikujemy rzut lokalu i dane wyjściowe; szczegółowe rysunki projektu będą dodawane po ich opracowaniu.</p>
+        <p>Po ustaleniu wariantu wykończenia pokażemy projektowane układy pomieszczeń, materiały i zabudowy, a następnie rysunki potrzebne do wykonania. Publikujemy inwentaryzację oraz opracowanie łazienki. Kolejne części obejmą kuchnię, sypialnię i hol.</p>
       </div>
     </section>
 
@@ -90,10 +161,13 @@ export default function CityApartmentPage() {
       </div>
       <div className="apartment-selected-project">
         <div><small>PO WYBORZE WARIANTU</small><h3>Rozwinięty projekt aranżacyjny i techniczny</h3></div>
-        <ul><li><b>01</b><span>Projekt salonu</span></li><li><b>02</b><span>Projekt kuchni</span></li><li><b>03</b><span>Projekt szafy w przedpokoju</span></li></ul>
+        <ul><li><b>01</b><span>Projekt łazienki</span></li><li><b>02</b><span>Projekt kuchni</span></li><li><b>03</b><span>Projekt sypialni i holu</span></li></ul>
         <p>Wybrany kierunek rozwiniemy w kompletną dokumentację potrzebną do prawidłowego wykonania wnętrza — od układu i materiałów po najważniejsze detale techniczne.</p>
       </div>
     </section>
+
+    <nav className="study-room-nav" aria-label="Opracowania pomieszczeń"><a href="#lazienka">01 · Łazienka</a><span>02 · Kuchnia <small>w przygotowaniu</small></span><span>03 · Sypialnia <small>w przygotowaniu</small></span><span>04 · Hol <small>w przygotowaniu</small></span></nav>
+    <ProjectStudy project={bathroomProject} />
 
     <section className="white-page-cta"><div><small>OD RZUTU DO REALIZACJI</small><h2>Sprawdźmy możliwości<br />Twojego mieszkania.</h2></div><p>Przeanalizujemy układ, instalacje, ergonomię i materiały, zanim rozpoczną się kosztowne prace.</p><Link className="white-outline" href="/kontakt">Umów konsultację <ArrowRight size={18} /></Link></section>
     <WhiteFooter />
