@@ -123,32 +123,14 @@ export default function CityApartmentPage() {
             <div><dt>Zakres</dt><dd>Projekt · meble · wykończenie</dd></div>
             <div><dt>Status</dt><dd>Aktualna realizacja</dd></div>
           </dl>
-          <p>Wykonana inwentaryzacja pomiarowa jest punktem odniesienia przy opracowaniu aranżacji, zabudowy meblowej i zakresu prac wykończeniowych.</p>
+          <p>Inwentaryzacja jest podstawą opracowania aranżacji, zabudowy i prac wykończeniowych. Poniżej prezentujemy projekt łazienki; kolejne opracowania obejmą kuchnię, sypialnię i hol.</p>
+          <details className="apartment-area-note">
+            <summary>Notatka · powierzchnie pomieszczeń</summary>
+            <dl>{rooms.map(room => <div key={room.number}><dt>{room.name}</dt><dd>{room.area}</dd></div>)}</dl>
+            <p>Razem: 67,80 m². Loggia: 32,38 m² — poza powierzchnią mieszkania.</p>
+          </details>
           <Link className="apartment-plan-button" href="/kontakt">Zapytaj o swoje mieszkanie <ArrowRight size={18} /></Link>
         </aside>
-      </div>
-    </section>
-
-    <section className="apartment-detail-section" aria-labelledby="apartment-detail-title">
-      <div className="apartment-detail-heading">
-        <div><small>LOKAL C.02.01 · DANE Z RZUTU</small><h2 id="apartment-detail-title">Pomieszczenia<br />i powierzchnie.</h2></div>
-        <p>Podział powierzchni według rzutu mieszkania. To punkt odniesienia do opracowania funkcji, zabudowy meblowej i rozmieszczenia wyposażenia.</p>
-      </div>
-      <div className="apartment-detail-grid">
-        <div className="apartment-room-table" role="table" aria-label="Powierzchnie pomieszczeń mieszkania C.02.01">
-          {rooms.map(room => <div className="apartment-room-row" role="row" key={room.number}><span role="cell">{room.number}</span><strong role="cell">{room.name}</strong><span role="cell">{room.area}</span></div>)}
-          <div className="apartment-room-total" role="row"><span role="cell">RAZEM</span><strong role="cell">Powierzchnia mieszkania</strong><b role="cell">67,80 m²</b></div>
-        </div>
-        <aside className="apartment-detail-aside">
-          <small>PRZESTRZEŃ ZEWNĘTRZNA</small>
-          <strong>32,38 m²</strong>
-          <span>Loggia · powierzchnia podana osobno, poza powierzchnią mieszkania.</span>
-          <a href={assetBase + "/assets/mwm-6-01-rzut2.jpg"} target="_blank" rel="noreferrer">Sprawdź oryginalny rzut lokalu <ArrowRight size={18} /></a>
-        </aside>
-      </div>
-      <div className="apartment-project-scope">
-        <div><small>DALSZE OPRACOWANIE PROJEKTU</small><h3>Od układu do detalu wykonawczego</h3></div>
-        <p>Po ustaleniu wariantu wykończenia pokażemy projektowane układy pomieszczeń, materiały i zabudowy, a następnie rysunki potrzebne do wykonania. Publikujemy inwentaryzację oraz opracowanie łazienki. Kolejne części obejmą kuchnię, sypialnię i hol.</p>
       </div>
     </section>
 
