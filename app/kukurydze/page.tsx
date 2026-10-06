@@ -90,6 +90,116 @@ const bathroomProject = {
   ]
 };
 
+const variantSpecifications = [
+  {
+    "title": "Prace wykończeniowe",
+    "rows": [
+      [
+        "Instalacje elektryczne",
+        "Bez przeróbek instalacji elektrycznych",
+        "Pojedyncze adaptacje instalacji elektrycznych",
+        "Dowolność aranżacji"
+      ],
+      [
+        "Instalacje wodno-kanalizacyjne",
+        "Bez przeróbek instalacji wodno-kanalizacyjnych",
+        "Pojedyncze adaptacje instalacji wodno-kanalizacyjnych",
+        "Dowolność aranżacji"
+      ],
+      [
+        "Ściany i sufity",
+        "Gładzie na ścianach i sufitach — wybiórczo, większe ubytki",
+        "Pełne szpachlowanie Q1",
+        "Dwukrotne szpachlowanie Q2"
+      ],
+      [
+        "Wykończenie ścian i sufitów",
+        "Malowanie ścian i sufitów na biało",
+        "Malowanie ścian i sufitów — biały i kolor",
+        "Malowanie, tynki, beton architektoniczny i inne"
+      ],
+      [
+        "Podłogi",
+        "Tradycyjne panele podłogowe",
+        "Nowoczesne panele podłogowe",
+        "Panele lub deski podłogowe"
+      ],
+      [
+        "Płytki i posadzki",
+        "Płytki ścienne i gresy do 100 zł/m²",
+        "Płytki ścienne i gresy do 150 zł/m²",
+        "Gresy, posadzki żywiczne i inne"
+      ]
+    ]
+  },
+  {
+    "title": "Meble na wymiar",
+    "rows": [
+      [
+        "Fronty",
+        "Standardowe z płyty melaminowanej",
+        "Akrylowe lub lakierowane",
+        "Lakierowane, ryflowane, ramki aluminiowe"
+      ],
+      [
+        "Korpusy",
+        "Białe",
+        "Białe lub szare",
+        "Dowolne, dopasowane do koloru frontów"
+      ],
+      [
+        "Blaty",
+        "Standardowe laminowane HPL, 38 mm",
+        "Standardowe HPL, kompaktowe HPL",
+        "Standardowe HPL, kompaktowe HPL, spiek, granit i inne"
+      ],
+      [
+        "Szuflady",
+        "Strong Max",
+        "Strong Max, Blum",
+        "Blum"
+      ],
+      [
+        "Cargo",
+        "O ile budżet pozwoli",
+        "Tak",
+        "Tak"
+      ],
+      [
+        "Systemy narożne",
+        "Półka",
+        "Nerka, Magic Corner",
+        "Nerka, Magic Corner"
+      ],
+      [
+        "Oświetlenie LED",
+        "Tak",
+        "Tak",
+        "Tak"
+      ],
+      [
+        "Zawiasy",
+        "Blum + Blumotion",
+        "Blum + Blumotion",
+        "Blum + Blumotion"
+      ],
+      [
+        "Kosze do sortowania",
+        "O ile budżet pozwoli",
+        "Franke",
+        "Franke"
+      ]
+    ]
+  }
+];
+
+function VariantSpecification({ variant }: { variant: number }) {
+  return <details className="variant-specification">
+    <summary>Specyfikacja wariantu</summary>
+    {variantSpecifications.map(group => <section key={group.title}><h4>{group.title}</h4><dl>{group.rows.map(row => <div key={row[0]}><dt>{row[0]}</dt><dd>{row[variant + 1]}</dd></div>)}</dl></section>)}
+  </details>;
+}
+
 export default function CityApartmentPage() {
   return <main className="white-site city-apartment-page">
     <WhiteHeader />
@@ -137,9 +247,9 @@ export default function CityApartmentPage() {
     <section className="apartment-variants">
       <header><small>TRZY KIERUNKI ARANŻACJI</small><h2>Wybór oparty<br />na konkretnych rozwiązaniach.</h2><p>Dla klienta przygotujemy trzy warianty wykończenia zgodne ze standardami opisanymi w ofercie. Każdy wariant zostanie przedstawiony na osobnej grafice, aby ułatwić porównanie estetyki, materiałów i poziomu wykończenia.</p></header>
       <div className="apartment-variant-grid">
-        <article><figure><img src={assetBase + "/assets/standard.jpg"} alt="Przykładowa wizualizacja wariantu Standard" /><figcaption>Wizualizacja przykładowa</figcaption></figure><div><span>01</span><small>WARIANT</small><h3>Standard</h3><p>Rozwiązania funkcjonalne, trwałe i racjonalnie dopasowane do założonego budżetu.</p></div></article>
-        <article><figure><img src={assetBase + "/assets/plus.jpg"} alt="Przykładowa wizualizacja wariantu Plus" /><figcaption>Wizualizacja przykładowa</figcaption></figure><div><span>02</span><small>WARIANT</small><h3>Plus</h3><p>Równowaga między efektownym wyglądem, komfortem i rozsądnym wykorzystaniem budżetu.</p></div></article>
-        <article><figure><img src={assetBase + "/assets/premium-wood-kitchen.jpg"} alt="Przykładowa wizualizacja wariantu Premium" /><figcaption>Wizualizacja przykładowa</figcaption></figure><div><span>03</span><small>WARIANT</small><h3>Premium</h3><p>Indywidualne rozwiązania, szlachetne materiały i maksymalnie dopracowany detal.</p></div></article>
+        <article><figure><img src={assetBase + "/assets/standard.jpg"} alt="Przykładowa wizualizacja wariantu Standard" /><figcaption>Wizualizacja przykładowa</figcaption></figure><div><span>01</span><small>WARIANT</small><h3>Standard</h3><p>Rozwiązania funkcjonalne, trwałe i racjonalnie dopasowane do założonego budżetu.</p><VariantSpecification variant={0} /></div></article>
+        <article><figure><img src={assetBase + "/assets/plus.jpg"} alt="Przykładowa wizualizacja wariantu Plus" /><figcaption>Wizualizacja przykładowa</figcaption></figure><div><span>02</span><small>WARIANT</small><h3>Plus</h3><p>Równowaga między efektownym wyglądem, komfortem i rozsądnym wykorzystaniem budżetu.</p><VariantSpecification variant={1} /></div></article>
+        <article><figure><img src={assetBase + "/assets/premium-wood-kitchen.jpg"} alt="Przykładowa wizualizacja wariantu Premium" /><figcaption>Wizualizacja przykładowa</figcaption></figure><div><span>03</span><small>WARIANT</small><h3>Premium</h3><p>Indywidualne rozwiązania, szlachetne materiały i maksymalnie dopracowany detal.</p><VariantSpecification variant={2} /></div></article>
       </div>
       <div className="apartment-selected-project">
         <div><small>PO WYBORZE WARIANTU</small><h3>Rozwinięty projekt aranżacyjny i techniczny</h3></div>
