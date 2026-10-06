@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { VariantDisclosure } from "../../components/variant-disclosure";
 import { ProjectStudy } from "../../components/project-study";
 import "../project-study.css";
 import Link from "next/link";
@@ -139,7 +140,7 @@ const variantSpecifications = [
         "Fronty",
         "Standardowe z płyty melaminowanej",
         "Akrylowe lub lakierowane",
-        "Lakierowane, ryflowane, ramki aluminiowe"
+        "Lakierowane, ryflowane, fornirowane, drewniane, ramki aluminiowe"
       ],
       [
         "Korpusy",
@@ -194,10 +195,9 @@ const variantSpecifications = [
 ];
 
 function VariantSpecification({ variant }: { variant: number }) {
-  return <details className="variant-specification">
-    <summary>Specyfikacja wariantu</summary>
+  return <VariantDisclosure>
     {variantSpecifications.map(group => <section key={group.title}><h4>{group.title}</h4><dl>{group.rows.map(row => <div key={row[0]}><dt>{row[0]}</dt><dd>{row[variant + 1]}</dd></div>)}</dl></section>)}
-  </details>;
+  </VariantDisclosure>;
 }
 
 export default function CityApartmentPage() {
