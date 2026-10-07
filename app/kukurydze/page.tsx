@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { VariantDisclosure } from "../../components/variant-disclosure";
-import { ProjectStudy } from "../../components/project-study";
+import { ProjectStudy, type ProjectStudyData } from "../../components/project-study";
 import "../project-study.css";
 import Link from "next/link";
 const assetBase = "/home";
@@ -90,6 +90,149 @@ const bathroomProject = {
     }
   ]
 };
+
+const additionalProjects: ProjectStudyData[] = [
+  {
+    "id": "kuchnia",
+    "number": "02",
+    "title": "Kuchnia",
+    "example": true,
+    "description": "Przykładowa aranżacja: kuchnia. Sekcja pokazuje układ przyszłego opracowania dla Kukurydz 2.0; grafiki i opisy zostaną dopasowane do właściwego projektu.",
+    "photos": [
+      {
+        "src": "/home/assets/projekt-kuchni-01.jpg",
+        "label": "Zabudowa i strefa przygotowania"
+      },
+      {
+        "src": "/home/assets/projekt-kuchni-02.jpg",
+        "label": "Przykładowa zabudowa kuchenna"
+      },
+      {
+        "src": "/home/assets/bialy-hero-kuchnia.jpg",
+        "label": "Wyspa i blat roboczy"
+      }
+    ],
+    "heroIndex": 0,
+    "details": [
+      {
+        "label": "MATERIAŁY",
+        "title": "Kaszmir i naturalne drewno",
+        "text": "Przykładowe zestawienie jasnych frontów, drewna i trwałych powierzchni roboczych."
+      },
+      {
+        "label": "FUNKCJA",
+        "title": "Wygodna praca w kuchni",
+        "text": "Strefy przechowywania, przygotowania i gotowania tworzą czytelny układ zabudowy."
+      },
+      {
+        "label": "ŚWIATŁO",
+        "title": "Oświetlenie blatu",
+        "text": "Światło pod szafkami i nad wyspą podkreśla podziały oraz ułatwia codzienną pracę."
+      }
+    ],
+    "drawings": []
+  },
+  {
+    "id": "salon",
+    "number": "03",
+    "title": "Salon",
+    "example": true,
+    "description": "Przykładowa aranżacja: salon. Sekcja pokazuje układ przyszłego opracowania dla Kukurydz 2.0; grafiki i opisy zostaną dopasowane do właściwego projektu.",
+    "photos": [
+      {
+        "src": "/home/assets/premium-wood-kitchen.jpg",
+        "label": "Strefa dzienna z aneksem"
+      },
+      {
+        "src": "/home/assets/realizacja-03.jpg",
+        "label": "Przykładowa zabudowa strefy telewizyjnej"
+      }
+    ],
+    "heroIndex": 0,
+    "details": [
+      {
+        "label": "MATERIAŁY",
+        "title": "Spójność strefy dziennej",
+        "text": "Drewno, jasne powierzchnie i miękkie tkaniny łączą salon z pozostałymi pomieszczeniami."
+      },
+      {
+        "label": "FUNKCJA",
+        "title": "Wypoczynek i przechowywanie",
+        "text": "Zabudowa meblowa porządkuje strefę telewizyjną i zapewnia miejsce na codzienne przedmioty."
+      },
+      {
+        "label": "ŚWIATŁO",
+        "title": "Nastrój i akcenty",
+        "text": "Oświetlenie główne i delikatne podświetlenia tworzą różne scenariusze użytkowania."
+      }
+    ],
+    "drawings": []
+  },
+  {
+    "id": "hol",
+    "number": "04",
+    "title": "Hol",
+    "example": true,
+    "description": "Przykładowa aranżacja: hol. Sekcja pokazuje układ przyszłego opracowania dla Kukurydz 2.0; grafiki i opisy zostaną dopasowane do właściwego projektu.",
+    "photos": [
+      {
+        "src": "/home/assets/kukurydze/przyklady/hol.jpg",
+        "label": "Przykładowa aranżacja holu"
+      }
+    ],
+    "heroIndex": 0,
+    "details": [
+      {
+        "label": "MATERIAŁY",
+        "title": "Jasne fronty i drewno",
+        "text": "Przykładowe połączenie neutralnych frontów z drewnianymi detalami."
+      },
+      {
+        "label": "FUNKCJA",
+        "title": "Szafa, siedzisko i lustro",
+        "text": "Zabudowa przy wejściu łączy przechowywanie odzieży z wygodnym miejscem do zmiany obuwia."
+      },
+      {
+        "label": "ŚWIATŁO",
+        "title": "Czytelna strefa wejścia",
+        "text": "Światło przy lustrze i zabudowie podkreśla układ niewielkiej przestrzeni."
+      }
+    ],
+    "drawings": []
+  },
+  {
+    "id": "sypialnia",
+    "number": "05",
+    "title": "Sypialnia",
+    "example": true,
+    "description": "Przykładowa aranżacja: sypialnia. Sekcja pokazuje układ przyszłego opracowania dla Kukurydz 2.0; grafiki i opisy zostaną dopasowane do właściwego projektu.",
+    "photos": [
+      {
+        "src": "/home/assets/kukurydze/przyklady/sypialnia.jpg",
+        "label": "Przykładowa aranżacja sypialni"
+      }
+    ],
+    "heroIndex": 0,
+    "details": [
+      {
+        "label": "MATERIAŁY",
+        "title": "Spokojne kolory i faktury",
+        "text": "Jasne odcienie, drewno i miękkie tkaniny budują przytulną przestrzeń odpoczynku."
+      },
+      {
+        "label": "FUNKCJA",
+        "title": "Wypoczynek i garderoba",
+        "text": "Łóżko, szafki nocne oraz zabudowa szafy tworzą przykładowy układ sypialni."
+      },
+      {
+        "label": "ŚWIATŁO",
+        "title": "Komfort wieczorem",
+        "text": "Subtelne podświetlenia i światło przy łóżku uzupełniają oświetlenie dzienne."
+      }
+    ],
+    "drawings": []
+  }
+];
 
 const variantSpecifications = [
   {
@@ -233,7 +376,7 @@ export default function CityApartmentPage() {
             <div><dt>Zakres</dt><dd>Projekt · meble · wykończenie</dd></div>
             <div><dt>Status</dt><dd>Aktualna realizacja</dd></div>
           </dl>
-          <p>Inwentaryzacja jest podstawą opracowania aranżacji, zabudowy i prac wykończeniowych. Poniżej prezentujemy projekt łazienki; kolejne opracowania obejmą kuchnię, sypialnię i hol.</p>
+          <p>Inwentaryzacja jest podstawą opracowania aranżacji, zabudowy i prac wykończeniowych. Poniżej prezentujemy projekt łazienki; a dalej przykładowe aranżacje kuchni, salonu, holu i sypialni, przygotowane do rozwinięcia w kolejne opracowania.</p>
           <details className="apartment-area-note">
             <summary>Notatka · powierzchnie pomieszczeń</summary>
             <dl>{rooms.map(room => <div key={room.number}><dt>{room.name}</dt><dd>{room.area}</dd></div>)}</dl>
@@ -253,13 +396,14 @@ export default function CityApartmentPage() {
       </div>
       <div className="apartment-selected-project">
         <div><small>PO WYBORZE WARIANTU</small><h3>Rozwinięty projekt aranżacyjny i techniczny</h3></div>
-        <ul><li><b>01</b><span>Projekt łazienki</span></li><li><b>02</b><span>Projekt kuchni</span></li><li><b>03</b><span>Projekt sypialni i holu</span></li></ul>
+        <ul><li><b>01</b><a href="#lazienka">Projekt łazienki</a></li>{additionalProjects.map(project => <li key={project.id}><b>{project.number}</b><a href={`#${project.id}`}>Projekt: {project.title.toLowerCase()}</a></li>)}</ul>
         <p>Wybrany kierunek rozwiniemy w kompletną dokumentację potrzebną do prawidłowego wykonania wnętrza — od układu i materiałów po najważniejsze detale techniczne.</p>
       </div>
     </section>
 
-    <nav className="study-room-nav" aria-label="Opracowania pomieszczeń"><a href="#lazienka">01 · Łazienka</a><span>02 · Kuchnia <small>w przygotowaniu</small></span><span>03 · Sypialnia <small>w przygotowaniu</small></span><span>04 · Hol <small>w przygotowaniu</small></span></nav>
+    <nav className="study-room-nav" aria-label="Opracowania pomieszczeń"><a href="#lazienka">01 · Łazienka</a>{additionalProjects.map(project => <a key={project.id} href={`#${project.id}`}>{project.number} · {project.title}</a>)}</nav>
     <ProjectStudy project={bathroomProject} />
+    {additionalProjects.map(project => <ProjectStudy key={project.id} project={project} />)}
 
     <section className="white-page-cta"><div><small>OD RZUTU DO REALIZACJI</small><h2>Sprawdźmy możliwości<br />Twojego mieszkania.</h2></div><p>Przeanalizujemy układ, instalacje, ergonomię i materiały, zanim rozpoczną się kosztowne prace.</p><Link className="white-outline" href="/kontakt">Umów konsultację <ArrowRight size={18} /></Link></section>
     <WhiteFooter />
