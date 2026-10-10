@@ -121,3 +121,26 @@
 @media(max-width:520px){
  .qr-choice-links>a strong{margin-left:12px!important}
 }
+
+/* Wariant 6: ostre zdjęcia na co dzień, rozmycie tylko po najechaniu */
+.qr-choice-links>a .qr-link-thumbnail{
+ filter:blur(0)!important;
+ transform:scale(1)!important;
+ transition:filter .45s ease,transform .45s ease!important;
+ will-change:filter;
+}
+.qr-choice-links>a::before{
+ background:linear-gradient(90deg,rgba(5,23,48,.88) 0%,rgba(6,28,58,.60) 24%,rgba(255,255,255,.10) 56%,rgba(255,255,255,.96) 100%)!important;
+}
+.qr-choice-links>a:hover .qr-link-thumbnail,
+.qr-choice-links>a:focus-visible .qr-link-thumbnail{
+ filter:blur(7px)!important;
+ transform:scale(1.045)!important;
+}
+.qr-choice-links>a:hover::before,
+.qr-choice-links>a:focus-visible::before{
+ background:linear-gradient(90deg,rgba(5,23,48,.88) 0%,rgba(6,28,58,.60) 24%,rgba(255,255,255,.10) 56%,rgba(255,255,255,.96) 100%)!important;
+}
+@media(prefers-reduced-motion:reduce){
+ .qr-choice-links>a .qr-link-thumbnail{transition:none!important}
+}
