@@ -30,3 +30,11 @@
  .qr-choice-links>a strong,.qr-social-tile strong{font-size:.82rem!important}
  .qr-choice-links>a small,.qr-social-tile span{font-size:.64rem!important}
 }
+
+/* Kolory identyfikacyjne platform społecznościowych, bez zmiany geometrii */
+.qr-social-grid>.qr-social-tile{border-color:transparent!important;color:#fff!important;transition:filter .2s ease,transform .2s ease}
+.qr-social-grid>.qr-social-tile:nth-child(1){background:linear-gradient(110deg,#833ab4 0%,#c13584 38%,#e1306c 68%,#f77737 100%)!important}
+.qr-social-grid>.qr-social-tile:nth-child(2){background:#1877f2!important}
+.qr-social-grid>.qr-social-tile:nth-child(3){background:#ff0033!important}
+.qr-social-grid>.qr-social-tile svg,.qr-social-grid>.qr-social-tile strong,.qr-social-grid>.qr-social-tile span{color:#fff!important}
+.qr-social-grid>.qr-social-tile span{opacity:.85!important}
