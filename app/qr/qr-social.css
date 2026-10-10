@@ -75,3 +75,49 @@
 .qr-choice-links>a .qr-link-thumbnail{z-index:1!important;filter:none!important}
 .qr-choice-links>a strong,.qr-choice-links>a small{z-index:3!important}
 .qr-choice-links>a:hover{box-shadow:0 12px 26px rgba(6,26,62,.24)!important}
+
+/* Zdjęcie wypełnia cały kafel, granat przechodzi płynnie w biel */
+.qr-choice-links>a{
+ position:relative!important;
+ isolation:isolate!important;
+ background:#fff!important;
+ overflow:hidden!important;
+}
+.qr-choice-links>a .qr-link-thumbnail{
+ position:absolute!important;
+ inset:0!important;
+ width:100%!important;
+ height:100%!important;
+ min-height:0!important;
+ max-width:none!important;
+ object-fit:cover!important;
+ object-position:center!important;
+ border-radius:0!important;
+ margin:0!important;
+ z-index:0!important;
+ filter:none!important;
+}
+.qr-choice-links>a::before{
+ content:""!important;
+ position:absolute!important;
+ inset:0!important;
+ z-index:1!important;
+ background:linear-gradient(90deg,rgba(5,24,56,.97) 0%,rgba(8,34,75,.86) 34%,rgba(35,65,106,.58) 62%,rgba(255,255,255,.92) 100%)!important;
+ pointer-events:none!important;
+}
+.qr-choice-links>a strong{
+ position:relative!important;
+ z-index:2!important;
+ margin-left:18px!important;
+ color:#fff!important;
+ text-shadow:0 1px 4px rgba(2,15,36,.55)!important;
+}
+.qr-choice-links>a small{
+ position:relative!important;
+ z-index:2!important;
+ color:#102b51!important;
+ text-shadow:none!important;
+}
+@media(max-width:520px){
+ .qr-choice-links>a strong{margin-left:12px!important}
+}
