@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowDownRight, Clock3, House, Mail, Instagram, Facebook, Youtube } from "lucide-react";
+import { Clock3, Instagram, Facebook, Youtube } from "lucide-react";
 import "./qr-social.css";
 
 const assetBase = "/home";
@@ -36,9 +36,9 @@ export default function QRLandingPage() {
         <h1 id="qr-title">Wybierz swój<br /><em>kierunek.</em></h1>
         <p className="qr-intro">Wybierz stronę, którą chcesz odwiedzić.</p>
         <nav className="qr-links qr-choice-links" aria-label="Wybierz stronę">
-          <a href="/home/kukurydze/"><ArrowDownRight size={24} aria-hidden="true" /><strong>Kukurydze 2.0</strong><small>Aktualna realizacja</small></a>
-          <a href="/home/"><House size={24} aria-hidden="true" /><strong>Strona główna</strong><small>KIM SILESIA</small></a>
-          <a href="/home/kontakt/"><Mail size={24} aria-hidden="true" /><strong>Kontakt</strong><small>Napisz do nas</small></a>
+          <a href="/home/kukurydze/"><img className="qr-link-thumbnail" src={assetBase + "/assets/mieszkaj-w-miescie.jpg"} alt="" /><strong>Kukurydze 2.0</strong><small>Aktualna realizacja</small></a>
+          <a href="/home/"><img className="qr-link-thumbnail" src={assetBase + "/assets/bialy-hero-kuchnia.jpg"} alt="" /><strong>Strona główna</strong><small>KIM SILESIA</small></a>
+          <a href="/home/kontakt/"><img className="qr-link-thumbnail" src={assetBase + "/assets/realizacja-01.jpg"} alt="" /><strong>Kontakt</strong><small>Napisz do nas</small></a>
         </nav>
         <section className="qr-social" aria-labelledby="qr-social-title">
           <h2 id="qr-social-title">Zostańmy w kontakcie</h2>
