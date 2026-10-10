@@ -38,3 +38,17 @@
 .qr-social-grid>.qr-social-tile:nth-child(3){background:#ff0033!important}
 .qr-social-grid>.qr-social-tile svg,.qr-social-grid>.qr-social-tile strong,.qr-social-grid>.qr-social-tile span{color:#fff!important}
 .qr-social-grid>.qr-social-tile span{opacity:.85!important}
+
+/* Miniatury zdjęć używanych na docelowych stronach */
+.qr-choice-links>a{overflow:hidden!important;padding:0 16px 0 0!important;gap:14px!important}
+.qr-choice-links>a .qr-link-thumbnail{
+ display:block!important;position:static!important;flex:0 0 110px!important;
+ width:110px!important;height:100%!important;min-height:100%!important;
+ object-fit:cover!important;object-position:center!important;
+ border-radius:3px 0 0 3px!important;margin:0!important;
+}
+.qr-choice-links>a strong{min-width:0!important}
+@media(max-width:520px){
+ .qr-choice-links>a{padding:0 10px 0 0!important;gap:10px!important}
+ .qr-choice-links>a .qr-link-thumbnail{flex-basis:88px!important;width:88px!important}
+}
