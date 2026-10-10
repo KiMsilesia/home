@@ -8,10 +8,10 @@ const assetBase = "/home";
 const defaultDestination = "/home/kukurydze/";
 
 export default function QRLandingPage() {
-  const [secondsLeft, setSecondsLeft] = useState(5);
+  const [secondsLeft, setSecondsLeft] = useState(10);
 
   useEffect(() => {
-    let remaining = 5;
+    let remaining = 10;
     let timer: ReturnType<typeof setTimeout>;
     const tick = () => {
       remaining -= 1;
