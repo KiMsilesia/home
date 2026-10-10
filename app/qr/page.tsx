@@ -44,9 +44,9 @@ export default function QRLandingPage() {
           <h2 id="qr-social-title">Zostańmy w kontakcie</h2>
           <p>Obserwuj KIM SILESIA w mediach społecznościowych.</p>
           <div className="qr-social-grid">
-            <div className="qr-social-tile"><Instagram size={23} aria-hidden="true" /><strong>Instagram</strong><span>Wkrótce</span></div>
-            <div className="qr-social-tile"><Facebook size={23} aria-hidden="true" /><strong>Facebook</strong><span>Wkrótce</span></div>
-            <div className="qr-social-tile"><Youtube size={24} aria-hidden="true" /><strong>YouTube</strong><span>Wkrótce</span></div>
+            <div className="qr-social-tile"><img className="qr-social-photo" src={assetBase + "/assets/mieszkaj-w-miescie.jpg"} alt="" /><Instagram size={23} aria-hidden="true" /><strong>Instagram</strong><span>Wkrótce</span></div>
+            <div className="qr-social-tile"><img className="qr-social-photo" src={assetBase + "/assets/bialy-hero-kuchnia.jpg"} alt="" /><Facebook size={23} aria-hidden="true" /><strong>Facebook</strong><span>Wkrótce</span></div>
+            <div className="qr-social-tile"><img className="qr-social-photo" src={assetBase + "/assets/realizacja-01.jpg"} alt="" /><Youtube size={24} aria-hidden="true" /><strong>YouTube</strong><span>Wkrótce</span></div>
           </div>
         </section>
         <div className="qr-auto-redirect" role="status" aria-live="polite"><Clock3 size={17} /><span>Za <strong>{secondsLeft}</strong> {secondsLeft === 1 ? "sekundę" : "sekundy"} otworzymy<b>Kukurydze 2.0</b></span></div>
