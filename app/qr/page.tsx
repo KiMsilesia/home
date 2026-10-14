@@ -53,9 +53,9 @@ export default function QRLandingPage() {
           <h2 id="qr-social-title">Zostańmy w kontakcie</h2>
           <p>Obserwuj KIM SILESIA w mediach społecznościowych.</p>
           <div className="qr-social-grid">
-            <a className="qr-social-tile" href="https://www.instagram.com/kim_silesia/reel/DEmMpPHM-N4/" target="_blank" rel="noopener noreferrer" aria-label="Instagram KIM SILESIA — zobacz rolkę"><img className="qr-social-photo" src={assetBase + "/assets/qr-instagram-visual.svg?v=20261015-2"} alt="" /><Instagram size={23} aria-hidden="true" /><strong>Instagram</strong><span>Zobacz rolkę</span></a>
-            <div className="qr-social-tile"><img className="qr-social-photo" src={assetBase + "/assets/qr-facebook-visual.svg"} alt="" /><Facebook size={23} aria-hidden="true" /><strong>Facebook</strong><span>Wkrótce</span></div>
-            <a className="qr-social-tile" href="https://youtu.be/Gbt933OBLFg" target="_blank" rel="noopener noreferrer" aria-label="YouTube KIM SILESIA — obejrzyj film"><img className="qr-social-photo" src={assetBase + "/assets/qr-youtube-visual.svg?v=20261015-2"} alt="" /><Youtube size={24} aria-hidden="true" /><strong>YouTube</strong><span>Obejrzyj film</span></a>
+            <a className="qr-social-tile" href="https://www.instagram.com/kim_silesia/reel/DEmMpPHM-N4/" target="_blank" rel="noopener noreferrer" aria-label="Instagram KIM SILESIA — zobacz rolkę"><Instagram size={23} aria-hidden="true" /><strong>Instagram</strong><span>Zobacz rolkę</span></a>
+            <div className="qr-social-tile"><Facebook size={23} aria-hidden="true" /><strong>Facebook</strong><span>Wkrótce</span></div>
+            <a className="qr-social-tile" href="https://youtu.be/Gbt933OBLFg" target="_blank" rel="noopener noreferrer" aria-label="YouTube KIM SILESIA — obejrzyj film"><Youtube size={24} aria-hidden="true" /><strong>YouTube</strong><span>Obejrzyj film</span></a>
           </div>
         </section>
         
