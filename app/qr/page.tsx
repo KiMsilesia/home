@@ -9,17 +9,15 @@ const defaultDestination = "/home/kukurydze/";
 
 export default function QRLandingPage() {
   const [secondsLeft, setSecondsLeft] = useState(10);
-  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    if (isPaused) return;
     if (secondsLeft <= 0) {
       window.location.assign(defaultDestination);
       return;
     }
     const timer = window.setTimeout(() => setSecondsLeft((value) => Math.max(0, value - 1)), 1000);
     return () => window.clearTimeout(timer);
-  }, [secondsLeft, isPaused]);
+  }, [secondsLeft]);
 
   return (
     <main className="qr-page qr-landing">
@@ -34,14 +32,13 @@ export default function QRLandingPage() {
           <div className="qr-timer-summary">
             <Clock3 size={22} aria-hidden="true" />
             <div className="qr-timer-copy">
-              <strong>{isPaused ? "Przekierowanie zatrzymane" : "Automatyczne przekierowanie"}</strong>
-              <span>{isPaused ? "Możesz spokojnie wybrać kafelek." : "Po odliczaniu otworzymy Kukurydze 2.0."}</span>
+              <strong>Automatyczne przekierowanie</strong>
+              <span>Po odliczaniu otworzymy Kukurydze 2.0.</span>
             </div>
             <output className="qr-timer-count" aria-label={`Pozostało ${secondsLeft} sekund`}>{secondsLeft}<small>s</small></output>
           </div>
           <div className="qr-timer-actions">
-            <button type="button" onClick={() => setIsPaused((value) => !value)}>{isPaused ? "Wznów" : "Zatrzymaj"}</button>
-            <button type="button" onClick={() => setSecondsLeft((value) => value + 10)}>+10 sekund</button>
+            <button type="button" onClick={() => setSecondsLeft((value) => value + 10)} aria-label="Dodaj 10 sekund do odliczania"><span className="qr-timer-plus" aria-hidden="true">+</span><span>Potrzebujesz chwili?<strong>Dodaj 10 sekund</strong></span><span className="qr-timer-arrow" aria-hidden="true">→</span></button>
           </div>
         </section>
         <nav className="qr-links qr-choice-links" aria-label="Wybierz stronę">
