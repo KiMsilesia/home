@@ -44,7 +44,7 @@ export default function QRLandingPage() {
           <h2 id="qr-social-title">Zostańmy w kontakcie</h2>
           <p>Obserwuj KIM SILESIA w mediach społecznościowych.</p>
           <div className="qr-social-grid">
-            <div className="qr-social-tile"><img className="qr-social-photo" src={assetBase + "/assets/qr-instagram-visual.svg"} alt="" /><Instagram size={23} aria-hidden="true" /><strong>Instagram</strong><span>Wkrótce</span></div>
+            <a className="qr-social-tile" href="https://www.instagram.com/kim_silesia/reel/DEmMpPHM-N4/" target="_blank" rel="noopener noreferrer" aria-label="Instagram KIM SILESIA — zobacz rolkę"><img className="qr-social-photo" src={assetBase + "/assets/qr-instagram-visual.svg"} alt="" /><Instagram size={23} aria-hidden="true" /><strong>Instagram</strong><span>Zobacz rolkę</span></a>
             <div className="qr-social-tile"><img className="qr-social-photo" src={assetBase + "/assets/qr-facebook-visual.svg"} alt="" /><Facebook size={23} aria-hidden="true" /><strong>Facebook</strong><span>Wkrótce</span></div>
             <div className="qr-social-tile"><img className="qr-social-photo" src={assetBase + "/assets/qr-youtube-visual.svg"} alt="" /><Youtube size={24} aria-hidden="true" /><strong>YouTube</strong><span>Wkrótce</span></div>
           </div>
