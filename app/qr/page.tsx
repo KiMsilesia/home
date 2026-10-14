@@ -46,7 +46,7 @@ export default function QRLandingPage() {
           <div className="qr-social-grid">
             <a className="qr-social-tile" href="https://www.instagram.com/kim_silesia/reel/DEmMpPHM-N4/" target="_blank" rel="noopener noreferrer" aria-label="Instagram KIM SILESIA — zobacz rolkę"><img className="qr-social-photo" src={assetBase + "/assets/qr-instagram-visual.svg"} alt="" /><Instagram size={23} aria-hidden="true" /><strong>Instagram</strong><span>Zobacz rolkę</span></a>
             <div className="qr-social-tile"><img className="qr-social-photo" src={assetBase + "/assets/qr-facebook-visual.svg"} alt="" /><Facebook size={23} aria-hidden="true" /><strong>Facebook</strong><span>Wkrótce</span></div>
-            <div className="qr-social-tile"><img className="qr-social-photo" src={assetBase + "/assets/qr-youtube-visual.svg"} alt="" /><Youtube size={24} aria-hidden="true" /><strong>YouTube</strong><span>Wkrótce</span></div>
+            <a className="qr-social-tile" href="https://youtu.be/Gbt933OBLFg" target="_blank" rel="noopener noreferrer" aria-label="YouTube KIM SILESIA — obejrzyj film"><img className="qr-social-photo" src="https://i.ytimg.com/vi/Gbt933OBLFg/hqdefault.jpg" alt="" /><Youtube size={24} aria-hidden="true" /><strong>YouTube</strong><span>Obejrzyj film</span></a>
           </div>
         </section>
         <div className="qr-auto-redirect" role="status" aria-live="polite"><Clock3 size={17} /><span>Za <strong>{secondsLeft}</strong> {secondsLeft === 1 ? "sekundę" : "sekundy"} otworzymy<b>Kukurydze 2.0</b></span></div>
