@@ -208,3 +208,19 @@
 @media(prefers-reduced-motion:reduce){
  .qr-choice-links>a::after,.qr-social-grid>.qr-social-tile::before{transition:none!important;display:none!important}
 }
+
+/* Sterowanie odliczaniem QR — nad kafelkami */
+.qr-timer-panel{margin:18px 0 20px;padding:16px;border:1px solid #d6e1ee;border-radius:9px;background:linear-gradient(125deg,#f8fbff,#eaf1f9);box-shadow:0 6px 22px rgba(8,34,75,.09)}
+.qr-timer-summary{display:flex;align-items:center;gap:12px;color:#10345f}
+.qr-timer-summary>svg{flex-shrink:0}
+.qr-timer-copy{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.qr-timer-copy strong{font-size:.9rem;line-height:1.25}
+.qr-timer-copy span{font-size:.73rem;color:#586b81;line-height:1.4}
+.qr-timer-count{font-variant-numeric:tabular-nums;font-size:2.1rem;font-weight:800;line-height:1;color:#0c2c57;white-space:nowrap}
+.qr-timer-count small{font-size:.8rem;margin-left:2px}
+.qr-timer-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.qr-timer-actions button{min-height:43px;padding:10px 12px;border:1px solid #173f74;border-radius:6px;background:#123c70;color:#fff;font:inherit;font-size:.85rem;font-weight:700;cursor:pointer}
+.qr-timer-actions button+button{background:#fff;color:#123c70}
+.qr-timer-actions button:hover{filter:brightness(1.08)}
+.qr-timer-actions button:focus-visible{outline:3px solid #5598e9;outline-offset:3px}
+@media(max-width:400px){.qr-timer-panel{padding:12px}.qr-timer-count{font-size:1.8rem}.qr-timer-copy strong{font-size:.8rem}}
