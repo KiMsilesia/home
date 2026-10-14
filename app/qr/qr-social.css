@@ -224,3 +224,34 @@
 .qr-timer-actions button:hover{filter:brightness(1.08)}
 .qr-timer-actions button:focus-visible{outline:3px solid #5598e9;outline-offset:3px}
 @media(max-width:400px){.qr-timer-panel{padding:12px}.qr-timer-count{font-size:1.8rem}.qr-timer-copy strong{font-size:.8rem}}
+
+/* KIM SILESIA / social tiles: premium architectural identity, no stock illustrations */
+.qr-social-grid>.qr-social-tile{
+  background:#0b1c31!important;border:1px solid rgba(176,194,216,.26)!important;
+  box-shadow:0 8px 24px rgba(6,20,43,.22),inset 0 1px rgba(255,255,255,.12)!important;
+  text-decoration:none!important;position:relative!important;isolation:isolate!important;
+}
+.qr-social-grid>.qr-social-tile:nth-child(1){
+  background:radial-gradient(ellipse at 83% 18%,rgba(221,96,141,.30),transparent 43%),
+  linear-gradient(115deg,#0a1b34 0%,#292143 58%,#67334c 100%)!important;
+}
+.qr-social-grid>.qr-social-tile:nth-child(2){
+  background:radial-gradient(ellipse at 83% 18%,rgba(83,146,229,.26),transparent 48%),
+  linear-gradient(115deg,#0a1b34,#12395b 100%)!important;
+}
+.qr-social-grid>.qr-social-tile:nth-child(3){
+  background:radial-gradient(ellipse at 83% 18%,rgba(226,93,98,.27),transparent 45%),
+  linear-gradient(115deg,#0a1b34,#3a2637 100%)!important;
+}
+.qr-social-grid>.qr-social-tile::after{
+  background:repeating-linear-gradient(125deg,transparent 0,transparent 39px,rgba(255,255,255,.045) 40px,transparent 41px),
+  linear-gradient(90deg,rgba(5,15,30,.28),transparent 65%)!important;
+  opacity:1!important;z-index:1!important;
+}
+.qr-social-grid>.qr-social-tile svg{color:#f5f7fa!important;filter:none!important}
+.qr-social-grid>.qr-social-tile strong{color:#fff!important;letter-spacing:.015em;text-shadow:none!important}
+.qr-social-grid>.qr-social-tile span{color:#e4e9f2!important;opacity:.93!important;text-shadow:none!important}
+.qr-social-grid>.qr-social-tile:nth-child(1) svg{color:#f2adc8!important}
+.qr-social-grid>.qr-social-tile:nth-child(2) svg{color:#a7cdfa!important}
+.qr-social-grid>.qr-social-tile:nth-child(3) svg{color:#ffafb1!important}
+.qr-social-grid>.qr-social-tile:hover{transform:translateY(-2px)!important;box-shadow:0 14px 28px rgba(6,20,43,.3)!important}
