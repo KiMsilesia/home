@@ -272,3 +272,10 @@
 .qr-timer-plus{display:grid;place-items:center;width:33px;height:33px;flex:0 0 33px;border:1px solid rgba(255,255,255,.38);border-radius:50%;font-size:1.45rem;font-weight:400;color:#fff}
 .qr-timer-arrow{margin-left:auto;font-size:1.25rem;font-weight:400;color:#b9d6f0}
 @media(prefers-reduced-motion:reduce){.qr-timer-actions button{transition:none}.qr-timer-actions button:hover{transform:none}}
+
+/* Wyrównanie panelu czasu do pełnej szerokości kafelków */
+.qr-timer-panel{box-sizing:border-box!important;width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;padding:14px 0 0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+.qr-timer-summary{padding:0 2px 12px}
+.qr-timer-actions{width:100%!important;margin-top:0!important}
+.qr-timer-actions button{box-sizing:border-box!important;width:100%!important;min-height:68px!important;border-radius:4px!important;padding:12px 18px!important}
+@media(max-width:520px){.qr-timer-panel{padding-top:12px!important}.qr-timer-actions button{height:68px!important;min-height:68px!important;padding:10px 12px!important}}
