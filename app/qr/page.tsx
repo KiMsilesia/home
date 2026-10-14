@@ -9,22 +9,17 @@ const defaultDestination = "/home/kukurydze/";
 
 export default function QRLandingPage() {
   const [secondsLeft, setSecondsLeft] = useState(10);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    let remaining = 10;
-    let timer: ReturnType<typeof setTimeout>;
-    const tick = () => {
-      remaining -= 1;
-      setSecondsLeft(remaining);
-      if (remaining <= 0) {
-        window.location.assign(defaultDestination);
-        return;
-      }
-      timer = setTimeout(tick, 1000);
-    };
-    timer = setTimeout(tick, 1000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (isPaused) return;
+    if (secondsLeft <= 0) {
+      window.location.assign(defaultDestination);
+      return;
+    }
+    const timer = window.setTimeout(() => setSecondsLeft((value) => Math.max(0, value - 1)), 1000);
+    return () => window.clearTimeout(timer);
+  }, [secondsLeft, isPaused]);
 
   return (
     <main className="qr-page qr-landing">
@@ -35,6 +30,20 @@ export default function QRLandingPage() {
         <p className="qr-eyebrow"><span /> WNĘTRZA · PROJEKTY · REALIZACJE</p>
         <h1 id="qr-title">Wybierz swój<br /><em>kierunek.</em></h1>
         <p className="qr-intro">Wybierz stronę, którą chcesz odwiedzić.</p>
+        <section className="qr-timer-panel" aria-label="Automatyczne przekierowanie">
+          <div className="qr-timer-summary">
+            <Clock3 size={22} aria-hidden="true" />
+            <div className="qr-timer-copy">
+              <strong>{isPaused ? "Przekierowanie zatrzymane" : "Automatyczne przekierowanie"}</strong>
+              <span>{isPaused ? "Możesz spokojnie wybrać kafelek." : "Po odliczaniu otworzymy Kukurydze 2.0."}</span>
+            </div>
+            <output className="qr-timer-count" aria-label={`Pozostało ${secondsLeft} sekund`}>{secondsLeft}<small>s</small></output>
+          </div>
+          <div className="qr-timer-actions">
+            <button type="button" onClick={() => setIsPaused((value) => !value)}>{isPaused ? "Wznów" : "Zatrzymaj"}</button>
+            <button type="button" onClick={() => setSecondsLeft((value) => value + 10)}>+10 sekund</button>
+          </div>
+        </section>
         <nav className="qr-links qr-choice-links" aria-label="Wybierz stronę">
           <a href="/home/kukurydze/"><img className="qr-link-thumbnail" src={assetBase + "/assets/mieszkaj-w-miescie.jpg"} alt="" /><strong>Kukurydze 2.0</strong><small>Aktualna realizacja</small></a>
           <a href="/home/"><img className="qr-link-thumbnail" src={assetBase + "/assets/bialy-hero-kuchnia.jpg"} alt="" /><strong>Strona główna</strong><small>KIM SILESIA</small></a>
@@ -49,7 +58,7 @@ export default function QRLandingPage() {
             <a className="qr-social-tile" href="https://youtu.be/Gbt933OBLFg" target="_blank" rel="noopener noreferrer" aria-label="YouTube KIM SILESIA — obejrzyj film"><img className="qr-social-photo" src={assetBase + "/assets/qr-youtube-visual.svg?v=20261015-2"} alt="" /><Youtube size={24} aria-hidden="true" /><strong>YouTube</strong><span>Obejrzyj film</span></a>
           </div>
         </section>
-        <div className="qr-auto-redirect" role="status" aria-live="polite"><Clock3 size={17} /><span>Za <strong>{secondsLeft}</strong> {secondsLeft === 1 ? "sekundę" : "sekundy"} otworzymy<b>Kukurydze 2.0</b></span></div>
+        
         <footer className="qr-landing-footer"><span>KIM SILESIA</span><span>Katowice · Śląsk</span></footer>
       </section>
     </main>
