@@ -279,3 +279,16 @@
 .qr-timer-actions{width:100%!important;margin-top:0!important}
 .qr-timer-actions button{box-sizing:border-box!important;width:100%!important;min-height:68px!important;border-radius:4px!important;padding:12px 18px!important}
 @media(max-width:520px){.qr-timer-panel{padding-top:12px!important}.qr-timer-actions button{height:68px!important;min-height:68px!important;padding:10px 12px!important}}
+
+/* Czytelność kafelków: bez przejścia do bieli */
+.qr-landing .qr-social-grid>.qr-social-tile::after,
+.qr-landing .qr-social-grid>.qr-social-tile:nth-child(1)::after,
+.qr-landing .qr-social-grid>.qr-social-tile:nth-child(2)::after,
+.qr-landing .qr-social-grid>.qr-social-tile:nth-child(3)::after{
+ background:linear-gradient(90deg,rgba(5,16,34,.68) 0%,rgba(9,26,48,.42) 52%,rgba(10,28,49,.36) 100%)!important;
+ opacity:1!important;
+}
+.qr-landing .qr-social-grid>.qr-social-tile span,
+.qr-landing .qr-social-grid>.qr-social-tile strong{
+ color:#fff!important;text-shadow:0 1px 3px rgba(0,0,0,.5)!important;opacity:1!important;
+}
