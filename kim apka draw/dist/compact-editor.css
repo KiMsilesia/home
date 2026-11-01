@@ -57,3 +57,40 @@ body main>header.nav-toolbar .panel-toggle,body main>header.nav-toolbar .view-ta
 @media(max-width:850px){body main>header.nav-toolbar{position:sticky;top:0;background:var(--paper);z-index:25}body main>header.nav-toolbar .panel-toggle,body main>header.nav-toolbar .view-tabs>button{font-size:12px;padding:8px;min-height:40px}}
 @media(max-width:600px){body>main{padding-top:4px}body main>header.nav-toolbar{gap:3px;margin-bottom:5px}body main>header.nav-toolbar>.view-tabs{gap:2px}body main>header.nav-toolbar .panel-toggle,body main>header.nav-toolbar .view-tabs>button{font-size:11px;padding:7px 6px}.save-indicator summary{min-width:27px;padding:9px 6px}}
 body main>.mobile-room{display:none}
+
+/* Full-width editing, with the preview below measurements on every device. */
+#content .editor-stage{display:block;width:100%;margin-bottom:6px}
+#content .editor-stage>.card{width:100%;max-width:none}
+#content .bottom-preview{position:static;inset:auto;width:100%;max-width:none;margin:10px 0 0;box-shadow:none}
+#content .bottom-preview .model-mini{height:150px;min-height:0;width:100%}
+#content .bottom-preview.preview-minimized .model-mini{display:none}
+#content .bottom-preview .card-top{min-height:36px;padding:5px 10px;gap:8px}
+#content .bottom-preview .card-top h3{margin-right:auto}
+#content .bottom-preview .card-top>p,#content .bottom-preview>p{display:none}
+#content .room-heading p,#content>.callout{display:none}
+#content .room-heading{margin-bottom:6px}
+#content .room-summary{margin-bottom:6px;padding:6px 8px}
+#content .plan-rotation{margin-bottom:5px}
+.plan-snap{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:6px;font-size:12px}
+.plan-snap label{display:flex;align-items:center;gap:5px;margin:0}
+.plan-snap input[type=number]{width:68px;min-width:0;padding:6px}
+.plan-snap input[type=checkbox]{width:auto}
+.plan-snap details{margin-left:auto}.plan-snap details[open]{flex-basis:100%}
+.plan-snap details>div{display:flex;gap:7px;align-items:center;flex-wrap:wrap;padding:5px 0}
+#snapReadout{color:#087c80;font-weight:600;min-height:16px}
+#planSvg{touch-action:none}
+@media(max-width:600px){#content .bottom-preview .model-mini{height:120px}#content .room-heading h2{font-size:16px}#content .room-heading button{padding:7px;font-size:12px}#content .room-summary{gap:5px}#content .drawing{padding-left:0;padding-right:0}}
+
+#content .bottom-preview .model-caption{display:none}
+#content .plan .drawing{min-height:0;padding:0}
+#content .plan .drawing svg{height:clamp(260px,45dvh,480px);min-height:0;width:100%}
+#snapReadout:empty{display:none}
+@media(max-width:600px){#content .plan .drawing svg{height:310px}#content .plan>.card-top{padding:5px 8px;min-height:36px}#content .connections:empty{display:none}#content .plan-model{margin-top:8px}}
+
+#content .bottom-preview{height:auto}#content .bottom-preview .model-mini svg{height:140px;width:100%}
+#content .dimension-math-hint,main>footer{display:none}
+#content .edit-notice:empty{display:none}
+#content .wall-card .drawing-bottom{display:none}
+@media(max-width:600px){#content .bottom-preview .model-mini svg{height:110px}}
+
+#wallCanvas>svg>text:last-child{display:none}
