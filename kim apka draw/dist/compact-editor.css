@@ -21,3 +21,18 @@
 }
 
 @media(max-width:600px){.dimension-math-hint{display:none}.editor-stage .model-card .tiny:after{content:none}}
+/* Fixed numeric columns: prevent the table's old minimum width stretching cells. */
+.table-card .measure-table{width:428px;min-width:428px;table-layout:fixed}
+.table-card .v2-table:has(th:nth-child(8)){width:488px;min-width:488px}
+.table-card .measure-table th{width:60px;padding:5px 2px;font-size:10px;overflow-wrap:normal}
+.table-card .measure-table th:first-child{width:80px}
+.table-card .measure-table th:nth-last-child(2){width:80px}
+.table-card .measure-table th:last-child{width:28px}
+.table-card .measure-table td{padding:4px 2px}
+.table-card .measurement-cell,.room-measures .measurement-cell{position:relative;width:56px;min-width:56px;max-width:56px;overflow:visible}
+.table-card .measurement-cell input,.room-measures .measurement-cell input{flex:none;width:54px;min-width:0;max-width:54px;padding:5px 3px;font-size:15px;letter-spacing:0;min-height:36px;border-radius:6px}
+.table-card .measurement-cell button,.room-measures .measurement-cell button{display:none;position:absolute;left:100%;top:-1px;z-index:30;width:30px;min-width:30px;min-height:38px;padding:2px;background:#e5edf4;border:1px solid #a9bdcc;border-radius:0 6px 6px 0;box-shadow:2px 1px 5px #10253c22}
+.table-card .measurement-cell:focus-within,.room-measures .measurement-cell:focus-within{z-index:31}
+.table-card .measurement-cell:focus-within button,.room-measures .measurement-cell:focus-within button{display:block}
+.table-card .element-name,.table-card .note-cell{padding:5px 3px;font-size:12px}
+@media(max-width:850px){.room-measures{display:flex;justify-content:flex-start;gap:12px}.room-measures>div{flex:0 0 72px;width:72px}.room-measures label{white-space:normal;font-size:9px}}

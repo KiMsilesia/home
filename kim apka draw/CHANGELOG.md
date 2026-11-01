@@ -1,3 +1,7 @@
+## Wąskie kolumny wymiarów — 1.11.2026
+
+Pola liczbowe 56 px, kolumny 60 px. Usunięte minimalne szerokości tabeli 610/700/1000 px. Aparat wyświetlany przy aktywnym polu.
+
 ## Telefon: pełna szerokość ściany — 1.11.2026
 
 Menu i edycja obrysu w jednym pasku, krótsze opisy, węższe pola wymiarowe. Miniatura 3D nakładana na widok, przeciągana za uchwyt i zwijana. Działania w polach nadal dostępne.
