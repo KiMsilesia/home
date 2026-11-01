@@ -1,3 +1,7 @@
+## Kompaktowy edytor telefonu — 1.11.2026
+
+Piktogramy pod rozwijanym polem Dodaj element, zamykanym po wyborze. Mniejsza miniatura 3D obok widoku ściany, przyklejony widok przy przewijaniu pól i mniejsze odstępy.
+
 ## Panel na telefonie — 1.11.2026
 
 Rozwijany granatowy panel, przycisk Menu, przewijanie, obsługa Escape i klawiatury. Zapis/import/eksport/PDF/PRO100 w rozwijanej sekcji. Wybór pomieszczenia zamyka panel na telefonie; na komputerze można go zwinąć, a preferencja jest zapamiętywana.
