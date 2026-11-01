@@ -1,0 +1,13 @@
+const mathField=e=>e?.matches?.('input[data-dimension-math]');
+function mathMessage(input,message,error=false){input.classList.toggle('math-error',error);input.setAttribute('aria-invalid',String(error));input.setCustomValidity(error?message:'');input.title=message;const notice=$('#outlineExpandedNotice')||($('#outlineSelected')&&!$('#outlineSelected').hidden?$('#outlineMessage'):null)||$('#shapeWarning')||$('#editNotice');if(notice)notice.textContent=message;}
+function resolveDimension(input){try{const expression=input.value,n=DimensionMath.calculate(expression);input.value=String(n);input.dataset.mathResolved=String(n);mathMessage(input,expression.trim()===String(n)?'Wymiar w mm.':`${expression} = ${n} mm`);return true}catch(e){mathMessage(input,e.message,true);return false}}
+// Resolve before existing change handlers read a dimension. Geometry validation stays in place.
+document.addEventListener('change',e=>{if(!mathField(e.target))return;if(!resolveDimension(e.target)){e.stopImmediatePropagation();return}if(e.target.closest('.measurement-cell'))e.target.dispatchEvent(new Event('input',{bubbles:true}));},true);
+document.addEventListener('keydown',e=>{const input=e.target;if(!mathField(input))return;if(e.key==='Enter'){e.preventDefault();e.stopImmediatePropagation();if(!resolveDimension(input))return;input.dispatchEvent(new Event('change',{bubbles:true}));if(!input.classList.contains('math-error'))input.blur()}},true);
+const numericEditMeasure=editMeasure;
+editMeasure=function(input,id,key){if(mathField(input)&&!/^\s*[+-]?(?:\d+(?:\.\d*)?|\.\d+)\s*$/.test(input.value)){input.classList.remove('invalid','math-error');input.setCustomValidity('');input.setAttribute('aria-invalid','false');if($('#editNotice'))$('#editNotice').textContent='Działanie zostanie obliczone po Enter lub wyjściu z pola.';return}numericEditMeasure(input,id,key)};
+const numericFinishMeasure=finishMeasure;
+finishMeasure=function(input,id,key){if(mathField(input)){if(input.classList.contains('math-error'))return;if(!resolveDimension(input))return;numericEditMeasure(input,id,key)}numericFinishMeasure(input,id,key)};
+function mathHint(){if($('#dimensionMathHint'))return;const before=$('.shape-presets')||$('.table-card');if(!before)return;const hint=document.createElement('p');hint.id='dimensionMathHint';hint.className='dimension-math-hint';hint.textContent='Wymiary z obliczeń: 1200+850+600 · 3000−2*18 · (600+450)/2. Enter lub wyjście z pola = wynik w mm. Możesz użyć przecinka dziesiętnego.';before.before(hint)}
+const mathRenderEditor=renderEditor;renderEditor=function(){mathRenderEditor();mathHint()};
+const mathRenderShape=renderShape;renderShape=function(){mathRenderShape();mathHint()};

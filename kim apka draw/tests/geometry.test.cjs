@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict'),G=require('../dist/geometry.js');
+const r={points:G.template('L',4000,3000),h:2700,x:500,y:500};r.edges=r.points.map(()=>({kind:'wall'}));
+assert.equal(G.polygonError(r.points),'');assert.equal(G.area(r.points),9570000);
+assert.equal(G.inside(r.points,{x:3000,y:2500}),false);assert.equal(G.inside(r.points,{x:1000,y:2500}),true);
+assert.equal(G.rectInside(r.points,1000,1000,500,500),true);assert.equal(G.rectInside(r.points,2000,1500,500,500),false);
+assert.notEqual(G.polygonError([{x:0,y:0},{x:1000,y:1000},{x:0,y:1000},{x:1000,y:0}]),'');
+let e={type:'socket',wall:0,x:300,y:300,w:80,h:80,z:0};assert(G.elementFits(r,e));r.edges[0]={kind:'partial',start:200,width:500};assert(!G.elementFits(r,e));assert(G.elementFits(r,{...e,x:900}));r.edges[0]={kind:'open'};assert(!G.elementFits(r,{...e,x:900}));
+assert(G.elementFits(r,{...e,wall:-1,x:1000,y:2000}));assert(!G.elementFits(r,{...e,wall:-2,x:3500,y:2500}));
+const a={points:G.rect(4000,3000),x:500,y:500},b={points:G.rect(3000,2000),x:0,y:0};assert.deepEqual(G.align(a,1,b,3,150,0),{x:4650,y:500});assert.throws(()=>G.align(a,0,b,1,150,0));
+const u=G.template('U',4000,3000);assert.equal(G.rectInside(u,500,2000,3000,500),false);assert.equal(G.polygonError(u),'');
+console.log('Geometry: polygon, concavity, openings, surfaces and alignment passed.');

@@ -1,0 +1,6 @@
+const assert=require('node:assert/strict'),G=require('../dist/geometry.js'),S=require('../dist/shape-edit.js');
+const orthogonal=p=>p.every((a,i)=>{const b=p[(i+1)%p.length];return Math.abs(a.x-b.x)<.001||Math.abs(a.y-b.y)<.001});
+for(const kind of ['rect','L','U']){const p=G.template(kind,4000,3000);for(let i=0;i<p.length;i++){const old=G.edge({points:p},i).len;const q=S.resize(p,i,old+50,true);assert.equal(G.polygonError(q),'');assert.ok(orthogonal(q));assert.ok(Math.abs(G.edge({points:q},i).len-old-50)<.001);assert.notDeepEqual(q,p)}const q=S.move(p,2,{x:p[2].x+100,y:p[2].y+100},true);assert.ok(orthogonal(q));assert.equal(G.polygonError(q),'');}
+const p=G.template('L',4000,3000),q=S.move(p,2,{x:4200,y:1800},false);assert.ok(!orthogonal(q));assert.deepEqual(p,G.template('L',4000,3000));assert.throws(()=>S.resize(p,1,0,true));
+const skew=[{x:0,y:0},{x:4000,y:150},{x:4000,y:3000},{x:0,y:3000}],snap=S.move(skew,1,{x:4010,y:15},true,20);assert.equal(snap[1].y,0);assert.equal(snap[1].x,4000);assert.equal(snap[2].x,4000);
+const split=[{x:0,y:0},{x:2000,y:0},{x:4000,y:0},{x:4000,y:3000},{x:0,y:3000}];assert.ok(orthogonal(S.move(split,0,{x:0,y:100},true)));console.log('Shape editing: all L/U/rectangle edge lengths, orthogonal dragging, free skew, axis snapping, collinear chains and input validation passed.');
