@@ -18,9 +18,12 @@
  if(small()){document.querySelectorAll('.room-measures label').forEach((label,i)=>label.textContent=['Obrys X · mm','Obrys Y · mm','Wysokość · mm'][i]);}
  const heading=document.querySelector('.editor-heading'),measures=document.querySelector('.room-measures');
  if(heading&&measures){const name=heading.firstElementChild,button=heading.querySelector('button');heading.classList.add('room-summary');name.classList.add('room-name-group');name.querySelector('.eyebrow')?.remove();const input=name.querySelector('input');input.id='roomSummaryName';const label=document.createElement('label');label.htmlFor=input.id;label.textContent='Pomieszczenie';name.prepend(label);button.classList.add('room-outline');heading.insertBefore(measures,button);measures.querySelectorAll('label').forEach((label,i)=>{label.textContent=['Obrys X · mm','Obrys Y · mm','Wysokość · mm'][i];const field=label.parentElement.querySelector('input');if(field)label.htmlFor=field.id;});}
+ const surfaces=document.querySelector('#content .surface-tabs'),toolbar=document.querySelector('.toolbar-scroll');
+ if(toolbar&&surfaces){toolbar.querySelector('.surface-tabs')?.remove();surfaces.setAttribute('aria-label','Ściana, podłoga lub sufit');toolbar.append(surfaces);surfaces.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.classList.contains('active'))));}
  floatingPreview();
  strip.addEventListener('click',event=>{if(small()&&event.target.closest('button:not(:disabled)'))picker.open=false;},true);
  };
+ for(const name of ['renderPlan','renderShape']){const previous=window[name];if(typeof previous==='function')window[name]=function(...args){document.querySelector('.toolbar-scroll .surface-tabs')?.remove();return previous.apply(this,args)};}
  let wasSmall=small();window.addEventListener('resize',()=>{const now=small();if(now!==wasSmall){const picker=document.querySelector('.element-picker');if(picker)picker.open=!now;wasSmall=now;}positionPreview();});
  if(typeof projectReady!=='undefined'&&projectReady&&view==='wall')render();
 })();
