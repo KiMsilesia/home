@@ -1,3 +1,7 @@
+## Usuwanie pomieszczeń — 1.11.2026
+
+Menu: Usuń bieżący pokój z potwierdzeniem i cofnięciem w bieżącej sesji projektu. Usuwane są też połączenia pokoju. Ostatnie pomieszczenie pozostaje wymagane.
+
 ## Wąskie kolumny wymiarów — 1.11.2026
 
 Pola liczbowe 56 px, kolumny 60 px. Usunięte minimalne szerokości tabeli 610/700/1000 px. Aparat wyświetlany przy aktywnym polu.
