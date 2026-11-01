@@ -1,3 +1,7 @@
+## Obracanie pomieszczeń w planie lokalu — 1.11.2026
+
+Wybór pokoju, obrót ±90° wokół środka obrysu i istniejące przesuwanie. Obracane punkty podłogi i sufitu, zachowane wymiary ścian i pozycje elementów na nich. Obrót po potwierdzeniu odłącza powiązania ścian.
+
 ## Usuwanie pomieszczeń — 1.11.2026
 
 Menu: Usuń bieżący pokój z potwierdzeniem i cofnięciem w bieżącej sesji projektu. Usuwane są też połączenia pokoju. Ostatnie pomieszczenie pozostaje wymagane.
