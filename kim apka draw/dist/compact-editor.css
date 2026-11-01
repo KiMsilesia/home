@@ -46,3 +46,14 @@
 .room-summary .room-measures>div{flex:0 0 72px;width:72px;min-width:0}
 .editor-heading.room-summary>.room-outline{display:block;flex:0 0 auto;min-height:38px;padding:8px 11px;font-size:12px;margin:0;background:#edf3f6}
 @media(max-width:600px){.editor-heading.room-summary{width:100%;padding:7px 8px;gap:7px;margin-bottom:6px}.room-summary .room-name-group{flex:1 1 130px;max-width:none;order:0}.editor-heading.room-summary>.room-outline{order:1;min-height:36px}.room-summary .room-measures{order:2;flex-basis:100%;gap:12px}.room-summary .room-measures>div{flex:0 0 72px}.room-summary .room-name-group>label,.room-summary .room-measures label{font-size:9px}.room-summary .room-title{font-size:15px}}
+
+/* One navigation row: panel toggle, room view, whole-floor view and save status. */
+body>main{padding-top:12px}
+body main>header.nav-toolbar{display:flex;justify-content:flex-start;align-items:center;gap:6px;margin-bottom:8px;padding:0;min-height:42px}
+body main>header.nav-toolbar>div:not(.view-tabs){display:none}
+body main>header.nav-toolbar>.view-tabs{display:flex;flex:1;align-items:center;flex-wrap:nowrap;border:0;gap:4px;margin:0;padding:0;min-width:0}
+body main>header.nav-toolbar .panel-toggle,body main>header.nav-toolbar .view-tabs>button{flex:0 0 auto;min-height:40px;padding:8px 12px;font-size:13px;white-space:nowrap}
+.save-indicator{position:relative;margin-left:auto;flex:0 0 auto}.save-indicator summary{display:block;list-style:none;cursor:pointer;min-width:32px;min-height:38px;padding:9px;text-align:center;color:#387561;font-size:15px;font-weight:700;border-radius:8px}.save-indicator summary::-webkit-details-marker{display:none}.save-indicator[data-state=error] summary{background:#fff0df;color:#a34c12}.save-indicator[data-state=pending] summary{color:#8b6b27}.save-indicator>#saveStatus{position:absolute;right:0;top:100%;z-index:45;width:max-content;max-width:260px;padding:11px;background:white;border:1px solid #ccd9e2;border-radius:8px;box-shadow:0 4px 14px #10253c22;font-size:12px;line-height:1.5;color:#29485e;text-align:left}
+@media(max-width:850px){body main>header.nav-toolbar{position:sticky;top:0;background:var(--paper);z-index:25}body main>header.nav-toolbar .panel-toggle,body main>header.nav-toolbar .view-tabs>button{font-size:12px;padding:8px;min-height:40px}}
+@media(max-width:600px){body>main{padding-top:4px}body main>header.nav-toolbar{gap:3px;margin-bottom:5px}body main>header.nav-toolbar>.view-tabs{gap:2px}body main>header.nav-toolbar .panel-toggle,body main>header.nav-toolbar .view-tabs>button{font-size:11px;padding:7px 6px}.save-indicator summary{min-width:27px;padding:9px 6px}}
+body main>.mobile-room{display:none}

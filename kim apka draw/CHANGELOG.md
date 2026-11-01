@@ -1,3 +1,7 @@
+## Jeden pasek nawigacji — 1.11.2026
+
+Menu/Zwiń, Pomieszczenie i Cały lokal w jednym wierszu. Status zapisu pod rozwijanym wskaźnikiem. Ukryte powielone nagłówki i dodatkowy wybór pokoju nad edytorem.
+
 ## Zwarty pasek parametrów pokoju — 1.11.2026
 
 Nazwa, Obrys X/Y, wysokość i Edytuj obrys w jednym panelu o szerokości zawartości. Na telefonie dwa krótkie wiersze.

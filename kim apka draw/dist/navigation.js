@@ -5,7 +5,15 @@
  const mobile=window.matchMedia?matchMedia('(max-width:850px)'):{matches:false,addEventListener(){}};
  panel.id='workspacePanel';panel.setAttribute('aria-label','Menu KiMapki');
  const toggle=document.createElement('button');toggle.id='panelToggle';toggle.className='panel-toggle';toggle.type='button';toggle.setAttribute('aria-controls',panel.id);
- document.querySelector('main > header').prepend(toggle);
+ const header=document.querySelector('main > header');header.prepend(toggle);header.classList.add('nav-toolbar');
+ const tabs=document.querySelector('.view-tabs');if(tabs)toggle.after(tabs);
+ const status=document.getElementById('saveStatus');
+ if(status&&tabs){const detail=document.createElement('details');detail.className='save-indicator';const summary=document.createElement('summary');detail.append(summary);status.before(detail);detail.append(status);
+ const sync=()=>{const text=status.textContent||'';const failed=/⚠|niezapis|niedostęp|nie udało|konflikt/i.test(text),pending=/zmiany do|oczekiwanie|nowy projekt|sprawdź/i.test(text);summary.textContent=failed?'!':pending?'…':'✓';summary.title=text;summary.setAttribute('aria-label',text||'Status zapisu');detail.dataset.state=failed?'error':pending?'pending':'saved';};
+ new MutationObserver(sync).observe(status,{childList:true,characterData:true,subtree:true});sync();
+ document.addEventListener('click',event=>{if(!detail.contains(event.target))detail.open=false});
+ }
+
  const top=document.createElement('div');top.className='panel-heading';
  top.innerHTML='<strong>Menu KiMapki</strong><button type="button" id="panelClose" aria-label="Zwiń lewy panel">‹ Zwiń</button>';panel.prepend(top);
  const backdrop=document.createElement('button');backdrop.className='panel-backdrop';backdrop.type='button';backdrop.tabIndex=-1;backdrop.setAttribute('aria-label','Zamknij menu');backdrop.hidden=true;document.body.append(backdrop);
