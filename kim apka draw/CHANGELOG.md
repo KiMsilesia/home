@@ -1,3 +1,7 @@
+## Telefon: pełna szerokość ściany — 1.11.2026
+
+Menu i edycja obrysu w jednym pasku, krótsze opisy, węższe pola wymiarowe. Miniatura 3D nakładana na widok, przeciągana za uchwyt i zwijana. Działania w polach nadal dostępne.
+
 ## Kompaktowy edytor telefonu — 1.11.2026
 
 Piktogramy pod rozwijanym polem Dodaj element, zamykanym po wyborze. Mniejsza miniatura 3D obok widoku ściany, przyklejony widok przy przewijaniu pól i mniejsze odstępy.
