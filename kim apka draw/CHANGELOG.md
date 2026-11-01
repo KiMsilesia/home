@@ -1,3 +1,7 @@
+## Panel na telefonie — 1.11.2026
+
+Rozwijany granatowy panel, przycisk Menu, przewijanie, obsługa Escape i klawiatury. Zapis/import/eksport/PDF/PRO100 w rozwijanej sekcji. Wybór pomieszczenia zamyka panel na telefonie; na komputerze można go zwinąć, a preferencja jest zapamiętywana.
+
 # Beta 0.3 — 1.11.2026
 
 Logowanie i reset hasła Supabase Auth, konta oczekujące, panel zatwierdzania i blokowania. Prywatny zapis z RLS, kontrolą wersji i limitami wielkości; eksport JSON pozostaje kopią użytkownika. Kod przeniesiony do `KiMsilesia/home/kim apka draw`. Backend wymaga aktywacji zgodnie z README. Nie uruchomiono płatnych usług ani produkcyjnej bazy.
