@@ -36,3 +36,13 @@
 .table-card .measurement-cell:focus-within button,.room-measures .measurement-cell:focus-within button{display:block}
 .table-card .element-name,.table-card .note-cell{padding:5px 3px;font-size:12px}
 @media(max-width:850px){.room-measures{display:flex;justify-content:flex-start;gap:12px}.room-measures>div{flex:0 0 72px;width:72px}.room-measures label{white-space:normal;font-size:9px}}
+
+/* One compact room strip; dimensions never spread across the page. */
+.editor-heading.room-summary{display:flex;align-items:flex-end;justify-content:flex-start;flex-wrap:wrap;gap:12px;width:fit-content;max-width:100%;margin:0 0 12px;padding:10px 12px;border:1px solid #d7e1e8;border-radius:11px;background:#fff}
+.room-summary .room-name-group{flex:0 1 180px;min-width:120px;max-width:220px}
+.room-summary .room-name-group>label,.room-summary .room-measures label{display:block;margin:0 0 4px;font-size:10px;line-height:1.2;font-weight:500;color:#657c8d;white-space:nowrap}
+.room-summary .room-title{width:100%;max-width:none;min-height:36px;border:1px solid #ccd9e2;background:#f8fafb;border-radius:7px;padding:6px 8px;font-size:15px;font-weight:600}
+.room-summary .room-measures{display:flex;flex:0 0 auto;align-items:flex-end;justify-content:flex-start;gap:10px;margin:0;grid-template-columns:none}
+.room-summary .room-measures>div{flex:0 0 72px;width:72px;min-width:0}
+.editor-heading.room-summary>.room-outline{display:block;flex:0 0 auto;min-height:38px;padding:8px 11px;font-size:12px;margin:0;background:#edf3f6}
+@media(max-width:600px){.editor-heading.room-summary{width:100%;padding:7px 8px;gap:7px;margin-bottom:6px}.room-summary .room-name-group{flex:1 1 130px;max-width:none;order:0}.editor-heading.room-summary>.room-outline{order:1;min-height:36px}.room-summary .room-measures{order:2;flex-basis:100%;gap:12px}.room-summary .room-measures>div{flex:0 0 72px}.room-summary .room-name-group>label,.room-summary .room-measures label{font-size:9px}.room-summary .room-title{font-size:15px}}

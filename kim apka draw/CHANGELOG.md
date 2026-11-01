@@ -1,3 +1,7 @@
+## Zwarty pasek parametrów pokoju — 1.11.2026
+
+Nazwa, Obrys X/Y, wysokość i Edytuj obrys w jednym panelu o szerokości zawartości. Na telefonie dwa krótkie wiersze.
+
 ## Obracanie pomieszczeń w planie lokalu — 1.11.2026
 
 Wybór pokoju, obrót ±90° wokół środka obrysu i istniejące przesuwanie. Obracane punkty podłogi i sufitu, zachowane wymiary ścian i pozycje elementów na nich. Obrót po potwierdzeniu odłącza powiązania ścian.

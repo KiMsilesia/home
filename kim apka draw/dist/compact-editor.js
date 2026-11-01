@@ -2,8 +2,6 @@
 (()=>{
  const small=()=>window.innerWidth<=600;
  let floatPosition=null,minimized=false,positionPreview=()=>{};
- const header=document.querySelector('main > header');
- if(header&&!document.getElementById('mobileOutline')){const button=document.createElement('button');button.id='mobileOutline';button.textContent='⌑ Edytuj obrys';button.onclick=()=>{view='shape';shapeDraft=null;render()};header.append(button);}
  function floatingPreview(){
  const stage=document.querySelector('.editor-stage'),card=stage?.querySelector('.model-card');if(!card)return;
  const expand=card.querySelector('.tiny');if(expand){expand.setAttribute('aria-label','Powiększ podgląd 3D');}
@@ -25,6 +23,8 @@
  const title=document.createElement('summary');title.textContent='＋ Dodaj element';strip.before(picker);picker.append(title,strip);
  const notice=document.getElementById('editNotice');if(small()&&notice)notice.textContent='';
  if(small()){document.querySelectorAll('.room-measures label').forEach((label,i)=>label.textContent=['Obrys X · mm','Obrys Y · mm','Wysokość · mm'][i]);}
+ const heading=document.querySelector('.editor-heading'),measures=document.querySelector('.room-measures');
+ if(heading&&measures){const name=heading.firstElementChild,button=heading.querySelector('button');heading.classList.add('room-summary');name.classList.add('room-name-group');name.querySelector('.eyebrow')?.remove();const input=name.querySelector('input');input.id='roomSummaryName';const label=document.createElement('label');label.htmlFor=input.id;label.textContent='Pomieszczenie';name.prepend(label);button.classList.add('room-outline');heading.insertBefore(measures,button);measures.querySelectorAll('label').forEach((label,i)=>{label.textContent=['Obrys X · mm','Obrys Y · mm','Wysokość · mm'][i];const field=label.parentElement.querySelector('input');if(field)label.htmlFor=field.id;});}
  floatingPreview();
  strip.addEventListener('click',event=>{if(small()&&event.target.closest('button:not(:disabled)'))picker.open=false;},true);
  };
