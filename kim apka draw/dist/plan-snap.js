@@ -10,6 +10,7 @@
  function set(all){const n=Number($('#wallThickness').value);if(!Number.isFinite(n)||n<1||n>1000)return toast('Grubość: 1–1000 mm.');room().edges.forEach((e,i)=>{if(all||i===+$('#wallThicknessEdge').value)e.thickness=n});save();toast('Zapisano grubość. W połączeniach eksport użyje odstępu między pokojami.');}
  $('#setWallThickness').onclick=()=>set(false);$('#setAllThickness').onclick=()=>set(true);
  const svg=$('#planSvg'),pt=e=>new DOMPoint(e.clientX,e.clientY).matrixTransform(svg.getScreenCTM().inverse());let drag=null;
+ svg.cancelRoomDrag=()=>{if(drag){drag.r.x=drag.x;drag.r.y=drag.y;drag.g.setAttribute('transform',`translate(${drag.x},${drag.y})`);drag=null;svg.querySelector('#snapGuide')?.remove();$('#snapReadout').textContent='';update3D();}};
  svg.onpointerdown=e=>{if(e.button!==0||!read())return;const g=e.target.closest('[data-id]');if(!g)return;e.preventDefault();const r=data.rooms.find(r=>r.id===g.dataset.id);drag={r,g,p:pt(e),x:r.x,y:r.y,candidate:null,moved:false};svg.setPointerCapture(e.pointerId)};
  svg.onpointermove=e=>{if(!drag)return;const p=pt(e);if(Math.hypot(p.x-drag.p.x,p.y-drag.p.y)<1&&!drag.moved)return;drag.moved=true;drag.r.x=Math.max(-200000,Math.min(200000,Math.round(drag.x+p.x-drag.p.x)));drag.r.y=Math.max(-200000,Math.min(200000,Math.round(drag.y+p.y-drag.p.y)));
  const tolerance=Math.min(400,14/Math.hypot(svg.getScreenCTM().a,svg.getScreenCTM().b));
