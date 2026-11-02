@@ -1,0 +1,21 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),{JSDOM}=require('jsdom'),fs=require('node:fs'),vm=require('node:vm');
+function setup(){const dom=new JSDOM('<div id="content"></div>',{runScripts:'outside-only'}),w=dom.window;
+ const r={id:'r',points:[{},{},{},{}],elements:[{id:'e',x:50,y:50,wall:0}]};let saves=0;
+ Object.assign(w,{roomId:'r',data:{id:'p',rooms:[r]},wall:0,projectReady:false,view:'wall',room:()=>r,activeField:null,activeElement:null,bindWallDrag:()=>{},fits:()=>true,update3D:()=>{},save:()=>saves++});
+ w.DOMPoint=class{constructor(x,y){this.x=x;this.y=y}matrixTransform(m){return {x:m.x+this.x*m.scale,y:m.y+this.y*m.scale}}};
+ w.SVGElement.prototype.getScreenCTM=function(){const b=this.getAttribute('viewBox').split(' ').map(Number);return {inverse:()=>({x:b[0],y:b[1],scale:b[2]/400})}};
+ w.HTMLElement.prototype.setPointerCapture=()=>{};
+ const svg=()=>'<svg viewBox="0 0 400 300" data-scale="1"><g data-element="e"><circle cx="50" cy="250" r="10"/></g></svg>';
+ w.refreshGeometry=()=>{w.document.querySelector('#wallCanvas').innerHTML=svg();w.bindWallDrag()};
+ w.renderEditor=()=>{w.document.querySelector('#content').innerHTML='<div class="wall-card"><div class="card-top"><h3>Widok</h3></div><div id="wallCanvas">'+svg()+'</div></div><input id="cell-e-x"><input id="cell-e-y">';w.bindWallDrag()};
+ w.render=()=>w.renderEditor();w.chooseSurface=n=>{w.wall=n;w.render()};
+ vm.runInContext(fs.readFileSync('dist/wall-view.js','utf8'),dom.getInternalVMContext());w.render();
+ const button=name=>[...w.document.querySelectorAll('button')].find(b=>b.getAttribute('aria-label')===name);
+ const event=(id,x,y,target)=>({button:0,pointerId:id,clientX:x,clientY:y,target:target||w.document.querySelector('#wallCanvas'),preventDefault(){}});
+ const host=()=>w.document.querySelector('#wallCanvas');const box=()=>w.document.querySelector('svg').getAttribute('viewBox').split(' ').map(Number);
+ return {w,r,button,event,host,box,saves:()=>saves,dom};
+}
+test('view arrows cycle all surfaces; zoom survives refresh and is independent for each surface',()=>{const t=setup();t.button('Przybliż widok').click();assert.equal(t.box()[2],400/1.5);t.w.refreshGeometry();assert.equal(t.box()[2],400/1.5);t.button('Następny widok').click();assert.equal(t.w.wall,1);assert.equal(t.box()[2],400);t.button('Poprzedni widok').click();assert.equal(t.box()[2],400/1.5);t.button('Poprzedni widok').click();assert.equal(t.w.wall,-2);t.button('Następny widok').click();assert.equal(t.w.wall,0);t.button('Dopasuj cały widok').click();assert.deepEqual(t.box(),[0,0,400,300]);assert.equal(t.saves(),0);t.dom.window.close()});
+test('pinch rolls back tentative element drag and only changes camera; wheel bounds zoom',()=>{const t=setup(),g=t.w.document.querySelector('[data-element]');t.host().onpointerdown(t.event(1,50,250,g));t.host().onpointermove(t.event(1,70,250,g));assert.equal(t.r.elements[0].x,70);t.host().onpointerdown(t.event(2,150,250));assert.equal(t.r.elements[0].x,50);t.host().onpointermove(t.event(2,230,250));assert.equal(t.box()[2],200);t.host().onpointerup({...t.event(1,70,250),type:'pointerup'});t.host().onpointerup({...t.event(2,230,250),type:'pointerup'});assert.equal(t.saves(),0);
+ for(let i=0;i<15;i++)t.host().onwheel({...t.event(0,200,150),deltaY:-1000,deltaMode:0});assert.equal(Math.round(400/t.box()[2]),12);assert.equal(t.r.elements[0].x,50);t.dom.window.close();});
+test('element drag at zoom uses model units, cancellation restores measurements',()=>{const t=setup();t.button('Przybliż widok').click();const g=t.w.document.querySelector('[data-element]');t.host().onpointerdown(t.event(1,75,100,g));t.host().onpointermove(t.event(1,105,100,g));assert.equal(t.r.elements[0].x,70);t.host().onpointercancel({...t.event(1,105,100),type:'pointercancel'});assert.equal(t.r.elements[0].x,50);assert.equal(t.saves(),0);t.dom.window.close();});
