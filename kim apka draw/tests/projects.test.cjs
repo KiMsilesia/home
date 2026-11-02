@@ -11,3 +11,5 @@ console.log('Projects: legacy migration, JSON round trip, names, photos, floor, 
 if(process.argv[2]){const actual=normalize(JSON.parse(fs.readFileSync(process.argv[2],'utf8')));assert.equal(actual.name,'Test BETA 0,2');assert.equal(actual.rooms[2].elements[0].name,'Słup przy wejściu');assert.equal(actual.rooms[2].elements[0].z,2700);assert.equal(actual.rooms[2].elements[1].wall,-2);assert.equal(actual.rooms[2].edges[1].kind,'partial');console.log('Actual browser-exported file imports successfully with all tested data.');}
 
 migrated.rooms[0].edges[0].thickness=245;assert.equal(normalize(migrated).rooms[0].edges[0].thickness,245);migrated.rooms[0].edges[0].thickness=-1;assert.throws(()=>normalize(migrated));
+
+migrated.rooms[0].edges[0].thickness=200;migrated.rooms[0].elevation=3200;assert.equal(normalize(migrated).rooms[0].elevation,3200);migrated.rooms[0].elevation=Infinity;assert.throws(()=>normalize(migrated));
