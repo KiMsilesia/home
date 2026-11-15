@@ -47,7 +47,8 @@ scene.add(new THREE.HemisphereLight(0xffffff,0x6d7b8c,2.0));
 const sun=new THREE.DirectionalLight(0xffffff,2.4);sun.position.set(-25,45,25);sun.castShadow=true;scene.add(sun);
 const ground=new THREE.Mesh(new THREE.PlaneGeometry(150,150),new THREE.MeshStandardMaterial({color:0xb7c6c4,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.5;ground.receiveShadow=true;scene.add(ground);
 const group=new THREE.Group();scene.add(group);
-// Budynek C: niemal kwadratowy rzut z wyraźnie zaokrąglonymi narożnikami.\nconst shapePts=[];const aa=11.8,bb=11.8,pow=2/4.4;
+// Budynek C: niemal kwadratowy rzut z wyraźnie zaokrąglonymi narożnikami.
+const shapePts=[];const aa=11.8,bb=11.8,pow=2/4.4;
 for(let i=0;i<128;i++){let t=i*Math.PI*2/128;shapePts.push(new THREE.Vector2(aa*Math.sign(Math.cos(t))*Math.pow(Math.abs(Math.cos(t)),pow),bb*Math.sign(Math.sin(t))*Math.pow(Math.abs(Math.sin(t)),pow)))}
 function shape(scale=1){let s=new THREE.Shape();shapePts.forEach((v,i)=>{let x=v.x*scale,z=v.y*scale;i?s.lineTo(x,z):s.moveTo(x,z)});s.closePath();return s}
 const glass=new THREE.MeshStandardMaterial({color:0x182c43,metalness:.3,roughness:.24});
