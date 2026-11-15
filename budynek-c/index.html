@@ -34,7 +34,7 @@ footer{max-width:1600px;margin:0 auto;padding:0 16px 18px;color:#718095;font-siz
 <hr><h2 style="font-size:14px">Sterowanie modelem</h2><div class="sub">Obracaj model przeciągając palcem lub myszką. Przybliżaj kółkiem albo przyciskami + / −.</div>
 <div class="field"><label>Widok</label><select id="view"><option value="perspective">Perspektywa</option><option value="front">Elewacja przednia</option><option value="side">Elewacja boczna</option><option value="top">Z góry</option></select></div>
 <div class="field"><label>Poziom przybliżenia</label><input id="zoom" type="range" min="24" max="78" value="49"></div>
-<div class="cardinfo"><b>Etap 1 — bryła budynku</b><br>Model pokazuje zaokrąglony obrys, ciemne przeszklenia i jasne pasy balkonów. Na tym etapie nie ma jeszcze podziału na poszczególne lokale.</div>
+<div class="cardinfo"><b>Etap 1 — bryła budynku</b><br>Model pokazuje niemal kwadratowy obrys z zaokrąglonymi narożnikami, ciemne przeszklenia i jasne pasy balkonów. Na tym etapie nie ma jeszcze podziału na poszczególne lokale.</div>
 <div class="notice">*Liczby 15 i 128 są roboczymi założeniami z dotychczasowej koncepcji i wymagają potwierdzenia w dokumentacji inwestycji. Model jest przybliżoną rekonstrukcją poglądową, nie modelem geodezyjnym ani dokumentacją wykonawczą.</div>
 </aside></main><footer>Publiczna makieta demonstracyjna · Na Tysiącleciu — Budynek C</footer>
 <script type="module">
@@ -47,7 +47,7 @@ scene.add(new THREE.HemisphereLight(0xffffff,0x6d7b8c,2.0));
 const sun=new THREE.DirectionalLight(0xffffff,2.4);sun.position.set(-25,45,25);sun.castShadow=true;scene.add(sun);
 const ground=new THREE.Mesh(new THREE.PlaneGeometry(150,150),new THREE.MeshStandardMaterial({color:0xb7c6c4,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.5;ground.receiveShadow=true;scene.add(ground);
 const group=new THREE.Group();scene.add(group);
-const shapePts=[];const aa=13,bb=10.6,pow=2/4.4;
+// Budynek C: niemal kwadratowy rzut z wyraźnie zaokrąglonymi narożnikami.\nconst shapePts=[];const aa=11.8,bb=11.8,pow=2/4.4;
 for(let i=0;i<128;i++){let t=i*Math.PI*2/128;shapePts.push(new THREE.Vector2(aa*Math.sign(Math.cos(t))*Math.pow(Math.abs(Math.cos(t)),pow),bb*Math.sign(Math.sin(t))*Math.pow(Math.abs(Math.sin(t)),pow)))}
 function shape(scale=1){let s=new THREE.Shape();shapePts.forEach((v,i)=>{let x=v.x*scale,z=v.y*scale;i?s.lineTo(x,z):s.moveTo(x,z)});s.closePath();return s}
 const glass=new THREE.MeshStandardMaterial({color:0x182c43,metalness:.3,roughness:.24});
@@ -62,7 +62,7 @@ for(let f=1;f<=floors;f++){let y=3+(f-1)*floorH;wall(y+.28,y+floorH-.35,.91,f%2?
 slab(0,1.035,.78,.55);const top=3+floors*floorH;slab(top,1.02,.84,.35);slab(top+.35,1.015,.985,.42);
 // subtle parapet rails
 const railMat=new THREE.MeshStandardMaterial({color:0x9aaeb7,metalness:.65,roughness:.35});
-const rail=new THREE.Mesh(new THREE.TorusGeometry(1,.035,8,128),railMat);rail.scale.set(13.1,1,10.7);rail.rotation.x=Math.PI/2;rail.position.y=top+.88;group.add(rail);
+const rail=new THREE.Mesh(new THREE.TorusGeometry(1,.035,8,128),railMat);rail.scale.set(11.9,1,11.9);rail.rotation.x=Math.PI/2;rail.position.y=top+.88;group.add(rail);
 const base=new THREE.Mesh(new THREE.CylinderGeometry(22,22,.3,64),new THREE.MeshStandardMaterial({color:0xa9b6b2}));base.position.y=-.3;group.add(base);
 const grid=new THREE.GridHelper(70,28,0x9eafb7,0xb7c4c9);grid.position.y=-.12;scene.add(grid);
 let dragging=false,lastX=0,lastY=0,rotY=-.5,rotX=0,dist=49,auto=false;
