@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Na Tysiącleciu — Budynek C</title>
+<style>
+:root{--navy:#071d3c;--blue:#123d70;--ink:#13243a;--muted:#6d7b8d;--line:#dce4ec;--bg:#eef3f7}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{height:66px;background:linear-gradient(110deg,#061a35,#123c6c);color:white;display:flex;align-items:center;justify-content:space-between;padding:0 22px;gap:12px;box-shadow:0 4px 18px #061a3533}
+.brand{display:flex;align-items:center;gap:12px;font-weight:750}.mark{font-size:26px}.brand small{display:block;font-size:11px;opacity:.75;font-weight:500}.tag{font-size:12px;color:#cfe1f4;border:1px solid #ffffff35;border-radius:20px;padding:7px 11px}
+main{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px;padding:14px;max-width:1600px;margin:auto}
+.viewer{position:relative;background:linear-gradient(#b9d7e9,#eaf2f5 55%,#c5d0d0);border-radius:18px;overflow:hidden;min-height:650px;box-shadow:0 10px 28px #0b244018}
+#scene{position:absolute;inset:0;width:100%;height:100%;display:block}
+.overlay{position:absolute;z-index:2;display:flex;gap:7px;flex-wrap:wrap}.top{top:14px;left:14px}.controls{left:14px;top:72px;flex-direction:column}.bottom{left:14px;bottom:14px}
+button,select,input{font:inherit}button{border:1px solid #d7e0e8;background:white;color:#193250;border-radius:10px;padding:9px 12px;cursor:pointer;box-shadow:0 2px 8px #112b4510}button:hover{background:#f1f6fb}button.primary{background:#0c3261;color:white;border-color:#0c3261}button.active{outline:2px solid #75a8dc}
+.pill{background:#ffffffeb;border:1px solid #dbe4eb;border-radius:999px;padding:8px 11px;font-size:12px;box-shadow:0 2px 8px #17334a12}
+.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 8px 24px #1029430d;align-self:start}
+.panel h2{font-size:17px;margin:0 0 5px}.sub{font-size:12px;color:var(--muted);line-height:1.5}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.legend span{font-size:12px;display:flex;align-items:center;gap:6px}.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:14px 0}.stat{background:#f3f6f9;border-radius:10px;padding:10px}.stat b{display:block;font-size:20px;color:#102d52}.stat small{font-size:10px;color:var(--muted)}
+hr{border:0;border-top:1px solid var(--line);margin:14px 0}.field{margin:10px 0}.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}.field input,.field select{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;background:white}
+.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}.full{width:100%}
+.cardinfo{background:#f4f7fa;border-radius:12px;padding:12px;font-size:13px;line-height:1.8;margin-top:12px}
+.notice{font-size:11px;color:#657487;line-height:1.55;margin-top:12px}
+footer{max-width:1600px;margin:0 auto;padding:0 16px 18px;color:#718095;font-size:11px}
+@media(max-width:900px){main{grid-template-columns:1fr;padding:8px}.viewer{min-height:62vh}.panel{order:2}header{padding:0 12px}.tag{display:none}}
+</style></head><body>
+<header><div class="brand"><span class="mark">▥</span><div>Na Tysiącleciu<small>Katowice · interaktywna makieta</small></div></div><div class="tag">WERSJA ROBOCZA · BRYŁA 3D</div></header>
+<main><section class="viewer"><canvas id="scene"></canvas>
+<div class="overlay top"><span class="pill">Budynek C</span><span class="pill">Widok zewnętrzny 3D</span></div>
+<div class="overlay controls"><button id="home" title="Widok początkowy">⌂</button><button id="plus">＋</button><button id="minus">－</button><button id="spin">⟳ Obrót</button></div>
+<div class="overlay bottom"><span class="pill">Przeciągnij, aby obracać · kółko myszy: zoom</span></div>
+</section>
+<aside class="panel"><h2>Budynek C</h2><div class="sub">Na Tysiącleciu · Katowice</div>
+<div class="legend"><span><i class="dot" style="background:#18a66a"></i> Wolne</span><span><i class="dot" style="background:#f0a323"></i> Zarezerwowane</span><span><i class="dot" style="background:#d94b50"></i> Sprzedane</span></div>
+<div class="stats"><div class="stat"><b>15</b><small>kondygnacji*</small></div><div class="stat"><b>128</b><small>mieszkań*</small></div><div class="stat"><b>360°</b><small>obrót</small></div></div>
+<hr><h2 style="font-size:14px">Sterowanie modelem</h2><div class="sub">Obracaj model przeciągając palcem lub myszką. Przybliżaj kółkiem albo przyciskami + / −.</div>
+<div class="field"><label>Widok</label><select id="view"><option value="perspective">Perspektywa</option><option value="front">Elewacja przednia</option><option value="side">Elewacja boczna</option><option value="top">Z góry</option></select></div>
+<div class="field"><label>Poziom przybliżenia</label><input id="zoom" type="range" min="24" max="78" value="49"></div>
+<div class="cardinfo"><b>Etap 1 — bryła budynku</b><br>Model pokazuje zaokrąglony obrys, ciemne przeszklenia i jasne pasy balkonów. Na tym etapie nie ma jeszcze podziału na poszczególne lokale.</div>
+<div class="notice">*Liczby 15 i 128 są roboczymi założeniami z dotychczasowej koncepcji i wymagają potwierdzenia w dokumentacji inwestycji. Model jest przybliżoną rekonstrukcją poglądową, nie modelem geodezyjnym ani dokumentacją wykonawczą.</div>
+</aside></main><footer>Publiczna makieta demonstracyjna · Na Tysiącleciu — Budynek C</footer>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+const canvas=document.querySelector('#scene');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(canvas.clientWidth,canvas.clientHeight,false);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+const scene=new THREE.Scene();scene.background=new THREE.Color('#c6deed');
+const camera=new THREE.PerspectiveCamera(38,canvas.clientWidth/canvas.clientHeight,.1,300);camera.position.set(37,28,47);
+scene.add(new THREE.HemisphereLight(0xffffff,0x6d7b8c,2.0));
+const sun=new THREE.DirectionalLight(0xffffff,2.4);sun.position.set(-25,45,25);sun.castShadow=true;scene.add(sun);
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(150,150),new THREE.MeshStandardMaterial({color:0xb7c6c4,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.5;ground.receiveShadow=true;scene.add(ground);
+const group=new THREE.Group();scene.add(group);
+const shapePts=[];const aa=13,bb=10.6,pow=2/4.4;
+for(let i=0;i<128;i++){let t=i*Math.PI*2/128;shapePts.push(new THREE.Vector2(aa*Math.sign(Math.cos(t))*Math.pow(Math.abs(Math.cos(t)),pow),bb*Math.sign(Math.sin(t))*Math.pow(Math.abs(Math.sin(t)),pow)))}
+function shape(scale=1){let s=new THREE.Shape();shapePts.forEach((v,i)=>{let x=v.x*scale,z=v.y*scale;i?s.lineTo(x,z):s.moveTo(x,z)});s.closePath();return s}
+const glass=new THREE.MeshStandardMaterial({color:0x182c43,metalness:.3,roughness:.24});
+const glass2=new THREE.MeshStandardMaterial({color:0x263f56,metalness:.22,roughness:.28});
+const concrete=new THREE.MeshStandardMaterial({color:0xd9dcda,roughness:.7});
+const side=new THREE.MeshStandardMaterial({color:0x9da8aa,roughness:.8});
+function slab(y,outer,inner,thick=.34){const s=shape(outer);s.holes.push(new THREE.Path());const h=s.holes[0];shapePts.forEach((v,i)=>{let x=v.x*inner,z=v.y*inner;i?h.lineTo(x,z):h.moveTo(x,z)});h.closePath();const g=new THREE.ExtrudeGeometry(s,{depth:thick,bevelEnabled:false,steps:1});g.rotateX(Math.PI/2);const m=new THREE.Mesh(g,concrete);m.position.y=y+thick; m.castShadow=true;m.receiveShadow=true;group.add(m)}
+function wall(y0,y1,scale,material){const pts=[];for(let i=0;i<128;i++){let v=shapePts[i];pts.push(new THREE.Vector3(v.x*scale,y0,v.y*scale),new THREE.Vector3(v.x*scale,y1,v.y*scale))}const idx=[];for(let i=0;i<128;i++){let j=(i+1)%128,a=i*2,b=j*2;idx.push(a,b,b+1,a,b+1,a+1)}const g=new THREE.BufferGeometry();g.setFromPoints(pts);g.setIndex(idx);g.computeVertexNormals();const m=new THREE.Mesh(g,material);group.add(m)}
+wall(.2,3.0,.91,glass2);
+const floors=15,floorH=2.55;
+for(let f=1;f<=floors;f++){let y=3+(f-1)*floorH;wall(y+.28,y+floorH-.35,.91,f%2?glass:glass2);slab(y+floorH-.32,1,.90,.20);slab(y+floorH-.12,1,.965,.22)}
+slab(0,1.035,.78,.55);const top=3+floors*floorH;slab(top,1.02,.84,.35);slab(top+.35,1.015,.985,.42);
+// subtle parapet rails
+const railMat=new THREE.MeshStandardMaterial({color:0x9aaeb7,metalness:.65,roughness:.35});
+const rail=new THREE.Mesh(new THREE.TorusGeometry(1,.035,8,128),railMat);rail.scale.set(13.1,1,10.7);rail.rotation.x=Math.PI/2;rail.position.y=top+.88;group.add(rail);
+const base=new THREE.Mesh(new THREE.CylinderGeometry(22,22,.3,64),new THREE.MeshStandardMaterial({color:0xa9b6b2}));base.position.y=-.3;group.add(base);
+const grid=new THREE.GridHelper(70,28,0x9eafb7,0xb7c4c9);grid.position.y=-.12;scene.add(grid);
+let dragging=false,lastX=0,lastY=0,rotY=-.5,rotX=0,dist=49,auto=false;
+canvas.addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;canvas.setPointerCapture(e.pointerId)});
+canvas.addEventListener('pointermove',e=>{if(!dragging)return;rotY+=(e.clientX-lastX)*.008;rotX+=(e.clientY-lastY)*.004;rotX=Math.max(-.35,Math.min(.5,rotX));lastX=e.clientX;lastY=e.clientY});
+canvas.addEventListener('pointerup',()=>dragging=false);canvas.addEventListener('pointercancel',()=>dragging=false);
+canvas.addEventListener('wheel',e=>{dist=Math.max(24,Math.min(78,dist+e.deltaY*.035));document.querySelector('#zoom').value=dist},{passive:true});
+function setView(v){if(v==='front'){rotY=0;rotX=0}else if(v==='side'){rotY=Math.PI/2;rotX=0}else if(v==='top'){rotY=0;rotX=-.25}}
+document.querySelector('#view').onchange=e=>setView(e.target.value);
+document.querySelector('#zoom').oninput=e=>dist=+e.target.value;
+document.querySelector('#plus').onclick=()=>dist=Math.max(24,dist-4);
+document.querySelector('#minus').onclick=()=>dist=Math.min(78,dist+4);
+document.querySelector('#home').onclick=()=>{rotY=-.5;rotX=0;dist=49;document.querySelector('#zoom').value=49;document.querySelector('#view').value='perspective'};
+document.querySelector('#spin').onclick=e=>{auto=!auto;e.target.classList.toggle('active',auto);e.target.textContent=auto?'Ⅱ Pauza':'⟳ Obrót'};
+function animate(){requestAnimationFrame(animate);if(auto&&!dragging)rotY+=.003;group.rotation.y=rotY;group.rotation.x=rotX;let target=new THREE.Vector3(0,19,0);camera.position.set(target.x+Math.sin(rotY)*dist,target.y+dist*.38+rotX*20,target.z+Math.cos(rotY)*dist);camera.lookAt(target);renderer.render(scene,camera)}
+animate();
+const ro=new ResizeObserver(()=>{const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()});ro.observe(canvas);
+</script></body></html>
