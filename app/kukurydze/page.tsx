@@ -368,6 +368,7 @@ export default function CityApartmentPage() {
         <aside>
           <small>REALIZOWANA INWESTYCJA</small>
           <h3>Budynek C</h3>
+          <a className="apartment-plan-button" href={assetBase + "/budynek-c/"} target="_blank" rel="noreferrer">Otwórz interaktywny model 3D <ArrowRight size={18} /></a>
           <dl>
             <div><dt>Lokalizacja</dt><dd>Osiedle Tysiąclecia, Katowice</dd></div>
             <div><dt>Powierzchnia mieszkania</dt><dd>67,8 m²</dd></div>
