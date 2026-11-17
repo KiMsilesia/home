@@ -18,8 +18,7 @@ function ring(width,depth,y,thick,color){const s=new THREE.Shape(),r=corner;s.mo
 // Rounded-square mass and podium
 ring(11.35,11.35,0,.42,'#c9c9c2');ring(10.75,10.75,.42,.28,'#e2e0d8');
 // Superellipse gives the characteristic broad, softly rounded corners visible in all four references.
-function perimeter(t,offset=0){const c=Math.cos(t),s=Math.sin(t),n=3.5;const x=half*Math.sign(c)*Math.pow(Math.abs(c),2/n),z=half*Math.sign(s)*Math.pow(Math.abs(s),2/n);const len=Math.hypot(x,z)||1;return new THREE.Vector3(x+offset*x/len,0,z+offset*z/len)}
-function sidePoint(side,u,offset=0){const t0=[0,Math.PI/2,Math.PI,Math.PI*1.5][side];return perimeter(t0+u*Math.PI/2,offset)}
+function sidePoint(side,u,offset=0){const span=half-corner,along=-span+2*span*u,bow=.16*Math.sin(Math.PI*u);let x,z;if(side===0){x=along;z=half+bow+offset}else if(side===1){x=half+bow+offset;z=-along}else if(side===2){x=-along;z=-half-bow-offset}else{x=-half-bow-offset;z=along}return new THREE.Vector3(x,0,z)}
 // Slightly different unit widths on every facade and floor. Values are normalized spans read from the four perspective views.
 const patterns={
 A:[[.18,.24,.34,.24],[.16,.29,.31,.24],[.18,.22,.36,.24],[.16,.25,.34,.25],[.19,.27,.30,.24],[.17,.31,.29,.23],[.16,.24,.35,.25],[.18,.28,.30,.24],[.16,.25,.34,.25],[.18,.30,.29,.23],[.17,.24,.34,.25],[.19,.27,.31,.23],[.16,.29,.32,.23],[.18,.24,.35,.23],[.17,.28,.31,.24],[.18,.26,.33,.23]],
