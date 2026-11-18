@@ -1,2 +1,121 @@
 <!doctype html>
-
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Na Tysiącleciu — parter, elewacje i ogródki</title>
+<style>
+:root{--navy:#071d3c;--blue:#174b82;--bg:#edf2f6;--ink:#172b43;--line:#d8e1e9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,system-ui,Arial;color:var(--ink)}
+header{background:linear-gradient(110deg,#061a35,#174b82);color:#fff;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+header b{font-size:18px}header small{display:block;color:#c7d8e9;font-size:12px;margin-top:3px}
+main{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:12px;padding:12px;max-width:1700px;margin:auto}
+.viewer{height:calc(100vh - 100px);min-height:590px;position:relative;background:linear-gradient(#b8d3e3,#e9f0f3 58%,#c8d1cd);border-radius:15px;overflow:hidden}
+canvas{width:100%;height:100%;display:block}
+.tools{position:absolute;top:12px;left:12px;display:flex;gap:6px;flex-wrap:wrap}
+.tools button,.panel button{background:#fff;border:1px solid #d5dfe8;border-radius:8px;padding:8px 10px;color:#173554;cursor:pointer}
+.tools button.active,.panel button.active{background:#0d3766;color:white}
+.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px;overflow:auto;max-height:calc(100vh - 100px)}
+h2{font-size:17px;margin:0 0 6px}.hint{font-size:12px;color:#68798b;line-height:1.5}
+.field{margin:13px 0}.field label{font-size:12px;color:#617287;display:block;margin-bottom:5px}
+input,select{width:100%;padding:8px;border:1px solid var(--line);border-radius:8px;background:#fff}
+input[type=color]{height:40px;padding:3px}
+.selected{background:#f0f5f9;border-radius:10px;padding:11px;margin-top:12px;font-size:13px;line-height:1.6}
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0;font-size:11px;color:#627184}.swatch{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+button.wide{width:100%;margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:14px 0}
+@media(max-width:850px){main{grid-template-columns:1fr;padding:7px}.viewer{height:60vh;min-height:430px}.panel{max-height:none}header{padding:12px}}
+</style></head><body>
+<header><div><b>Na Tysiącleciu · Budynek C</b><small>Parter — elewacje, okna, granice lokali i ogródki</small></div><small>MODEL ROBOCZY · TYLKO ZEWNĘTRZE</small></header>
+<main><section class="viewer"><canvas id="view3d"></canvas><div class="tools">
+<button id="home">Widok początkowy</button><button id="spin">Obrót 360°</button><button id="yards" class="active">Granice ogródków</button><button id="labels" class="active">Oznaczenia lokali</button>
+</div></section>
+<aside class="panel"><h2>Parter — elewacje</h2><div class="hint">Wybierz kolor, a następnie kliknij fragment elewacji lub ogródek. Kolor zaznaczenia można zmieniać. Przeciągnij model, aby obejrzeć każdą stronę; kółko myszy przybliża.</div>
+<div class="legend"><span><i class="swatch" style="background:#d9e0e5"></i>Elewacja</span><span><i class="swatch" style="background:#283e54"></i>Okna</span><span><i class="swatch" style="background:#55a879"></i>Ogródki</span></div>
+<hr><div class="field"><label>Kolor wybranego mieszkania / ogródka</label><input id="color" type="color" value="#e7a33e"></div>
+<div class="field"><label>Przezroczystość podświetlenia</label><input id="opacity" type="range" min="20" max="100" value="85"></div>
+<div class="selected" id="info"><b>Nic nie wybrano</b><br>Kliknij kolorowy obszar elewacji lub ogródek w modelu.</div>
+<button class="wide" id="clear">Usuń podświetlenie</button>
+<hr><h2 style="font-size:14px">Parametry kondygnacji</h2>
+<div class="selected">Wysokość ścian: <b>260 cm</b><br>Strop: <b>40 cm</b> (ukryty)<br>Łączna wysokość kondygnacji: <b>300 cm</b><br>Zakres: <b>wyłącznie parter</b></div>
+<div class="hint" style="margin-top:12px">Uwaga: granice lokali i ogródków na tej wersji są podziałem poglądowym wyprowadzonym z obrysu rzutu. Rzut zawiera oznaczenia pomieszczeń, a nie jednoznaczne numery mieszkań ani wymiarowane granice ogródków. Przed publikacją sprzedażową trzeba je potwierdzić na dokumentacji lokali.</div>
+</aside></main>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+const canvas=document.querySelector('#view3d'),renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(canvas.clientWidth,canvas.clientHeight,false);renderer.shadowMap.enabled=true;
+const scene=new THREE.Scene();scene.background=new THREE.Color('#dce9ef');
+const camera=new THREE.PerspectiveCamera(42,1,.1,200);camera.position.set(25,17,27);
+scene.add(new THREE.HemisphereLight(0xffffff,0x738394,2));
+const sun=new THREE.DirectionalLight(0xffffff,2.1);sun.position.set(-18,30,20);sun.castShadow=true;scene.add(sun);
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(90,90),new THREE.MeshStandardMaterial({color:0xc6d0c8,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.04;ground.receiveShadow=true;scene.add(ground);
+const root=new THREE.Group();scene.add(root);
+const W=20,D=18,H=2.6,wallT=.28;
+const wallMat=new THREE.MeshStandardMaterial({color:0xd9dedf,roughness:.82});
+const glassMat=new THREE.MeshStandardMaterial({color:0x233c53,metalness:.25,roughness:.2});
+const frameMat=new THREE.MeshStandardMaterial({color:0x87969d,metalness:.45,roughness:.4});
+const floorMat=new THREE.MeshStandardMaterial({color:0x9da8a5,roughness:1});
+const selectable=[],yardObjects=[];
+function addBox(parent,x,y,z,sx,sy,sz,mat,userData){const m=new THREE.Mesh(new THREE.BoxGeometry(sx,sy,sz),mat);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;if(userData)m.userData=userData;parent.add(m);return m}
+addBox(root,0,-.12,0,W+.5,.24,D+.5,floorMat);
+// Four facade elevations, divided into selectable apartment bays. Each bay has dark window openings and a colored transparent selection overlay.
+const sides=[
+ {name:'Elewacja północna',axis:'x',z:-D/2,span:W,count:5,rot:0},
+ {name:'Elewacja południowa',axis:'x',z:D/2,span:W,count:5,rot:Math.PI},
+ {name:'Elewacja zachodnia',axis:'z',x:-W/2,span:D,count:5,rot:-Math.PI/2},
+ {name:'Elewacja wschodnia',axis:'z',x:W/2,span:D,count:5,rot:Math.PI/2}
+];
+let apartmentNo=0;
+for(const side of sides){
+ for(let i=0;i<side.count;i++){
+  apartmentNo++;
+  const len=side.span/side.count,center=-side.span/2+len*(i+.5);
+  const bay=new THREE.Group();bay.userData={type:'apartment',name:'Mieszkanie P'+String(apartmentNo).padStart(2,'0'),side:side.name};
+  if(side.axis==='x')bay.position.set(center,0,side.z);else bay.position.set(side.x,0,center);
+  bay.rotation.y=side.rot;root.add(bay);
+  // solid facade piers and parapet bands leave a broad central window opening
+  addBox(bay,0,H/2,0,len-.12,H,wallT,wallMat);
+  addBox(bay,0,1.43,wallT*.54,len*.62,1.02,.08,glassMat);
+  addBox(bay,0,1.43,wallT*.54,len*.62,.055,.10,frameMat);
+  addBox(bay,0,1.43,wallT*.54,.055,1.02,.10,frameMat);
+  addBox(bay,-len*.31,1.43,wallT*.54,.055,1.02,.10,frameMat);
+  // selection skin, normally transparent and slightly in front of the facade
+  const skin=addBox(bay,0,H/2,wallT*.62,len-.14,H-.04,.025,new THREE.MeshStandardMaterial({color:0xe7a33e,transparent:true,opacity:0,depthWrite:false}));
+  skin.userData={type:'apartment',name:'Mieszkanie P'+String(apartmentNo).padStart(2,'0'),side:side.name,skin:true};
+  selectable.push(skin);selectable.push(bay.children[1]);bay.userData.selectable=true;
+  bay.traverse(o=>{if(o.isMesh&&o!==skin)o.userData={type:'apartment',name:'Mieszkanie P'+String(apartmentNo).padStart(2,'0'),side:side.name}});
+  // vertical apartment division markers at the bay edges
+  for(const edge of [-len/2,len/2])addBox(bay,edge,H/2,wallT*.61,.035,H,.035,frameMat);
+ }
+}
+// corner return walls make the perimeter read as a continuous ground-floor envelope
+addBox(root,0,H/2,-D/2-wallT/2,W,H,wallMat);
+addBox(root,0,H/2,D/2+wallT/2,W,H,wallMat);
+addBox(root,-W/2-wallT/2,H/2,0,wallT,H,D,wallMat);
+addBox(root,W/2+wallT/2,H/2,0,wallT,H,D,wallMat);
+// Re-add glazing as visible facade elements just outside the continuous wall skin
+for(const side of sides){for(let i=0;i<side.count;i++){const len=side.span/side.count,c=-side.span/2+len*(i+.5);const g=new THREE.Group();if(side.axis==='x')g.position.set(c,0,side.z-(side.z<0?.18:-.18));else g.position.set(side.x+(side.x<0?-.18:.18),0,c);g.rotation.y=side.rot;root.add(g);addBox(g,0,1.43,0,len*.62,1.02,.045,glassMat);addBox(g,0,1.43,.03,.045,1.02,.07,frameMat);addBox(g,0,1.43,.03,len*.62,.045,.07,frameMat)}}
+// Garden strips with clear boundary edges, individually selectable.
+let gardenNo=0;
+const gardenMat=new THREE.MeshStandardMaterial({color:0x58a978,transparent:true,opacity:.25,side:THREE.DoubleSide});
+function garden(x,z,sx,sz,sideName){gardenNo++;const g=new THREE.Mesh(new THREE.PlaneGeometry(sx,sz),gardenMat.clone());g.rotation.x=-Math.PI/2;g.position.set(x,.012,z);g.userData={type:'yard',name:'Ogródek '+gardenNo,side:sideName};root.add(g);yardObjects.push(g);const edges=new THREE.EdgesGeometry(new THREE.BoxGeometry(sx,.035,sz));const line=new THREE.LineSegments(edges,new THREE.LineBasicMaterial({color:0x317c56}));line.position.set(x,.025,z);root.add(line)}
+// Poglądowe pasy ogródków wokół elewacji — granice są edytowalnym podkładem, nie geodezyjnym wytyczeniem.
+garden(-8,-12,4,5,'Północ');garden(-3,-12,4,5,'Północ');garden(3,-12,5,5,'Północ');garden(8,-12,4,5,'Północ');
+garden(-8,12,4,5,'Południe');garden(-3,12,4,5,'Południe');garden(3,12,5,5,'Południe');garden(8,12,4,5,'Południe');
+garden(-13,-6,5,4,'Zachód');garden(-13,0,5,4,'Zachód');garden(-13,6,5,4,'Zachód');
+garden(13,-6,5,4,'Wschód');garden(13,0,5,4,'Wschód');garden(13,6,5,4,'Wschód');
+const ray=new THREE.Raycaster(),mouse=new THREE.Vector2();let selected=null,drag=false,px=0,py=0,ry=-.65,rx=.22,dist=34,auto=false,showYards=true,showLabels=true;
+function updateInfo(o){const info=document.querySelector('#info');info.innerHTML=o?'<b>'+o.name+'</b><br>'+o.side+'<br>Typ: '+(o.type==='yard'?'teren przynależny — ogródek':'fragment elewacji mieszkania'):'<b>Nic nie wybrano</b><br>Kliknij fragment elewacji lub ogródek.'}
+function applyColor(){if(!selected)return;const color=document.querySelector('#color').value,op=Number(document.querySelector('#opacity').value)/100;if(selected.userData.type==='apartment'){root.traverse(o=>{if(o.userData.name===selected.userData.name&&o.userData.skin){o.material.color.set(color);o.material.opacity=op}})}else{selected.material.color.set(color);selected.material.opacity=op}}
+function pick(e){const r=canvas.getBoundingClientRect();mouse.x=((e.clientX-r.left)/r.width)*2-1;mouse.y=-((e.clientY-r.top)/r.height)*2+1;ray.setFromCamera(mouse,camera);const hits=ray.intersectObjects([...selectable,...yardObjects],false).filter(h=>showYards||h.object.userData.type!=='yard');if(!hits.length)return;let o=hits[0].object;selected=o;document.querySelector('#color').value='#'+o.material.color.getHexString();updateInfo(o);applyColor()}
+canvas.addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;canvas.setPointerCapture(e.pointerId)});
+canvas.addEventListener('pointermove',e=>{if(!drag)return;ry+=(e.clientX-px)*.008;rx=Math.max(-.15,Math.min(.8,rx+(e.clientY-py)*.005));px=e.clientX;py=e.clientY});
+canvas.addEventListener('pointerup',e=>{if(drag&&Math.abs(e.clientX-px)+Math.abs(e.clientY-py)<4)pick(e);drag=false});
+canvas.addEventListener('pointercancel',()=>drag=false);
+canvas.addEventListener('wheel',e=>{dist=Math.max(19,Math.min(60,dist+e.deltaY*.035))},{passive:true});
+document.querySelector('#color').addEventListener('input',applyColor);document.querySelector('#opacity').addEventListener('input',applyColor);
+document.querySelector('#yards').onclick=e=>{showYards=!showYards;e.target.classList.toggle('active',showYards);yardObjects.forEach(o=>o.visible=showYards)};
+document.querySelector('#labels').onclick=e=>{showLabels=!showLabels;e.target.classList.toggle('active',showLabels)};
+document.querySelector('#clear').onclick=()=>{if(!selected)return;const name=selected.userData.name;if(selected.userData.type==='apartment')root.traverse(o=>{if(o.userData.skin&&o.userData.name===name){o.material.opacity=0}});else selected.material.opacity=.25;selected=null;updateInfo(null)};
+document.querySelector('#home').onclick=()=>{ry=-.65;rx=.22;dist=34};
+document.querySelector('#spin').onclick=e=>{auto=!auto;e.target.classList.toggle('active',auto);e.target.textContent=auto?'Zatrzymaj obrót':'Obrót 360°'};
+function animate(){requestAnimationFrame(animate);if(auto&&!drag)ry+=.003;root.rotation.y=ry;root.rotation.x=rx;camera.position.set(Math.sin(ry)*dist,9+dist*.35+rx*8,Math.cos(ry)*dist);camera.lookAt(0,1,0);renderer.render(scene,camera)}
+animate();const ro=new ResizeObserver(()=>{const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()});ro.observe(canvas);
+</script></body></html>
