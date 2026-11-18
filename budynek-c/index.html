@@ -77,10 +77,11 @@ for(const side of sides){
   addBox(bay,0,1.43,wallT*.54,.055,1.02,.10,frameMat);
   addBox(bay,-len*.31,1.43,wallT*.54,.055,1.02,.10,frameMat);
   // selection skin, normally transparent and slightly in front of the facade
-  const skin=addBox(bay,0,H/2,wallT*.62,len-.14,H-.04,.025,new THREE.MeshStandardMaterial({color:0xe7a33e,transparent:true,opacity:0,depthWrite:false}));
+  const skin=addBox(bay,0,H/2,-.20,len-.14,H-.04,.025,new THREE.MeshStandardMaterial({color:0xe7a33e,transparent:true,opacity:0,depthWrite:false}));
   skin.userData={type:'apartment',name:'Mieszkanie P'+String(apartmentNo).padStart(2,'0'),side:side.name,skin:true};
-  selectable.push(skin);selectable.push(bay.children[1]);bay.userData.selectable=true;
+  selectable.push(skin);bay.userData.selectable=true;
   bay.traverse(o=>{if(o.isMesh&&o!==skin)o.userData={type:'apartment',name:'Mieszkanie P'+String(apartmentNo).padStart(2,'0'),side:side.name}});
+  skin.userData={type:'apartment',name:'Mieszkanie P'+String(apartmentNo).padStart(2,'0'),side:side.name,skin:true};
   // vertical apartment division markers at the bay edges
   for(const edge of [-len/2,len/2])addBox(bay,edge,H/2,wallT*.61,.035,H,.035,frameMat);
  }
@@ -91,7 +92,7 @@ addBox(root,0,H/2,D/2+wallT/2,W,H,wallMat);
 addBox(root,-W/2-wallT/2,H/2,0,wallT,H,D,wallMat);
 addBox(root,W/2+wallT/2,H/2,0,wallT,H,D,wallMat);
 // Re-add glazing as visible facade elements just outside the continuous wall skin
-for(const side of sides){for(let i=0;i<side.count;i++){const len=side.span/side.count,c=-side.span/2+len*(i+.5);const g=new THREE.Group();if(side.axis==='x')g.position.set(c,0,side.z-(side.z<0?.18:-.18));else g.position.set(side.x+(side.x<0?-.18:.18),0,c);g.rotation.y=side.rot;root.add(g);addBox(g,0,1.43,0,len*.62,1.02,.045,glassMat);addBox(g,0,1.43,.03,.045,1.02,.07,frameMat);addBox(g,0,1.43,.03,len*.62,.045,.07,frameMat)}}
+for(const side of sides){for(let i=0;i<side.count;i++){const len=side.span/side.count,c=-side.span/2+len*(i+.5);const g=new THREE.Group();if(side.axis==='x')g.position.set(c,0,side.z-(side.z<0?.18:-.18));else g.position.set(side.x+(side.x<0?-.18:.18),0,c);g.rotation.y=side.rot;root.add(g);const win=addBox(g,0,1.43,0,len*.62,1.02,.045,glassMat,{type:'apartment',name:'Mieszkanie P'+String((sides.indexOf(side)*side.count)+i+1).padStart(2,'0'),side:side.name});selectable.push(win);addBox(g,0,1.43,.03,.045,1.02,.07,frameMat);addBox(g,0,1.43,.03,len*.62,.045,.07,frameMat)}}
 // Garden strips with clear boundary edges, individually selectable.
 let gardenNo=0;
 const gardenMat=new THREE.MeshStandardMaterial({color:0x58a978,transparent:true,opacity:.25,side:THREE.DoubleSide});
