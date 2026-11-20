@@ -527,3 +527,8 @@ p { color:var(--muted); }
 .white-site .apartment-plan-image>a{right:18px;bottom:18px}
 @media(max-width:850px){.white-site .apartment-plan-layout>.apartment-plan-image{min-height:0;aspect-ratio:1510 / 1152}.white-site .apartment-plan-image-frame{min-height:0}}
 @media(max-width:650px){.white-site .apartment-plan-layout>.apartment-plan-image{min-height:0;padding:0;aspect-ratio:1510 / 1152}.white-site .apartment-plan-image>a{right:12px;bottom:12px}}
+
+
+/* Kukurydze 2.0 — temporary double plan while floor-plan graphics are prepared. */
+.white-site .apartment-plan-image-frame.apartment-plan-image-stack{display:block;flex:0 0 auto;min-height:0;height:auto;padding:0;margin:0;background:#fff;overflow:visible}
+.white-site .apartment-plan-image-frame.apartment-plan-image-stack img{display:block;width:100%;height:auto;min-height:0;max-height:none;max-width:100%;object-fit:contain;background:#fff}
