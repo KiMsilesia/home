@@ -378,7 +378,10 @@ export default function CityApartmentPage() {
             <div><dt>Zakres</dt><dd>Projekt · meble · wykończenie</dd></div>
             <div><dt>Status</dt><dd>Aktualna realizacja</dd></div>
           </dl>
-          <p>Inwentaryzacja jest podstawą opracowania aranżacji, zabudowy i prac wykończeniowych. Poniżej prezentujemy projekt łazienki; a dalej przykładowe aranżacje kuchni, salonu, holu i sypialni, przygotowane do rozwinięcia w kolejne opracowania.</p>
+          <details className="apartment-description-note">
+            <summary>Opis opracowania</summary>
+            <p>Inwentaryzacja jest podstawą opracowania aranżacji, zabudowy i prac wykończeniowych. Poniżej prezentujemy projekt łazienki; a dalej przykładowe aranżacje kuchni, salonu, holu i sypialni, przygotowane do rozwinięcia w kolejne opracowania.</p>
+          </details>
           <details className="apartment-area-note">
             <summary>Notatka · powierzchnie pomieszczeń</summary>
             <dl>{rooms.map(room => <div key={room.number}><dt>{room.name}</dt><dd>{room.area}</dd></div>)}</dl>
