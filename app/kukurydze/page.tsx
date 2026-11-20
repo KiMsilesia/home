@@ -360,8 +360,8 @@ export default function CityApartmentPage() {
       </header>
       <div className="apartment-plan-layout">
         <figure className="apartment-plan-image">
-          <div style={{ position: "relative", width: "100%", aspectRatio: "1510 / 1152", overflow: "hidden" }}>
-            <img src={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=d993de3"} alt="Inwentaryzacja z natury pomieszczeń mieszkalnych dla realizowanej inwestycji Mieszkaj w Mieście" style={{ position: "absolute", width: "135.63%", maxWidth: "none", maxHeight: "none", height: "auto", left: "-19.87%", top: 0 }} />
+          <div style={{ position: "relative", width: "100%", aspectRatio: "1510 / 1152", overflow: "hidden", boxSizing: "border-box", padding: "18px", background: "#e9edf4" }}>
+            <img src={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=d993de3"} alt="Inwentaryzacja z natury pomieszczeń mieszkalnych dla realizowanej inwestycji Mieszkaj w Mieście" style={{ display: "block", width: "100%", height: "100%", maxWidth: "100%", maxHeight: "100%", objectFit: "contain", objectPosition: "center" }} />
           </div>
           <a href={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=d993de3"} target="_blank" rel="noreferrer">Otwórz pełny rzut <Maximize2 size={17} /></a>
         </figure>
