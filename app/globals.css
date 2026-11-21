@@ -560,3 +560,15 @@ p { color:var(--muted); }
  .white-site .apartment-plan-image-frame.apartment-plan-image-stack .apartment-plan-secondary{grid-column:1}
  .white-site .apartment-plan-image-frame.apartment-plan-image-stack .apartment-plan-secondary{padding:10px 0 0;border-left:0;border-top:1px solid #e1e5eb}
 }
+
+
+/* Kukurydze 2.0 — single enlarged plan, with a tighter frame and reduced inner margins. */
+.white-site .apartment-plan-layout{align-items:stretch}
+.white-site .apartment-plan-layout>.apartment-plan-image{display:flex;align-self:stretch;min-width:0;min-height:0;padding:0;overflow:hidden;background:#fff}
+.white-site .apartment-plan-image-frame.apartment-plan-image-single{display:flex;flex:1 1 auto;align-items:center;justify-content:center;width:100%;height:100%;min-height:0;padding:6px;margin:0;background:#fff;overflow:hidden}
+.white-site .apartment-plan-image-frame.apartment-plan-image-single img{display:block;width:100%;height:100%;min-width:0;min-height:0;max-width:none;max-height:none;object-fit:contain;object-position:center;transform:scale(1.08);transform-origin:center}
+@media(max-width:850px){
+ .white-site .apartment-plan-layout>.apartment-plan-image{min-height:0;aspect-ratio:auto}
+ .white-site .apartment-plan-image-frame.apartment-plan-image-single{height:auto;padding:4px}
+ .white-site .apartment-plan-image-frame.apartment-plan-image-single img{height:auto;transform:none}
+}
