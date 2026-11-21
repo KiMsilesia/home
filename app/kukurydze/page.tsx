@@ -361,8 +361,8 @@ export default function CityApartmentPage() {
       <div className="apartment-plan-layout">
         <figure className="apartment-plan-image">
           <div className="apartment-plan-image-frame apartment-plan-image-stack">
-            <img src={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=d993de3"} alt="Rzut mieszkania — widok pierwszy" />
-            <img src={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=d993de3"} alt="Rzut mieszkania — widok drugi" />
+            <img className="apartment-plan-primary" src={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=d993de3"} alt="Główny rzut mieszkania" />
+            <img className="apartment-plan-secondary" src={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=d993de3"} alt="Dodatkowy podgląd rzutu mieszkania — tymczasowa kopia" />
           </div>
           <a href={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=d993de3"} target="_blank" rel="noreferrer">Otwórz pełny rzut <Maximize2 size={17} /></a>
         </figure>
