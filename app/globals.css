@@ -541,3 +541,22 @@ p { color:var(--muted); }
 .white-site .apartment-description-note summary::before{content:"＋";display:inline-block;width:18px;color:#e4c36f}
 .white-site .apartment-description-note[open] summary::before{content:"−"}
 .white-site .apartment-description-note p{margin:12px 0 2px;color:#dce5f0;font-size:.82rem;line-height:1.55}
+
+
+/* Kukurydze 2.0 — desktop: one dominant plan and one smaller supporting view.
+   The plan column stretches to the exact height of the information panel. */
+.white-site .apartment-plan-layout{align-items:stretch}
+.white-site .apartment-plan-layout>.apartment-plan-image{display:flex;align-self:stretch;min-width:0;min-height:0;padding:0;overflow:hidden;background:#fff}
+.white-site .apartment-plan-image-frame.apartment-plan-image-stack{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,.85fr);align-items:center;gap:12px;flex:1 1 auto;width:100%;height:100%;min-height:0;padding:18px;background:#fff;overflow:hidden}
+.white-site .apartment-plan-image-frame.apartment-plan-image-stack img{display:block;width:100%;height:100%;min-width:0;min-height:0;max-width:100%;max-height:100%;object-fit:contain;object-position:center;background:#fff}
+.white-site .apartment-plan-image-frame.apartment-plan-image-stack .apartment-plan-primary{grid-column:1}
+.white-site .apartment-plan-image-frame.apartment-plan-image-stack .apartment-plan-secondary{grid-column:2;padding:10px;border-left:1px solid #e1e5eb}
+.white-site .apartment-plan-image>a{right:18px;bottom:18px}
+@media(max-width:850px){
+ .white-site .apartment-plan-layout>.apartment-plan-image{min-height:0;aspect-ratio:auto}
+ .white-site .apartment-plan-image-frame.apartment-plan-image-stack{grid-template-columns:1fr;grid-template-rows:auto auto;gap:10px;height:auto;padding:10px}
+ .white-site .apartment-plan-image-frame.apartment-plan-image-stack img{height:auto;max-height:none}
+ .white-site .apartment-plan-image-frame.apartment-plan-image-stack .apartment-plan-primary,
+ .white-site .apartment-plan-image-frame.apartment-plan-image-stack .apartment-plan-secondary{grid-column:1}
+ .white-site .apartment-plan-image-frame.apartment-plan-image-stack .apartment-plan-secondary{padding:10px 0 0;border-left:0;border-top:1px solid #e1e5eb}
+}
