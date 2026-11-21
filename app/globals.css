@@ -572,3 +572,13 @@ p { color:var(--muted); }
  .white-site .apartment-plan-image-frame.apartment-plan-image-single{height:auto;padding:4px}
  .white-site .apartment-plan-image-frame.apartment-plan-image-single img{height:auto;transform:none}
 }
+
+
+/* Kukurydze 2.0 — final correction: preserve the complete source image.
+   Remove the previous zoom and use the full frame area with no inner padding. */
+.white-site .apartment-plan-image-frame.apartment-plan-image-single{padding:0!important;margin:0!important;background:#fff;overflow:hidden}
+.white-site .apartment-plan-image-frame.apartment-plan-image-single img{width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:center;transform:none!important}
+@media(max-width:850px){
+ .white-site .apartment-plan-image-frame.apartment-plan-image-single{padding:0!important}
+ .white-site .apartment-plan-image-frame.apartment-plan-image-single img{width:100%;height:auto;max-height:none;object-fit:contain;transform:none!important}
+}
