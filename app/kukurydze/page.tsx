@@ -358,14 +358,13 @@ export default function CityApartmentPage() {
         <div><small>INWENTARYZACJA Z NATURY</small><h2>Dokumentacja pomiarowa<br />realizowanej inwestycji.</h2></div>
         <p>Szkic przedstawia rzeczywisty układ i wymiary pomieszczeń mieszkalnych, ustalone podczas inwentaryzacji z natury dla realizowanej inwestycji. Stanowi podstawę dalszych prac projektowych i wykonawczych.</p>
       </header>
-      <div className="apartment-plan-layout">
-        <figure className="apartment-plan-image">
+      <div className="apartment-plan-layout apartment-plan-layout-overlay">
+        <figure className="apartment-plan-image apartment-plan-image-overlay">
           <div className="apartment-plan-image-frame apartment-plan-image-single">
             <img src={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=20261122"} alt="Rzut mieszkania" />
           </div>
           <a href={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=20261122"} target="_blank" rel="noreferrer">Otwórz pełny rzut <Maximize2 size={17} /></a>
-        </figure>
-        <aside>
+          <aside>
           <small>REALIZOWANA INWESTYCJA</small>
           <h3>Budynek C</h3>
           <a className="apartment-plan-button" href={assetBase + "/budynek-c/"} target="_blank" rel="noreferrer">Otwórz interaktywny model 3D <ArrowRight size={18} /></a>
@@ -388,6 +387,7 @@ export default function CityApartmentPage() {
           </details>
           <Link className="apartment-plan-button" href="/kontakt">Zapytaj o swoje mieszkanie <ArrowRight size={18} /></Link>
         </aside>
+        </figure>
       </div>
     </section>
 
