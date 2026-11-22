@@ -582,3 +582,61 @@ p { color:var(--muted); }
  .white-site .apartment-plan-image-frame.apartment-plan-image-single{padding:0!important}
  .white-site .apartment-plan-image-frame.apartment-plan-image-single img{width:100%;height:auto;max-height:none;object-fit:contain;transform:none!important}
 }
+
+
+
+/* Kukurydze 2.0 — wyrównanie panelu informacji do rzeczywistej wysokości grafiki rzutu. */
+.white-site.city-apartment-page .apartment-plan-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(290px,.65fr);
+  align-items:stretch;
+}
+.white-site.city-apartment-page .apartment-plan-layout>.apartment-plan-image{
+  display:block;
+  align-self:stretch;
+  min-width:0;
+  min-height:0;
+  padding:0;
+  background:#fff;
+  overflow:hidden;
+}
+.white-site.city-apartment-page .apartment-plan-image-frame.apartment-plan-image-single{
+  display:block;
+  width:100%;
+  height:auto;
+  min-height:0;
+  margin:0;
+  padding:0!important;
+  background:#fff;
+  overflow:hidden;
+}
+.white-site.city-apartment-page .apartment-plan-image-frame.apartment-plan-image-single img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-width:100%;
+  max-height:none;
+  object-fit:contain;
+  object-position:center;
+  transform:none!important;
+}
+.white-site.city-apartment-page .apartment-plan-layout>aside{
+  align-self:stretch;
+  min-width:0;
+  padding:clamp(22px,2.4vw,36px);
+  display:flex;
+  flex-direction:column;
+}
+.white-site.city-apartment-page .apartment-plan-layout>aside h3{margin:10px 0 18px}
+.white-site.city-apartment-page .apartment-plan-layout>aside dl div{padding:clamp(8px,1vw,13px) 0}
+.white-site.city-apartment-page .apartment-plan-layout>aside .apartment-description-note,
+.white-site.city-apartment-page .apartment-plan-layout>aside .apartment-area-note{margin-top:8px}
+.white-site.city-apartment-page .apartment-plan-layout>aside>.apartment-plan-button:last-child{margin-top:auto}
+@media(max-width:850px){
+ .white-site.city-apartment-page .apartment-plan-layout{grid-template-columns:1fr}
+ .white-site.city-apartment-page .apartment-plan-layout>.apartment-plan-image{min-height:0}
+ .white-site.city-apartment-page .apartment-plan-image-frame.apartment-plan-image-single{height:auto}
+ .white-site.city-apartment-page .apartment-plan-image-frame.apartment-plan-image-single img{height:auto}
+ .white-site.city-apartment-page .apartment-plan-layout>aside{padding:28px 24px}
+ .white-site.city-apartment-page .apartment-plan-layout>aside>.apartment-plan-button:last-child{margin-top:18px}
+}
