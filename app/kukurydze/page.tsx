@@ -4,7 +4,7 @@ import { ProjectStudy, type ProjectStudyData } from "../../components/project-st
 import "../project-study.css";
 import Link from "next/link";
 const assetBase = "/home";
-import { ArrowRight, Maximize2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { WhiteFooter, WhiteHeader, WhiteSubhero } from "../../components/white-shell";
 
 export const metadata: Metadata = {
@@ -363,7 +363,7 @@ export default function CityApartmentPage() {
           <div className="apartment-plan-image-frame apartment-plan-image-single">
             <img src={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=20261122"} alt="Rzut mieszkania" />
           </div>
-          <a href={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=20261122"} target="_blank" rel="noreferrer">Otwórz pełny rzut <Maximize2 size={17} /></a>
+          <span className="apartment-plan-missing-dimension">12706</span>
           <aside>
           <small>REALIZOWANA INWESTYCJA</small>
           <h3>Budynek C</h3>
