@@ -771,3 +771,24 @@ p { color:var(--muted); }
    top:12px;
  }
 }
+
+
+
+/* Korekta kadru rzutu: przesunięcie grafiki w lewo, aby odsunąć plan od nakładki opisowej. */
+.white-site.city-apartment-page .apartment-plan-image-overlay .apartment-plan-image-frame{
+  overflow:hidden;
+}
+.white-site.city-apartment-page .apartment-plan-image-overlay .apartment-plan-image-frame img{
+  width:108%;
+  max-width:none;
+  transform:translateX(-7.4%)!important;
+  object-fit:contain;
+  object-position:left center;
+}
+@media(max-width:850px){
+ .white-site.city-apartment-page .apartment-plan-image-overlay .apartment-plan-image-frame img{
+   width:100%;
+   max-width:100%;
+   transform:none!important;
+ }
+}
