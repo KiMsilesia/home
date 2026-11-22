@@ -781,7 +781,7 @@ p { color:var(--muted); }
 .white-site.city-apartment-page .apartment-plan-image-overlay .apartment-plan-image-frame img{
   width:108%;
   max-width:none;
-  transform:translateX(-7.4%) scale(.92)!important;
+  transform:translate(-7.4%, 1.8%) scale(.92)!important;
   transform-origin:center center;
   object-fit:contain;
   object-position:left center;
