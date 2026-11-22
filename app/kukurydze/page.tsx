@@ -361,9 +361,9 @@ export default function CityApartmentPage() {
       <div className="apartment-plan-layout">
         <figure className="apartment-plan-image">
           <div className="apartment-plan-image-frame apartment-plan-image-single">
-            <img src={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=d993de3"} alt="Rzut mieszkania" />
+            <img src={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=20261122"} alt="Rzut mieszkania" />
           </div>
-          <a href={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=d993de3"} target="_blank" rel="noreferrer">Otwórz pełny rzut <Maximize2 size={17} /></a>
+          <a href={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=20261122"} target="_blank" rel="noreferrer">Otwórz pełny rzut <Maximize2 size={17} /></a>
         </figure>
         <aside>
           <small>REALIZOWANA INWESTYCJA</small>
