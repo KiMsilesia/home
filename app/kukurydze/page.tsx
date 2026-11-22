@@ -363,7 +363,7 @@ export default function CityApartmentPage() {
           <div className="apartment-plan-image-frame apartment-plan-image-single">
             <img src={assetBase + "/assets/mwm-6-01-rzut2.jpg?v=20261122"} alt="Rzut mieszkania" />
           </div>
-          <span className="apartment-plan-missing-dimension">12706</span>
+
           <aside>
           <small>REALIZOWANA INWESTYCJA</small>
           <h3>Budynek C</h3>
