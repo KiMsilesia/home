@@ -796,3 +796,53 @@ p { color:var(--muted); }
    transform:none!important;
  }
 }
+
+
+/* Kukurydze 2.1 — ciaśniejszy kadr rzutu, czytelny wymiar i mniejsza nakładka. */
+.white-site.city-apartment-page .apartment-plan-image-overlay>aside{
+  width:29%;
+  max-width:360px;
+  min-width:240px;
+}
+.white-site.city-apartment-page .apartment-plan-image-overlay .apartment-plan-image-frame{
+  padding-top:8px!important;
+  padding-bottom:8px!important;
+}
+.white-site.city-apartment-page .apartment-plan-image-overlay .apartment-plan-image-frame img{
+  width:116%;
+  max-width:none;
+  transform:translate(-9%,0) scale(.96)!important;
+  transform-origin:center center;
+  object-fit:contain;
+  object-position:left center;
+}
+.white-site.city-apartment-page .apartment-plan-missing-dimension{
+  position:absolute;
+  z-index:3;
+  top:3.2%;
+  left:48%;
+  padding:2px 7px;
+  color:#071d3b;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(7,29,59,.35);
+  font:700 clamp(11px,1.15vw,17px)/1.2 Arial,Helvetica,sans-serif;
+  letter-spacing:.04em;
+  pointer-events:none;
+}
+@media(max-width:850px){
+  .white-site.city-apartment-page .apartment-plan-image-overlay>aside{
+    width:100%;
+    max-width:none;
+    min-width:0;
+  }
+  .white-site.city-apartment-page .apartment-plan-image-overlay .apartment-plan-image-frame img{
+    width:116%;
+    max-width:none;
+    transform:translateX(-9%)!important;
+  }
+  .white-site.city-apartment-page .apartment-plan-missing-dimension{
+    top:2%;
+    left:48%;
+    font-size:13px;
+  }
+}
