@@ -1,23 +1,10 @@
-export default function KiMosaicLanding() {
+export default function KiMosaicPage() {
   return (
-    <main
-      style={{
-        minHeight: "100svh",
-        display: "grid",
-        placeItems: "center",
-        background: "#091a35",
-        padding: "24px",
-      }}
-    >
-      <img
-        src="/home/assets/logo-kim-silesia-bialy.png"
-        alt="KiM Silesia"
-        style={{
-          display: "block",
-          width: "min(78vw, 420px)",
-          maxHeight: "80svh",
-          objectFit: "contain",
-        }}
+    <main style={{ width: "100%", height: "100svh", margin: 0, overflow: "hidden" }}>
+      <iframe
+        title="KiMosaic — Floor Design & Tiling Studio"
+        src="/home/kimosaic-app.html"
+        style={{ display: "block", width: "100%", height: "100%", border: 0 }}
       />
     </main>
   );
