@@ -30,7 +30,8 @@ jobs:
       - name: Include standalone LightLab app
         run: |
           mkdir -p out/lightlab
-          cp lightlab/index.html out/lightlab/index.html\n      - uses: actions/configure-pages@v5
+          cp lightlab/index.html out/lightlab/index.html
+      - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
