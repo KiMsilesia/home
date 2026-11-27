@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KiM LightLab</title>
+<style>
+:root{--bg:#071426;--panel:#10243d;--panel2:#142d49;--line:#294765;--text:#edf4fc;--muted:#9bb0c8;--accent:#55b8ff;--gold:#ffd36b}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#071426,#0b1c31 65%,#102743);color:var(--text);font:15px/1.45 system-ui,Segoe UI,Arial}
+header{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{font-size:23px;font-weight:800;letter-spacing:.3px}.brand span{color:var(--accent)}.sub{color:var(--muted);font-size:12px}
+main{max-width:1500px;margin:auto;padding:18px;display:grid;grid-template-columns:310px minmax(0,1fr);gap:16px}
+.panel,.view{background:rgba(16,36,61,.94);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.panel{padding:16px}.panel h2,.view h2{font-size:15px;margin:0 0 14px}
+.control{margin:0 0 17px}.control label{display:flex;justify-content:space-between;gap:10px;color:#c7d7e8;font-size:13px;margin-bottom:7px}.control output{color:var(--accent);font-variant-numeric:tabular-nums;font-weight:700}
+input[type=range]{width:100%;accent-color:var(--accent)}select,button,input[type=text]{background:#091a2d;color:var(--text);border:1px solid #34516e;border-radius:8px;padding:9px}
+select{width:100%}.btns{display:flex;gap:8px;flex-wrap:wrap}button{cursor:pointer}button.primary{background:#176ba5;border-color:#318cc9}button:hover{filter:brightness(1.15)}
+.content{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-content:start}.view h2{padding:13px 15px 0}.canvas{width:100%;display:block;background:linear-gradient(#0b2037,#0a192b);aspect-ratio:1.55}.wide{grid-column:1/-1}.wide .canvas{aspect-ratio:2.2}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px}.metric{background:#0a1b2f;border:1px solid #25415e;border-radius:9px;padding:9px}.metric small{display:block;color:var(--muted);font-size:11px}.metric strong{font-size:17px}
+.note{padding:12px 14px;color:var(--muted);font-size:12px;border-top:1px solid var(--line)}
+.saved{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.saved button{font-size:12px}
+@media(max-width:900px){main{grid-template-columns:1fr}.content{grid-template-columns:1fr}.wide{grid-column:auto}.wide .canvas{aspect-ratio:1.5}}
+@media(max-width:520px){header{padding:14px}main{padding:10px;gap:10px}.panel{padding:13px}.metrics{grid-template-columns:1fr 1fr}.canvas{aspect-ratio:1.25}}
+</style>
+</head>
+<body>
+<header><div><div class="brand">KiM <span>LightLab</span></div><div class="sub">Laboratorium geometrii światła · prototyp koncepcyjny</div></div><div class="sub">KiM Silesia</div></header>
+<main>
+<aside class="panel">
+<h2>Parametry oprawy i pomieszczenia</h2>
+<div class="control"><label for="slot">Szerokość szczeliny <output id="slotV">8 mm</output></label><input id="slot" type="range" min="2" max="30" step="1" value="8"></div>
+<div class="control"><label for="chamber">Wysokość komory <output id="chamberV">45 mm</output></label><input id="chamber" type="range" min="20" max="100" step="1" value="45"></div>
+<div class="control"><label for="width">Szerokość oprawy <output id="widthV">80 mm</output></label><input id="width" type="range" min="30" max="180" step="5" value="80"></div>
+<div class="control"><label for="power">Moc LED <output id="powerV">14 W/m</output></label><input id="power" type="range" min="4" max=" thirty" step="1" value="14"></div>
+<div class="control"><label for="flux">Strumień LED <output id="fluxV">1400 lm/m</output></label><input id="flux" type="range" min="300" max="3000" step="50" value="1400"></div>
+<div class="control"><label for="angle">Kąt emisji <output id="angleV">60°</output></label><input id="angle" type="range" min="15" max="120" step="1" value="60"></div>
+<div class="control"><label for="height">Wysokość sufitu <output id="heightV">270 cm</output></label><input id="height" type="range" min="240" max="320" step="5" value="270"></div>
+<div class="control"><label for="reflector">Układ optyczny</label><select id="reflector"><option value="none">Bez odbłyśnika</option><option value="flat">Odbłyśnik płaski</option><option value="parabolic" selected>Odbłyśnik paraboliczny</option><option value="lens">Soczewka kierunkowa</option></select></div>
+<div class="control"><label for="direction">Kierunek emisji</label><select id="direction"><option value="down" selected>W dół — na ściany/podłogę</option><option value="up">W górę — na sufit</option></select></div>
+<div class="btns"><button class="primary" id="save">Zapisz wariant</button><button id="reset">Reset</button><button id="export">Eksport JSON</button></div>
+<div class="saved" id="saved"></div>
+</aside>
+<section class="content">
+<div class="view"><h2>1. Przekrój oprawy</h2><canvas class="canvas" id="lamp"></canvas><div class="note">Schemat przekroju — widoczna szczelina, komora, LED i uproszczony tor emisji.</div></div>
+<div class="view"><h2>2. Przekrój pomieszczenia</h2><canvas class="canvas" id="room"></canvas><div class="metrics"><div class="metric"><small>Szacowana szerokość pasa</small><strong id="band">—</strong></div><div class="metric"><small>Względna koncentracja</small><strong id="focus">—</strong></div><div class="metric"><small>Strumień LED</small><strong id="lumens">—</strong></div></div></div>
+<div class="view wide"><h2>3. Widok przestrzenny — dwa przeciwne pasy</h2><canvas class="canvas" id="space"></canvas><div class="note">Widok 3D poglądowy. Zmiany szczeliny, kąta i odbłyśnika wpływają na szerokość i koncentrację wizualizowanych pasów.</div></div>
+</section>
+</main>
+<script>
+const ids=['slot','chamber','width','power','flux','angle','height','reflector','direction'];const $=id=>document.getElementById(id);
+const defaults={slot:8,chamber:45,width:80,power:14,flux:1400,angle:60,height:270,reflector:'parabolic',direction:'down'};
+function state(){return Object.fromEntries(ids.map(k=>[k,$(k).value]))}
+function setState(s){ids.forEach(k=>{if(s[k]!==undefined)$(k).value=s[k]});draw()}
+function geom(){let s=state(),slot=+s.slot,angle=+s.angle,h=+s.height/100,reflect=s.reflector;let optical=reflect==='lens'?.62:reflect==='parabolic'?.76:reflect==='flat'?.9:1;let spread=Math.tan(angle*Math.PI/360)*h*2*(slot/8)**.18*optical;let focus=(+s.flux/1400)*(8/slot)**.45*(reflect==='parabolic'?1.25:reflect==='lens'?1.45:1);return {s,spread,focus,band:Math.max(.04,spread)}}
+function label(){let s=state();ids.slice(0,7).forEach(k=>$(k+'V').textContent=({slot:s.slot+' mm',chamber:s.chamber+' mm',width:s.width+' mm',power:s.power+' W/m',flux:s.flux+' lm/m',angle:s.angle+'°',height:s.height+' cm'})[k])}
+function prep(c){let dpr=devicePixelRatio||1,r=c.getBoundingClientRect();c.width=r.width*dpr;c.height=r.height*dpr;let x=c.getContext('2d');x.scale(dpr,dpr);return {x,w:r.width,h:r.height}}
+function drawLamp(){let {x,w,h}=prep($('lamp'));x.clearRect(0,0,w,h);let g=geom(),s=g.s,cx=w/2,top=h*.22,base=h*.58,scale=Math.min(w/220,2);x.strokeStyle='#a9c5df';x.lineWidth=2;x.fillStyle='#213e5c';x.beginPath();x.moveTo(cx-75,top);x.lineTo(cx+75,top);x.lineTo(cx+45,base);x.lineTo(cx-45,base);x.closePath();x.fill();x.stroke();x.fillStyle='#071426';x.fillRect(cx-+s.width*.35,base-3,+s.width*.7,9);x.fillStyle='#ffd36b';x.fillRect(cx-24,top+14,48,7);x.fillStyle='#ffd36b';x.beginPath();x.arc(cx,top+18,5,0,Math.PI*2);x.fill();x.strokeStyle='#55b8ff';x.lineWidth=3;x.beginPath();x.moveTo(cx-+s.slot*1.5,base+2);x.lineTo(cx-s.slot/2,base+2);x.moveTo(cx+s.slot/2,base+2);x.lineTo(cx+s.slot*1.5,base+2);x.stroke();x.fillStyle='#9bb0c8';x.font='12px system-ui';x.fillText('komora '+s.chamber+' mm',cx+84,top+35);x.fillText('szczelina '+s.slot+' mm',cx+22,base+18);x.fillText('LED',cx-12,top+9)}
+function drawRoom(){let {x,w,h}=prep($('room'));let g=geom(),s=g.s,cx=w/2,ceil=h*.23,floor=h*.83,dir=s.direction==='down'?1:-1;x.strokeStyle='#8ca9c6';x.lineWidth=2;x.strokeRect(20,ceil,w-40,floor-ceil);x.fillStyle='#294764';x.fillRect(cx-25,ceil-5,50,8);let end=dir===1?floor:ceil;let spread=Math.min(w*.46,g.band*38);let grad=x.createLinearGradient(cx-spread,ceil,cx+spread,floor);grad.addColorStop(0,'rgba(75,180,255,0)');grad.addColorStop(.5,'rgba(75,180,255,'+Math.min(.8,.18+g.focus*.16)+')');grad.addColorStop(1,'rgba(75,180,255,0)');x.fillStyle=grad;x.beginPath();if(dir===1){x.moveTo(cx-4,ceil);x.lineTo(cx-spread,end);x.lineTo(cx+spread,end);x.lineTo(cx+4,ceil)}else{x.moveTo(cx-4,floor);x.lineTo(cx-spread,ceil);x.lineTo(cx+spread,ceil);x.lineTo(cx+4,floor)}x.closePath();x.fill();x.fillStyle='#edf4fc';x.font='12px system-ui';x.fillText('sufit',28,ceil-10);x.fillText('płaszczyzna '+(dir===1?'podłogi':'sufitu'),28,end+(dir===1?17:-10));}
+function drawSpace(){let {x,w,h}=prep($('space'));let g=geom(),s=g.s,cx=w/2,top=h*.18,bottom=h*.84;x.strokeStyle='#3c5e7f';x.lineWidth=2;x.beginPath();x.moveTo(w*.18,top);x.lineTo(w*.82,top);x.lineTo(w*.95,bottom);x.lineTo(w*.05,bottom);x.closePath();x.stroke();x.fillStyle='#172f49';x.fillRect(cx-55,top-5,110,12);let spread=Math.min(w*.43,g.band*32),alpha=Math.min(.75,.16+g.focus*.15);[-1,1].forEach(side=>{let ex=cx+side*spread;x.fillStyle='rgba(78,180,255,'+alpha+')';x.beginPath();x.moveTo(cx,top+8);x.lineTo(ex,bottom);x.lineTo(cx+side*spread*.78,bottom);x.closePath();x.fill();x.strokeStyle='rgba(120,205,255,.8)';x.beginPath();x.moveTo(cx,top+8);x.lineTo(ex,bottom);x.stroke()});x.fillStyle='#ffd36b';x.fillRect(cx-18,top-1,36,5);x.fillStyle='#c8d8e8';x.font='12px system-ui';x.fillText('dwa przeciwne kierunki emisji',14,18)}
+function draw(){label();drawLamp();drawRoom();drawSpace();let g=geom();$('band').textContent=g.band.toFixed(2)+' m';$('focus').textContent=Math.round(g.focus*100)+'%';$('lumens').textContent=Number(g.s.flux).toLocaleString('pl-PL')+' lm/m'}
+ids.forEach(k=>$(k).addEventListener('input',draw));$('reset').onclick=()=>setState(defaults);
+let variants=[];$('save').onclick=()=>{variants.push({name:'Wariant '+(variants.length+1),...state()});renderSaved()};
+function renderSaved(){$('saved').innerHTML='';variants.forEach((v,i)=>{let b=document.createElement('button');b.textContent=v.name;b.onclick=()=>setState(v);$('saved').appendChild(b)})}
+$('export').onclick=()=>{let blob=new Blob([JSON.stringify({current:state(),variants},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='KiM-LightLab-ustawienia.json';a.click();URL.revokeObjectURL(a.href)};
+window.addEventListener('resize',draw);draw();
+</script>
+</body></html>
