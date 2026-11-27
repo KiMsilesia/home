@@ -27,7 +27,7 @@ jobs:
         env:
           GITHUB_PAGES: 'true'
           NEXT_PUBLIC_GITHUB_PAGES: 'true'
-      - uses: actions/configure-pages@v5
+      - name: Include standalone LightLab app\n        run: |\n          mkdir -p out/lightlab\n          cp lightlab/index.html out/lightlab/index.html\n      - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
