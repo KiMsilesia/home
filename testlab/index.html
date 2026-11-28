@@ -93,7 +93,7 @@ if(!L||!E||!s.I||!s.W){$('verdict').textContent='Sprawdź geometrię, długość
 let M=udl?(support==='simple'?q*L*L/8:q*L*L/2):(support==='simple'?P*L/4:P*L);
 let V=udl?(support==='simple'?q*L/2:q*L):(support==='simple'?P/2:P);
 let delta=udl?(support==='simple'?5*q*Math.pow(L,4)/(384*E*s.I):q*Math.pow(L,4)/(8*E*s.I)):(support==='simple'?P*Math.pow(L,3)/(48*E*s.I):P*Math.pow(L,3)/(3*E*s.I));
-let stress=M*1e3/s.W,cap=fy*s.W/1e6,util=cap>0?M/1e6/cap:Infinity,capacity=cap;
+let stress=M/s.W,cap=fy*s.W/1e6,util=cap>0?M/1e6/cap:Infinity,capacity=cap;
 let rc=active==='Żelbet';
 if(rc){let d=s.h-num('cover'),As=num('As'),fck=num('fc'),fyk=num('fy'),b=s.b;let x=(As*fyk)/(0.85*fck*b);let z=d-x/2;capacity=(d>0&&z>0&&x<d)?(As*fyk*z)/1e6:0;util=capacity>0?(M/1e6)/capacity:Infinity;stress=NaN}
 $('moment').textContent=(M/1e6).toFixed(2);$('stress').textContent=rc?'—':stress.toFixed(1);$('deflection').textContent=delta.toFixed(2);$('util').textContent=Number.isFinite(util)?(util*100).toFixed(0)+'%':'—';
