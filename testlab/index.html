@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1730">
+<title>KiM TestLab — analiza konstrukcji</title>
+<style>
+:root{--bg:#081326;--panel:#101f39;--panel2:#152744;--line:#263b5d;--txt:#edf4ff;--muted:#9db0cc;--blue:#55a8ff;--cyan:#5de0d0;--warn:#ffcc75;--red:#ff7777}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#071225,#0b1c35 60%,#0a1427);color:var(--txt);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:22px clamp(16px,4vw,48px) 18px;border-bottom:1px solid var(--line);background:#09172ce8;position:sticky;top:0;z-index:5;backdrop-filter:blur(14px)}
+.brand{display:flex;align-items:center;gap:14px}.mark{width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,#2375d6,#43c5c6);display:grid;place-items:center;font-weight:900;color:#06152a;letter-spacing:-2px;font-size:19px}.brand h1{font-size:21px;margin:0;letter-spacing:.2px}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px;letter-spacing:1.6px;text-transform:uppercase}
+main{max-width:1450px;margin:auto;padding:24px clamp(12px,3vw,36px) 60px}.intro{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:20px}.intro h2{margin:0 0 5px;font-size:clamp(23px,3vw,32px)}.intro p{margin:0;color:var(--muted);max-width:720px}.status{border:1px solid #31577c;color:#a8d4ff;border-radius:30px;padding:7px 12px;font-size:12px;white-space:nowrap}
+.tabs{display:flex;gap:8px;overflow:auto;padding:4px 2px 14px;scrollbar-width:thin}.tab{border:1px solid var(--line);background:#0e1d34;color:#c5d4e9;padding:11px 15px;border-radius:12px;white-space:nowrap;cursor:pointer;font-weight:650}.tab.active{background:#17375d;border-color:#438ed4;color:white;box-shadow:inset 0 0 0 1px #438ed455}
+.layout{display:grid;grid-template-columns:minmax(310px,430px) minmax(0,1fr);gap:18px;align-items:start}.panel{background:linear-gradient(160deg,#12233e,#0e1b31);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 12px 30px #0002}.panel h3{margin:0 0 14px;font-size:16px}.section{border-top:1px solid var(--line);padding-top:15px;margin-top:15px}.section:first-of-type{border:0;padding:0;margin:0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{min-width:0}.field.full{grid-column:1/-1}label{display:block;color:#b8c8dd;font-size:12px;margin:0 0 6px}input,select{width:100%;border:1px solid #314765;background:#09172a;color:white;border-radius:9px;padding:10px 11px;font:inherit;min-width:0}input:focus,select:focus{outline:2px solid #55a8ff66;border-color:var(--blue)}.unit{color:var(--muted);font-size:11px;margin-top:4px}.hint{font-size:12px;color:var(--muted);margin:8px 0 0}.hidden{display:none!important}
+.right{display:grid;gap:18px}.results{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.metric{background:#0a192d;border:1px solid var(--line);border-radius:13px;padding:13px}.metric small{display:block;color:var(--muted);font-size:11px}.metric strong{display:block;font-size:clamp(18px,2vw,25px);margin-top:5px;font-variant-numeric:tabular-nums}.metric em{font-style:normal;color:var(--muted);font-size:11px}
+canvas,svg{width:100%;display:block}.diagram{background:#09172a;border:1px solid var(--line);border-radius:13px;padding:10px}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:11px;margin-top:8px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;background:var(--blue)}.dot.load{background:var(--warn)}.dot.def{background:var(--cyan)}
+.notice{border:1px solid #70582e;background:#2c2416;color:#ffdda0;border-radius:12px;padding:13px;font-size:12px;margin-top:16px}.notice strong{color:#ffe7bd}.good{color:var(--cyan)}.bad{color:var(--red)}.table{width:100%;border-collapse:collapse;font-size:13px}.table td{padding:9px 5px;border-bottom:1px solid var(--line)}.table td:last-child{text-align:right;font-variant-numeric:tabular-nums}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}button.secondary{border:1px solid var(--line);background:#142743;color:#dceaff;padding:9px 12px;border-radius:9px;cursor:pointer}
+footer{color:#7186a4;font-size:11px;text-align:center;padding:24px 12px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.results{grid-template-columns:repeat(2,minmax(0,1fr))}.intro{align-items:start;flex-direction:column}.status{white-space:normal}}
+@media(max-width:430px){.fields{grid-template-columns:1fr 1fr}.panel{padding:14px}.tab{padding:10px 12px}.metric{padding:10px}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="mark">KiM</div><div><h1>KiM TestLab</h1><p>Analiza obciążeń i wytrzymałości</p></div></div></header>
+<main>
+<div class="intro"><div><h2>Laboratorium konstrukcji</h2><p>Dobierz materiał, przekrój, podparcie i obciążenie. Zobacz szacowane naprężenia, ugięcie oraz zapas nośności w modelu belki.</p></div><div class="status">WERSJA 0.1 · MODUŁ BELKI</div></div>
+<nav class="tabs" id="tabs"></nav>
+<div class="layout">
+<section class="panel">
+<h3 id="materialTitle">Materiał i geometria</h3>
+<div class="section"><div class="fields">
+<div class="field full"><label for="preset">Gatunek / klasa materiału</label><select id="preset"></select></div>
+<div class="field"><label for="E">Moduł Younga E</label><input id="E" type="number" min="1" step="100" value="200000"><div class="unit">MPa</div></div>
+<div class="field"><label for="strength">Wytrzymałość odniesienia</label><input id="strength" type="number" min="1" step="1" value="235"><div class="unit">MPa (wartość orientacyjna)</div></div>
+</div></div>
+<div class="section"><h3>Geometria przekroju</h3><div class="fields">
+<div class="field full"><label for="shape">Rodzaj przekroju</label><select id="shape"><option value="rect">Prostokątny</option><option value="circle">Kołowy pełny</option><option value="tube">Rura okrągła</option><option value="box">Rura prostokątna</option></select></div>
+<div class="field" id="fB"><label for="b">Szerokość b</label><input id="b" type="number" min="1" value="100"><div class="unit">mm</div></div>
+<div class="field" id="fH"><label for="h">Wysokość h / średnica D</label><input id="h" type="number" min="1" value="200"><div class="unit">mm</div></div>
+<div class="field hidden" id="fT"><label for="t">Grubość ścianki t</label><input id="t" type="number" min="1" value="5"><div class="unit">mm</div></div>
+</div></div>
+<div class="section"><h3>Podparcie i obciążenie</h3><div class="fields">
+<div class="field full"><label for="support">Schemat podparcia</label><select id="support"><option value="simple">Belka swobodnie podparta</option><option value="cantilever">Wspornik — utwierdzenie z jednej strony</option></select></div>
+<div class="field"><label for="L">Rozpiętość L</label><input id="L" type="number" min="1" value="3000"><div class="unit">mm</div></div>
+<div class="field"><label for="loadType">Rodzaj obciążenia</label><select id="loadType"><option value="point">Siła skupiona w środku / na końcu</option><option value="udl">Obciążenie równomierne na całej długości</option></select></div>
+<div class="field"><label for="load">Wartość obciążenia</label><input id="load" type="number" min="0" step="0.1" value="1"><div class="unit" id="loadUnit">kN</div></div>
+<div class="field"><label for="limit">Limit ugięcia L /</label><input id="limit" type="number" min="1" value="250"><div class="unit">kryterium orientacyjne</div></div>
+</div></div>
+<div class="section" id="rcSection"><h3>Parametry zbrojenia — żelbet</h3><div class="fields">
+<div class="field"><label for="fc">Beton f'c</label><input id="fc" type="number" min="1" value="20"><div class="unit">MPa — założona wytrzymałość</div></div>
+<div class="field"><label for="fy">Stal zbrojeniowa fy</label><input id="fy" type="number" min="1" value="500"><div class="unit">MPa</div></div>
+<div class="field"><label for="As">Pole prętów rozciąganych As</label><input id="As" type="number" min="1" value="402"><div class="unit">mm² (np. 2Ø16 ≈ 402)</div></div>
+<div class="field"><label for="cover">Otulina + położenie</label><input id="cover" type="number" min="1" value="40"><div class="unit">mm od krawędzi do osi pręta</div></div>
+<div class="field full"><label for="mix">Pochodzenie betonu</label><select id="mix"><option>Beton z wytwórni — klasa znana</option><option>Beton gospodarczy — parametry szacowane</option><option>Beton gospodarczy — wytrzymałość z badań</option></select></div>
+</div><p class="hint">Model żelbetu w tej wersji szacuje uproszczoną nośność na zginanie przekroju prostokątnego. Nie obejmuje jeszcze ścinania, zakotwień, strzemion, rys, pełzania ani sprawdzenia detali.</p></div>
+<div class="actions"><button class="secondary" id="reset">Przywróć wartości</button><button class="secondary" id="print">Drukuj raport</button></div>
+</section>
+<div class="right">
+<section class="panel"><h3>Wyniki analizy</h3><div class="results">
+<div class="metric"><small>Maks. moment zginający</small><strong id="moment">—</strong><em>kN·m</em></div>
+<div class="metric"><small>Maks. naprężenie</small><strong id="stress">—</strong><em>MPa</em></div>
+<div class="metric"><small>Maks. ugięcie</small><strong id="deflection">—</strong><em>mm</em></div>
+<div class="metric"><small>Wykorzystanie</small><strong id="util">—</strong><em>model uproszczony</em></div>
+</div><div class="notice" id="verdict">Uzupełnij parametry, aby obliczyć belkę.</div></section>
+<section class="panel"><h3>Schemat belki i deformacji</h3><div class="diagram"><svg id="beam" viewBox="0 0 760 250" role="img" aria-label="Schemat obciążonej belki"></svg><div class="legend"><span><i class="dot"></i> belka</span><span><i class="dot load"></i> obciążenie</span><span><i class="dot def"></i> linia ugięcia — poglądowa</span></div></div></section>
+<section class="panel"><h3>Parametry przekroju i reakcje</h3><table class="table"><tbody id="details"></tbody></table><p class="hint" id="modelNote">Wzory klasycznej teorii belki Eulera–Bernoulliego; małe ugięcia, materiał liniowo-sprężysty, przekrój stały.</p></section>
+</div></div>
+<div class="notice"><strong>Uwaga dotycząca bezpieczeństwa.</strong> KiM TestLab 0.1 to narzędzie edukacyjne i wstępne. Nie jest projektem konstrukcyjnym ani certyfikowanym obliczeniem. Nie wyznacza rzeczywistej siły niszczącej. Wynik zależy od jakości materiału, wad, połączeń, stateczności i warunków wykonania. Nie używaj go do wymiarowania elementów, których awaria może zagrozić ludziom. W przypadku betonu gospodarczego bez badań nie da się wiarygodnie potwierdzić klasy betonu.</div>
+</main><footer>KiM TestLab · narzędzie obliczeniowe w fazie rozwoju · wyniki wymagają weryfikacji inżynierskiej</footer>
+<script>
+const $=id=>document.getElementById(id);
+const materials=[
+{name:'Drewno',items:[['C24 — drewno konstrukcyjne',11000,24],['GL24h — drewno klejone',11500,24],['Drewno — wartość własna',11000,18]]},
+{name:'Stal',items:[['S235',210000,235],['S355',210000,355],['Stal — wartość własna',210000,235]]},
+{name:'Aluminium',items:[['EN AW-6060 T6 (orientacyjnie)',69000,150],['EN AW-6082 T6 (orientacyjnie)',70000,250],['Aluminium — wartość własna',70000,150]]},
+{name:'Beton',items:[['C16/20 — beton niezbrojony',30000,16],['C20/25 — beton niezbrojony',30000,20],['Beton gospodarczy — szacunek',25000,12],['Beton — wartość własna',25000,20]]},
+{name:'Żelbet',items:[['C20/25 + B500',30000,20],['C25/30 + B500',31000,25],['Beton gospodarczy + stal',25000,12]]},
+{name:'Tworzywa i kompozyty',items:[['PVC twarde (orientacyjnie)',3000,45],['Poliwęglan (orientacyjnie)',2300,60],['GFRP — laminat (orientacyjnie)',25000,150]]}
+];
+let active='Stal';
+function tabs(){ $('tabs').innerHTML=materials.map(m=>'<button class="tab '+(m.name===active?'active':'')+'" data-tab="'+m.name+'">'+m.name+'</button>').join('');document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{active=b.dataset.tab;renderTabs();loadMaterial();calculate()})}
+function renderTabs(){tabs()}
+function loadMaterial(){const m=materials.find(x=>x.name===active);$('materialTitle').textContent='Materiał i geometria · '+active;$('preset').innerHTML=m.items.map((x,i)=>'<option value="'+i+'">'+x[0]+'</option>').join('');const apply=()=>{let x=m.items[+$('preset').value];$('E').value=x[1];$('strength').value=x[2]};$('preset').onchange=()=>{apply();calculate()};apply();$('rcSection').classList.toggle('hidden',active!=='Żelbet')}
+function num(id){return Math.max(0,Number($(id).value)||0)}
+function section(){let b=num('b'),h=num('h'),t=num('t'),shape=$('shape').value,A=0,I=0,W=0;
+if(shape==='rect'){A=b*h;I=b*h**3/12;W=I/(h/2)}
+if(shape==='circle'){let d=h;A=Math.PI*d*d/4;I=Math.PI*d**4/64;W=I/(d/2)}
+if(shape==='tube'){let d=h,di=Math.max(0,d-2*t);A=Math.PI*(d*d-di*di)/4;I=Math.PI*(d**4-di**4)/64;W=I/(d/2)}
+if(shape==='box'){let bi=Math.max(0,b-2*t),hi=Math.max(0,h-2*t);A=b*h-bi*hi;I=(b*h**3-bi*hi**3)/12;W=I/(h/2)}
+return {A,I,W,b,h,t,shape}}
+function calculate(){let s=section(),E=num('E'),fy=num('strength'),L=num('L'),P=num('load')*1000,support=$('support').value,type=$('loadType').value,udl=type==='udl',q=udl?P/L:0;
+if(!L||!E||!s.I||!s.W){$('verdict').textContent='Sprawdź geometrię, długość i parametry materiału.';return}
+let M=udl?(support==='simple'?q*L*L/8:q*L*L/2):(support==='simple'?P*L/4:P*L);
+let V=udl?(support==='simple'?q*L/2:q*L):(support==='simple'?P/2:P);
+let delta=udl?(support==='simple'?5*q*Math.pow(L,4)/(384*E*s.I):q*Math.pow(L,4)/(8*E*s.I)):(support==='simple'?P*Math.pow(L,3)/(48*E*s.I):P*Math.pow(L,3)/(3*E*s.I));
+let stress=M*1e3/s.W,cap=fy*s.W/1e6,util=cap>0?M/1e6/cap:Infinity,capacity=cap;
+let rc=active==='Żelbet';
+if(rc){let d=s.h-num('cover'),As=num('As'),fck=num('fc'),fyk=num('fy'),b=s.b;let x=(As*fyk)/(0.85*fck*b);let z=d-x/2;capacity=(d>0&&z>0&&x<d)?(As*fyk*z)/1e6:0;util=capacity>0?(M/1e6)/capacity:Infinity;stress=NaN}
+$('moment').textContent=(M/1e6).toFixed(2);$('stress').textContent=rc?'—':stress.toFixed(1);$('deflection').textContent=delta.toFixed(2);$('util').textContent=Number.isFinite(util)?(util*100).toFixed(0)+'%':'—';
+let defLimit=L/Math.max(1,num('limit')),ok=util<1&&delta<defLimit;
+$('verdict').innerHTML=rc?'<strong>Żelbet — uproszczone zginanie:</strong> szacowana nośność przekroju '+capacity.toFixed(2)+' kN·m. '+(ok?'<span class="good">W granicach przyjętego modelu.</span>':'<span class="bad">Przekroczony warunek modelowy lub niepoprawne parametry.</span>'):'<strong>'+ (ok?'Wynik w granicach przyjętych kryteriów':'Przekroczenie przyjętego kryterium')+'.</strong> '+(util>=1?'Naprężenie przekracza przyjętą wytrzymałość odniesienia. ':'')+(delta>defLimit?'Ugięcie przekracza L/'+$('limit').value+'.':'Ugięcie mieści się w przyjętym limicie.');
+$('details').innerHTML=[['Pole przekroju A',s.A.toFixed(0)+' mm²'],['Moment bezwładności I',s.I.toFixed(0)+' mm⁴'],['Wskaźnik wytrzymałości W',s.W.toFixed(0)+' mm³'],['Maksymalna siła tnąca', (V/1000).toFixed(2)+' kN'],['Reakcja na podporę', (V/2000).toFixed(2)+' kN'],['Nośność na zginanie (model)',capacity.toFixed(2)+' kN·m'],['Limit ugięcia',defLimit.toFixed(2)+' mm']];
+$('modelNote').textContent=rc?'Żelbet: uproszczony model przekroju pojedynczo zbrojonego, blok ściskania 0,85 f’c. Bez weryfikacji ścinania, zakotwienia, zarysowania i wymagań normowych.':'Belka pryzmatyczna, liniowa sprężystość, małe ugięcia. Nie uwzględniono wyboczenia, ścinania przekroju, połączeń, karbów, zmęczenia ani imperfekcji.';
+draw(delta,L,support,udl,P)}
+function draw(delta,L,support,udl,P){let x1=90,x2=670,y=105,amp=Math.min(65,delta/Math.max(1,L)*9000);let path='';for(let i=0;i<=60;i++){let u=i/60,v=support==='simple'?4*u*(1-u):u*u*(3-2*u);let yy=y+amp*v;path+=(i?'L':'M')+(x1+(x2-x1)*u).toFixed(1)+','+yy.toFixed(1)+' '}let supports=support==='simple'?'<path d="M90 112 l-14 24 h28 z M670 112 l-14 24 h28 z" fill="#8095b3"/>':'<path d="M90 82 V145 M80 145 H100 M80 137 L100 153 M80 127 L100 143 M80 117 L100 133" stroke="#8095b3" stroke-width="3"/>';
+let loads=udl?Array.from({length:13},(_,i)=>{let x=x1+(x2-x1)*i/12;return '<path d="M'+x+' 35 v43 m-5 -7 l5 7 5 -7" stroke="#ffcc75" stroke-width="2"/>'}).join(''):'<path d="M380 28 v54 m-7 -9 l7 9 7 -9" stroke="#ffcc75" stroke-width="3"/>';
+$('beam').innerHTML='<defs><linearGradient id="beamg"><stop stop-color="#398fe0"/><stop offset="1" stop-color="#5de0d0"/></linearGradient></defs>'+loads+'<path d="M'+x1+' '+y+' H'+x2+'" stroke="url(#beamg)" stroke-width="10" stroke-linecap="round"/><path d="'+path+'" fill="none" stroke="#5de0d0" stroke-width="3" stroke-dasharray="7 5"/>'+supports+'<text x="380" y="18" fill="#ffcc75" text-anchor="middle" font-size="12">'+(udl?'q = ':'P = ')+(P/1000).toFixed(2)+' '+(udl?'kN/m':'kN')+'</text><text x="380" y="190" fill="#b9c9de" text-anchor="middle" font-size="13">L = '+L+' mm</text><text x="380" y="220" fill="#7e98b8" text-anchor="middle" font-size="11">Linia przerywana: poglądowy kształt ugięcia (nie w skali)</text>'}
+['E','strength','b','h','t','shape','support','L','loadType','load','limit','fc','fy','As','cover','mix'].forEach(id=>$(id).addEventListener('input',()=>{let sh=$('shape').value;$('fT').classList.toggle('hidden',!['tube','box'].includes(sh));$('fB').classList.toggle('hidden',!['rect','box'].includes(sh));$('fH').querySelector('label').textContent=sh==='circle'||sh==='tube'?'Średnica D':'Wysokość h';$('loadUnit').textContent=$('loadType').value==='udl'?'kN/m':'kN';calculate()}));
+$('reset').onclick=()=>{location.reload()};$('print').onclick=()=>window.print();
+renderTabs();loadMaterial();calculate();
+</script>
+</body></html>
